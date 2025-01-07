@@ -5,16 +5,23 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>ua.pidopryhora</groupId>
-        <artifactId>MediaConverter</artifactId>
+        <artifactId>media-converter</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>ConverterService</artifactId>
+    <artifactId>converter</artifactId>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 
 </project>
