@@ -9,27 +9,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-
-
 import java.util.Map;
 @Slf4j
 @RestController
-@RequestMapping("api/v1")
-public class RestContoller {
-
-    private final UploadProcessor uploadProcessor;
-
-    public RestContoller(UploadProcessor uploadProcessor){
-        this.uploadProcessor = uploadProcessor;
-    }
-
+@RequestMapping("/api")
+public class UploadEndpoint {
 
     @PostMapping("/upload")
     public ResponseEntity<Object> uploadFile(
-            @RequestParam("file")MultipartFile file,
+            @RequestParam("file") MultipartFile file,
             @RequestParam("format") String format){
+        log.info("FILE IS HERE");
 
         if (file.isEmpty()) {
+            log.info("FILE IS EMPTY");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(Map.of("message", "File is empty."));
         }
@@ -41,7 +34,6 @@ public class RestContoller {
 
         try {
 
-           uploadProcessor.process("mediaConversionQueue", file, format);
 
             return ResponseEntity.ok(Map.of(
                     "message", "File is being uploaded",
@@ -55,9 +47,4 @@ public class RestContoller {
         }
 
     }
-
-
-
-
-
 }
