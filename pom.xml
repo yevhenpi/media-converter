@@ -12,7 +12,7 @@
 	<artifactId>media-converter</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>MediaConverter</name>
+	<name>media-converter</name>
 	<description>Pet-project</description>
 	<url/>
 	<licenses>

@@ -1,4 +1,4 @@
-package ua.pidopryhora;
+package ua.pidopryhora.endpoints;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
