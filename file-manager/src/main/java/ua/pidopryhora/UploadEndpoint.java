@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.Map;
 @Slf4j
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/file-manager")
 public class UploadEndpoint {
 
     @PostMapping("/upload")
