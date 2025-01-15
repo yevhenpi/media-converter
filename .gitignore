@@ -35,3 +35,4 @@ build/
 ### User ###
 application.properties
 log/
+uploads/
