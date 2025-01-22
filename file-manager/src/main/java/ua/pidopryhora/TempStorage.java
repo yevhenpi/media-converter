@@ -36,7 +36,7 @@ public class TempStorage {
         try {
             Path filePath = Paths.get(UPLOAD_DIR, filename);
             Files.write(filePath, file.getBytes());
-            log.info("File {} saved to local storage", filename);
+            log.debug("File {} saved to local storage", filename);
 
             return filePath;
 
@@ -52,7 +52,7 @@ public class TempStorage {
 
         try {
             Files.delete(path);
-            log.info("File {} removed from local storage", fileName);
+            log.debug("File {} removed from local storage", fileName);
         } catch (IOException e) {
             log.error("ERROR DELETING FILE FROM LOCAL STORAGE", e);
         }

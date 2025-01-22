@@ -64,7 +64,7 @@ public class SqsListener {
                 .receiptHandle(receiptHandle)
                 .build();
         sqsClient.deleteMessage(request);
-        log.info("Deleted message with receipt handle: {}", receiptHandle);
+        log.debug("Deleted message with receipt handle: {}", receiptHandle);
     }
 
 
