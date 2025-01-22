@@ -37,6 +37,10 @@
         <appender-ref ref="FILE-ROLLING"/>
         <appender-ref ref="CONSOLE"/>
     </root>
+<!--    <root level="debug">-->
+<!--        <appender-ref ref="FILE-ROLLING"/>-->
+<!--        <appender-ref ref="CONSOLE"/>-->
+<!--    </root>-->
 
 
 

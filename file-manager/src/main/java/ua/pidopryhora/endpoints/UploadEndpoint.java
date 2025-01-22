@@ -27,7 +27,7 @@ public class UploadEndpoint {
     @PostMapping("/upload")
     public ResponseEntity<Object> uploadFile(
             @RequestParam("file") MultipartFile file,
-            @RequestParam("format") String format) throws InterruptedException {
+            @RequestParam("format") String format){
 
         if (file.isEmpty()) {
             log.info("FILE IS EMPTY");

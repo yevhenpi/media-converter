@@ -1,21 +1,19 @@
-package ua.pidopryhora.aws;
+package ua.pidopryhora.aws.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.stereotype.Service;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.concurrent.CompletableFuture;
 
 @Slf4j
-@Component
+@Service
 public class S3Uploader {
 
     private final S3Client s3Client;
@@ -41,6 +39,7 @@ public class S3Uploader {
                     RequestBody.fromBytes(fileContent)
 
             );
+
             log.info("File {} is uploaded to s3", name);
             return CompletableFuture.completedFuture(true);
         } catch (IOException e) {
