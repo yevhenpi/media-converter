@@ -1,6 +1,7 @@
 package ua.pidopryhora.aws.service;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ public class SqsListener {
     private final EventProcessor eventProcessor;
     @Value("${sqs.queue.url}")
     private String queueUrl;
+    private Thread listenerThread;
 
 
     public SqsListener(SqsClient sqsClient,EventProcessor eventProcessor){
@@ -26,9 +28,18 @@ public class SqsListener {
     }
 
     @PostConstruct
-    public void startListening() {
-        log.info("Starting SQS listener...");
-        new Thread(this::listen).start(); // Run listener in a separate thread
+    public void init() {
+        log.debug("Starting SQS Listener...");
+        listenerThread = new Thread(this::listen);
+        listenerThread.start();
+    }
+
+    @PreDestroy
+    public void shutdown() {
+        if (listenerThread != null && listenerThread.isAlive()) {
+            listenerThread.interrupt();
+        }
+        sqsClient.close();
     }
 
     private void listen() {
@@ -51,9 +62,15 @@ public class SqsListener {
                     }
                 }
 
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
+                if(Thread.currentThread().isInterrupted()) {
+                    log.debug("Shutting down SQS Listener...");
+                    break;
+                }
+
                 log.error("Error while listening to SQS queue: " ,e);
-                return;
+                break;
             }
         }
     }
