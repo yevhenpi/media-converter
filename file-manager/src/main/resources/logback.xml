@@ -1,29 +1,7 @@
 <configuration>
 
-    <!-- Log file base path -->
-    <property name="HOME_LOG" value="./log/file-manager/file-manager"/>
-
     <!-- Logback pattern for all appenders -->
     <property name="LOGBACK_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} -%kvp- %msg%n"/>
-
-    <!-- File-based rolling appender -->
-    <appender name="FILE-ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${HOME_LOG}.log</file>
-
-        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>${HOME_LOG}.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
-            <!-- Each archived log file will have a maximum size of 10MB -->
-            <maxFileSize>10MB</maxFileSize>
-            <!-- Total size of all archived files will not exceed 5GB -->
-            <totalSizeCap>5GB</totalSizeCap>
-            <!-- Retain logs for 60 days -->
-            <maxHistory>60</maxHistory>
-        </rollingPolicy>
-
-        <encoder>
-            <pattern>${LOGBACK_PATTERN}</pattern>
-        </encoder>
-    </appender>
 
     <!-- Console appender -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
@@ -36,7 +14,6 @@
 
     <!-- Root logger -->
     <root level="info">
-        <appender-ref ref="FILE-ROLLING"/>
         <appender-ref ref="CONSOLE"/>
     </root>
 

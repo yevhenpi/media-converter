@@ -1,4 +1,4 @@
-package ua.pidopryhora.aws.service;
+package ua.pidopryhora.service.s3;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
@@ -9,6 +9,7 @@ import software.amazon.awssdk.services.sqs.SqsClient;
 import software.amazon.awssdk.services.sqs.model.DeleteMessageRequest;
 import software.amazon.awssdk.services.sqs.model.Message;
 import software.amazon.awssdk.services.sqs.model.ReceiveMessageRequest;
+import ua.pidopryhora.service.EventProcessor;
 
 import java.util.List;
 @Slf4j
@@ -32,14 +33,6 @@ public class SqsListener {
         log.debug("Starting SQS Listener...");
         listenerThread = new Thread(this::listen);
         listenerThread.start();
-    }
-
-    @PreDestroy
-    public void shutdown() {
-        if (listenerThread != null && listenerThread.isAlive()) {
-            listenerThread.interrupt();
-        }
-        sqsClient.close();
     }
 
     private void listen() {
@@ -82,6 +75,14 @@ public class SqsListener {
                 .build();
         sqsClient.deleteMessage(request);
         log.debug("Deleted message with receipt handle: {}", receiptHandle);
+    }
+
+    @PreDestroy
+    public void shutdown() {
+        if (listenerThread != null && listenerThread.isAlive()) {
+            listenerThread.interrupt();
+        }
+        sqsClient.close();
     }
 
 

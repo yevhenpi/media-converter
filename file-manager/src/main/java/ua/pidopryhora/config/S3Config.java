@@ -1,4 +1,4 @@
-package ua.pidopryhora.aws;
+package ua.pidopryhora.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
@@ -8,32 +8,32 @@ import software.amazon.awssdk.regions.Region;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 import software.amazon.awssdk.services.sqs.SqsClient;
 
 
 @Configuration
-public class AwsConfig {
-    @Value("${aws.access.key}")
-    String accessKey;
-    @Value("${aws.secret.key}")
-    String secretKey;
-    @Value("${aws.region}")
-    String regionName;
+public class S3Config {
 
-    @Bean
-    public AwsCredentialsProvider awsCredentialsProvider() {
-        return StaticCredentialsProvider.create(AwsBasicCredentials.create(accessKey, secretKey));
+    private final AwsCredentialsProvider credentialsProvider;
+    private final Region region;
+
+    public S3Config(AwsCredentialsProvider credentialsProvider, Region region) {
+        this.credentialsProvider = credentialsProvider;
+        this.region = region;
     }
 
     @Bean
-    public Region awsRegion() {
-        return Region.of(regionName);
+    public S3Presigner s3Presigner(){
+        return S3Presigner
+                .builder()
+                .region(region)
+                .credentialsProvider(credentialsProvider)
+                .build();
     }
 
-
-
     @Bean
-    public S3Client s3Client(AwsCredentialsProvider credentialsProvider, Region region) {
+    public S3Client s3Client() {
         return S3Client
                 .builder()
                 .region(region)
@@ -41,13 +41,4 @@ public class AwsConfig {
                 .build();
     }
 
-    @Bean
-    public SqsClient sqsClient(AwsCredentialsProvider credentialsProvider, Region region){
-        return  SqsClient
-                .builder()
-                .region(region)
-                .credentialsProvider(credentialsProvider)
-                .build();
-
-    }
 }

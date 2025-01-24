@@ -2,7 +2,7 @@ package ua.pidopryhora;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import ua.pidopryhora.aws.service.S3Uploader;
+import ua.pidopryhora.service.s3.S3Uploader;
 import ua.pidopryhora.model.MediaMessage;
 
 @Slf4j
