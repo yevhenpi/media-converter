@@ -1,4 +1,4 @@
-package ua.pidopryhora.service.s3;
+package ua.pidopryhora.service.sqs;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;

@@ -11,7 +11,7 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequestMapping("/file-manager")
-public class GetEndpoint {
+public class GetController {
 
     @GetMapping("/file")
     public ResponseEntity<Object> getFile(){

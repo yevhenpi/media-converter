@@ -1,4 +1,4 @@
 package ua.pidopryhora.controllers;
 
-public class StatusEndpoint {
+public class StatusController {
 }

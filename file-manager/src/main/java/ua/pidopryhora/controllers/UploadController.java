@@ -16,15 +16,15 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequestMapping("/file-manager")
-public class UploadEndpoint {
+public class UploadController {
 
     private final UploadProcessor uploadProcessor;
 
-    public UploadEndpoint(UploadProcessor uploadProcessor) {
+    public UploadController(UploadProcessor uploadProcessor) {
         this.uploadProcessor = uploadProcessor;
     }
 
-    @PostMapping("/upload")
+    @PostMapping("/upload-old")
     public ResponseEntity<Object> uploadFile(
             @RequestParam("file") MultipartFile file,
             @RequestParam("format") String format){
