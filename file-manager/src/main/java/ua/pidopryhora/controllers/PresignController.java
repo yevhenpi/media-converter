@@ -9,6 +9,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/file-manager")
+@CrossOrigin(origins = "*")
 public class PresignController {
 
     private final S3PresignedUrlService presignedUrlService;
@@ -25,8 +26,8 @@ public class PresignController {
         URL presignedUrl = presignedUrlService.generatePresignedUrl(fileName, expirationMinutes);
 
         return ResponseEntity.ok().body(Map.of(
-                "url", presignedUrl.toString(),
-                "expirationMinutes", expirationMinutes
+                "url", presignedUrl.toString()
+
         ));
     }
 }
