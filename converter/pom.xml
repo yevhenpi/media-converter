@@ -32,11 +32,6 @@
             <artifactId>jave-core</artifactId>
             <version>3.5.0</version>
         </dependency>
-        <dependency>
-            <groupId>ua.pidopryhora</groupId>
-            <artifactId>file-manager</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
 
     </dependencies>
 

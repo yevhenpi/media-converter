@@ -1,12 +1,15 @@
 package ua.pidopryhora.config;
 
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.sqs.SqsAsyncClient;
 import software.amazon.awssdk.services.sqs.SqsClient;
 
 @Configuration
+
 public class SqsConfig {
 
     private final AwsCredentialsProvider credentialsProvider;
@@ -22,6 +25,14 @@ public class SqsConfig {
         return SqsClient.builder()
                 .region(region)
                 .credentialsProvider(credentialsProvider)
+                .build();
+    }
+
+    @Bean
+    public SqsAsyncClient sqsAsyncClient(){
+        return SqsAsyncClient.builder()
+                .credentialsProvider(credentialsProvider)
+                .region(region) // Specify your AWS region
                 .build();
     }
 }

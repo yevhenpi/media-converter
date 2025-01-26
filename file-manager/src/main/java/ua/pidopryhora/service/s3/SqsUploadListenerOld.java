@@ -14,7 +14,7 @@ import ua.pidopryhora.service.EventProcessor;
 import java.util.List;
 @Slf4j
 @Service
-public class SqsListener {
+public class SqsUploadListenerOld {
 
     private final SqsClient sqsClient;
     private final EventProcessor eventProcessor;
@@ -23,7 +23,7 @@ public class SqsListener {
     private Thread listenerThread;
 
 
-    public SqsListener(SqsClient sqsClient,EventProcessor eventProcessor){
+    public SqsUploadListenerOld(SqsClient sqsClient, EventProcessor eventProcessor){
         this.sqsClient = sqsClient;
         this.eventProcessor = eventProcessor;
     }
@@ -35,7 +35,7 @@ public class SqsListener {
         listenerThread.start();
     }
 
-    private void listen() {
+    public void listen() {
         while (true) {
             try {
                 ReceiveMessageRequest request = ReceiveMessageRequest.builder()

@@ -1,48 +1,23 @@
 <configuration>
 
-    <property name="HOME_LOG" value="./log/cnv/converter.log"/>
+    <!-- Logback pattern for all appenders -->
+    <property name="LOGBACK_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} -%kvp- %msg%n"/>
 
-    <appender name="FILE-ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${HOME_LOG}</file>
-
-        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>./log/cnv/Converter.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
-            <!-- each archived file, size max 10MB -->
-            <maxFileSize>10MB</maxFileSize>
-            <!-- total size of all archive files, if total size > 20GB, it will delete old archived file -->
-            <totalSizeCap>1GB</totalSizeCap>
-            <!-- 60 days to keep -->
-            <maxHistory>60</maxHistory>
-        </rollingPolicy>
-
-        <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} -%kvp- %msg%n</pattern>
-        </encoder>
-    </appender>
-
+    <!-- Console appender -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} -%kvp- %msg%n</pattern>
+            <pattern>${LOGBACK_PATTERN}</pattern>
         </encoder>
     </appender>
 
-    <!-- Logger for your specific package -->
-    <logger name="ua.pidopryhora.converter" level="debug" additivity="false">
-        <appender-ref ref="FILE-ROLLING"/>
-        <appender-ref ref="CONSOLE"/>
-    </logger>
-
+    <logger name="ua.pidopryhora" level="debug" />
 
     <!-- Root logger -->
-    <root level="error">
-        <appender-ref ref="FILE-ROLLING"/>
-        <appender-ref ref="CONSOLE"/>
-    </root>
-
     <root level="info">
-        <appender-ref ref="FILE-ROLLING"/>
         <appender-ref ref="CONSOLE"/>
     </root>
-
+    <!--    <root level="debug">-->
+    <!--        <appender-ref ref="CONSOLE"/>-->
+    <!--    </root>-->
 
 </configuration>
