@@ -13,6 +13,6 @@ COPY target/eureka-server-0.0.1-SNAPSHOT.jar eureka-server.jar
 EXPOSE 8761
 
 # Run the Eureka Server
-CMD ["java", "-jar", "eureka-server.jar"]
+CMD ["java", "-jar", "/eureka-server/eureka-server.jar"]
 
 
