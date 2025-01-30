@@ -17,9 +17,6 @@ public class S3PresignedUrlService {
     private final S3Presigner presigner;
     private final AwsProperties awsProperties;
 
-
-
-
     public S3PresignedUrlService(S3Presigner presigner,
                                  AwsProperties awsProperties){
         this.presigner = presigner;

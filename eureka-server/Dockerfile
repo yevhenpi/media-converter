@@ -1,0 +1,18 @@
+FROM ubuntu:latest
+LABEL authors="euji"
+# Use an official OpenJDK runtime as a base image
+FROM openjdk:21-jdk-slim
+
+# Set the working directory inside the container
+WORKDIR /eureka-server
+
+# Copy the compiled JAR file into the container
+COPY target/eureka-server-0.0.1-SNAPSHOT.jar eureka-server.jar
+
+# Expose the Eureka Server port
+EXPOSE 8761
+
+# Run the Eureka Server
+CMD ["java", "-jar", "eureka-server.jar"]
+
+
