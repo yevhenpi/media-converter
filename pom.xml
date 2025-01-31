@@ -26,7 +26,8 @@
 		<module>api-gateway</module>
 		<module>file-manager</module>
 		<module>eureka-server</module>
-    </modules>
+		<module>auth-server</module>
+	</modules>
 	<scm>
 		<connection/>
 		<developerConnection/>
