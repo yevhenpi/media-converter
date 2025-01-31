@@ -1,4 +1,4 @@
-package ua.pidopryhora.service.s3;
+package ua.pidopryhora.mediaconverter.filemanager.service.s3;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;

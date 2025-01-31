@@ -1,9 +1,9 @@
-package ua.pidopryhora;
+package ua.pidopryhora.mediaconverter.filemanager;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import ua.pidopryhora.service.s3.S3Uploader;
-import ua.pidopryhora.model.MediaMessage;
+import ua.pidopryhora.mediaconverter.filemanager.service.s3.S3Uploader;
+import ua.pidopryhora.mediaconverter.filemanager.model.MediaMessage;
 
 @Slf4j
 @Component

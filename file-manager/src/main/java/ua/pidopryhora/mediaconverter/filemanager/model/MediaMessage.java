@@ -1,4 +1,4 @@
-package ua.pidopryhora.model;
+package ua.pidopryhora.mediaconverter.filemanager.model;
 
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;

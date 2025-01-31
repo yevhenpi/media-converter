@@ -1,4 +1,4 @@
-package ua.pidopryhora;
+package ua.pidopryhora.mediaconverter.gateway;
 
 
 import org.springframework.boot.SpringApplication;

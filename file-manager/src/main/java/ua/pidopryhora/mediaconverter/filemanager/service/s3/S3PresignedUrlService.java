@@ -1,12 +1,11 @@
-package ua.pidopryhora.service.s3;
+package ua.pidopryhora.mediaconverter.filemanager.service.s3;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import software.amazon.awssdk.services.s3.model.ObjectCannedACL;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 import software.amazon.awssdk.services.s3.presigner.model.PutObjectPresignRequest;
-import ua.pidopryhora.config.AwsProperties;
+import ua.pidopryhora.mediaconverter.filemanager.config.AwsProperties;
 
 import java.net.URL;
 import java.time.Duration;

@@ -1,4 +1,4 @@
-package ua.pidopryhora.service.sqs;
+package ua.pidopryhora.mediaconverter.filemanager.service.sqs;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
@@ -9,7 +9,7 @@ import software.amazon.awssdk.services.sqs.SqsClient;
 import software.amazon.awssdk.services.sqs.model.DeleteMessageRequest;
 import software.amazon.awssdk.services.sqs.model.Message;
 import software.amazon.awssdk.services.sqs.model.ReceiveMessageRequest;
-import ua.pidopryhora.service.EventProcessor;
+import ua.pidopryhora.mediaconverter.filemanager.service.EventProcessor;
 
 import java.util.List;
 @Slf4j
