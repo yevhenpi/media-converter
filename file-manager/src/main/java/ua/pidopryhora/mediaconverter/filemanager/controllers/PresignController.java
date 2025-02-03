@@ -8,7 +8,7 @@ import java.net.URL;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/file-manager")
+@RequestMapping("/api")
 @CrossOrigin(origins = "*")
 public class PresignController {
 

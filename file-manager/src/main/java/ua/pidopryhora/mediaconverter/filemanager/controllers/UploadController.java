@@ -15,7 +15,7 @@ import java.util.Map;
 
 @Slf4j
 @RestController
-@RequestMapping("/file-manager")
+@RequestMapping("/api")
 public class UploadController {
 
     private final UploadProcessor uploadProcessor;
