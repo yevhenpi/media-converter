@@ -9,7 +9,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
-public class GetController {
+public class TestController {
 
     @GetMapping("/test")
     public ResponseEntity<Object> getTest(){

@@ -30,6 +30,7 @@ public class SecurityConfig {
                 // Permit all requests (customize as needed)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/login").permitAll()
+                        .requestMatchers("/auth/register").permitAll()
                         .anyRequest().authenticated())
                 ;
 
