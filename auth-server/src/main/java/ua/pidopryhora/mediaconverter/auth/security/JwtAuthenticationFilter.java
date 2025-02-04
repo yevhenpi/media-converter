@@ -9,6 +9,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
+import ua.pidopryhora.mediaconverter.common.security.JwtDecoder;
+import ua.pidopryhora.mediaconverter.common.security.JwtToPrincipleConverter;
+import ua.pidopryhora.mediaconverter.common.security.UserPrincipalAuthenticationToken;
 
 import java.io.IOException;
 import java.util.Optional;

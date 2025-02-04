@@ -1,9 +1,6 @@
-package ua.pidopryhora.mediaconverter.auth.security;
+package ua.pidopryhora.mediaconverter.common.security;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
-import org.springframework.security.core.GrantedAuthority;
-
-import java.util.Collection;
 
 public class UserPrincipalAuthenticationToken extends AbstractAuthenticationToken {
 

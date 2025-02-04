@@ -1,4 +1,4 @@
-package ua.pidopryhora.mediaconverter.auth.security;
+package ua.pidopryhora.mediaconverter.common.security;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
