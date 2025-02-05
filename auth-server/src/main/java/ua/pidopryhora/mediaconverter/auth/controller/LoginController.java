@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ua.pidopryhora.mediaconverter.auth.model.LoginRequest;
 import ua.pidopryhora.mediaconverter.auth.model.LoginResponse;
 import ua.pidopryhora.mediaconverter.auth.security.JwtIssuer;
+import ua.pidopryhora.mediaconverter.auth.service.AuthService;
 import ua.pidopryhora.mediaconverter.common.security.UserPrincipal;
 
 import java.util.List;
@@ -25,25 +26,15 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class LoginController {
 
-    private final JwtIssuer jwtIssuer;
+    private final AuthService authService;
 
-    private final AuthenticationManager authenticationManager;
+
 
     @PostMapping("/login")
     public LoginResponse login(@RequestBody @Validated LoginRequest request){
-        var authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
-        );
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        var principal = (UserPrincipal) authentication.getPrincipal();
-        var roles = principal.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList();
 
-        var token = jwtIssuer.issue(principal.getUserId(), principal.getEmail(), roles);
+        return authService.attemptLogin(request.getEmail(), request.getPassword());
 
-        return LoginResponse
-                .builder()
-                .accessToken(token)
-                .build();
     }
 
 
