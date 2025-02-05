@@ -1,8 +1,10 @@
 package ua.pidopryhora.mediaconverter.gateway.security;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
+import org.springframework.security.config.web.server.SecurityWebFiltersOrder;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity.CsrfSpec;
 import org.springframework.security.config.web.server.ServerHttpSecurity.CorsSpec;
@@ -14,10 +16,14 @@ import org.springframework.security.web.server.context.NoOpServerSecurityContext
 
 @Configuration
 @EnableWebFluxSecurity
+@RequiredArgsConstructor
 public class WebSecurityConfig {
+
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
+
         return http
                 // Disable CSRF
                 .csrf(CsrfSpec::disable)
@@ -33,8 +39,9 @@ public class WebSecurityConfig {
                 .logout(LogoutSpec::disable)
                 // Authorize all requests
                 .authorizeExchange(exchanges -> exchanges
-                        .anyExchange().permitAll()
+                        .anyExchange().authenticated()
                 )
+                .addFilterAt(jwtAuthenticationFilter, SecurityWebFiltersOrder.AUTHENTICATION)
                 .build();
     }
 }
