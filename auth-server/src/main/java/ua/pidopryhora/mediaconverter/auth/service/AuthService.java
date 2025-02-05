@@ -19,11 +19,15 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
 
     public LoginResponse attemptLogin(String email, String password){
+
         var authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(email, password)
         );
+
         SecurityContextHolder.getContext().setAuthentication(authentication);
+
         var principal = (UserPrincipal) authentication.getPrincipal();
+
         var roles = principal.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList();
 
         var token = jwtIssuer.issue(principal.getUserId(), principal.getEmail(), roles);
