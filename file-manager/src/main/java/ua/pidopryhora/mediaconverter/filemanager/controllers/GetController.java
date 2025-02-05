@@ -1,10 +1,9 @@
 package ua.pidopryhora.mediaconverter.filemanager.controllers;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.web.bind.annotation.*;
+
 
 import java.util.Map;
 
@@ -14,8 +13,10 @@ import java.util.Map;
 public class GetController {
 
     @GetMapping("/file")
-    public ResponseEntity<Object> getFile(){
-        return ResponseEntity.ok(Map.of("message","Success"));
+    public String getFile(@RequestHeader("X-User-Role") String role,
+                          @RequestHeader("X-User-Id") String userId){
+        log.debug("{}{}", role, userId);
+        return role + userId;
     }
 
 }

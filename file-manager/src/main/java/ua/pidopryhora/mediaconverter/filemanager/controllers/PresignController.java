@@ -21,13 +21,15 @@ public class PresignController {
     @GetMapping("/upload")
     public ResponseEntity<?> getPresignedUrl(
             @RequestParam("fileName") String fileName,
-            @RequestParam(value = "expirationMinutes", defaultValue = "15") long expirationMinutes) {
+            @RequestParam(value = "expirationMinutes", defaultValue = "15") long expirationMinutes,
+            @RequestHeader("X-User-Id") String userId,
+            @RequestHeader("X-User-Role") String role) {
 
         URL presignedUrl = presignedUrlService.generatePresignedUrl(fileName, expirationMinutes);
 
         return ResponseEntity.ok().body(Map.of(
-                "url", presignedUrl.toString()
-
+                "url", presignedUrl.toString(),
+                "role", role
         ));
     }
 }

@@ -2,6 +2,7 @@ package ua.pidopryhora.mediaconverter.gateway.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.ReactiveSecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -24,17 +25,33 @@ public class WebFluxJwtAuthenticationFilter implements WebFilter {
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
         String token = extractTokenFromRequest(exchange);
         if (token != null) {
-            // Create a reactive chain to decode and convert the token
             return Mono.just(token)
                     .map(jwtDecoder::decode)
                     .map(jwtToPrincipleConverter::convert)
-                    .map(UserPrincipalAuthenticationToken::new)
-                    // Add the authentication to the reactive security context
-                    .flatMap(authentication -> chain.filter(exchange)
-                                    .contextWrite(ReactiveSecurityContextHolder.withAuthentication(authentication))
-                    );
+                    .flatMap(principal -> {
+                        // Mutate the request: remove the original token and add new headers with user info.
+                        ServerWebExchange mutatedExchange = exchange.mutate()
+                                .request(req -> req.headers(httpHeaders -> {
+                                    // Remove the Authorization header.
+                                    httpHeaders.remove(HttpHeaders.AUTHORIZATION);
+                                    String authority = principal.getAuthorities()
+                                            .stream()
+                                            .findFirst()  // get the first element as Optional<GrantedAuthority>
+                                            .map(GrantedAuthority::getAuthority)
+                                            .orElse("USER");
+                                    // Add new headers with data extracted from the token.
+                                    httpHeaders.add("X-User-Id", String.valueOf(principal.getUserId()));
+                                    httpHeaders.add("X-User-Role", authority);
+                                }))
+                                .build();
+
+                        // Optionally, create an authentication token for the reactive security context.
+                        UserPrincipalAuthenticationToken authentication = new UserPrincipalAuthenticationToken(principal);
+                        return chain.filter(mutatedExchange)
+                                .contextWrite(ReactiveSecurityContextHolder.withAuthentication(authentication));
+                    });
         }
-        // If no token is present, continue the chain as usual.
+        // If no token is present, continue as usual.
         return chain.filter(exchange);
     }
 
