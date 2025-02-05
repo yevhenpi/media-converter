@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 import ua.pidopryhora.mediaconverter.common.security.JwtDecoder;
-import ua.pidopryhora.mediaconverter.common.security.JwtToPrincipleConverter;
+import ua.pidopryhora.mediaconverter.common.security.JwtToPrincipalConverter;
 import ua.pidopryhora.mediaconverter.common.security.UserPrincipalAuthenticationToken;
 
 import java.io.IOException;
@@ -22,7 +22,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtDecoder jwtDecoder;
 
-    private final JwtToPrincipleConverter jwtToPrincipleConverter;
+    private final JwtToPrincipalConverter jwtToPrincipleConverter;
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         extractTokenFromRequest(request)

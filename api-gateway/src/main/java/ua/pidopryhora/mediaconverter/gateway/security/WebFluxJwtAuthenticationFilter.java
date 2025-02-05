@@ -1,5 +1,6 @@
 package ua.pidopryhora.mediaconverter.gateway.security;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.context.ReactiveSecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -9,19 +10,15 @@ import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
 import ua.pidopryhora.mediaconverter.common.security.JwtDecoder;
-import ua.pidopryhora.mediaconverter.common.security.JwtToPrincipleConverter;
+import ua.pidopryhora.mediaconverter.common.security.JwtToPrincipalConverter;
 import ua.pidopryhora.mediaconverter.common.security.UserPrincipalAuthenticationToken;
 
 @Component
-public class JwtAuthenticationFilter implements WebFilter {
+@RequiredArgsConstructor
+public class WebFluxJwtAuthenticationFilter implements WebFilter {
 
     private final JwtDecoder jwtDecoder;
-    private final JwtToPrincipleConverter jwtToPrincipleConverter;
-
-    public JwtAuthenticationFilter(JwtDecoder jwtDecoder, JwtToPrincipleConverter jwtToPrincipleConverter) {
-        this.jwtDecoder = jwtDecoder;
-        this.jwtToPrincipleConverter = jwtToPrincipleConverter;
-    }
+    private final JwtToPrincipalConverter jwtToPrincipleConverter;
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
@@ -33,8 +30,7 @@ public class JwtAuthenticationFilter implements WebFilter {
                     .map(jwtToPrincipleConverter::convert)
                     .map(UserPrincipalAuthenticationToken::new)
                     // Add the authentication to the reactive security context
-                    .flatMap(authentication ->
-                            chain.filter(exchange)
+                    .flatMap(authentication -> chain.filter(exchange)
                                     .contextWrite(ReactiveSecurityContextHolder.withAuthentication(authentication))
                     );
         }

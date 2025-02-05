@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class JwtToPrincipleConverter {
+public class JwtToPrincipalConverter {
     public UserPrincipal convert(DecodedJWT jwt){
         return UserPrincipal.builder()
                 .userId(Long.valueOf(jwt.getSubject()))

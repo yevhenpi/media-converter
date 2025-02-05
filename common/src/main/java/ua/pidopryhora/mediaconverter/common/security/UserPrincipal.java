@@ -1,5 +1,6 @@
 package ua.pidopryhora.mediaconverter.common.security;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
@@ -17,6 +18,9 @@ public class UserPrincipal implements UserDetails {
 
     private final Collection<? extends GrantedAuthority> authorities;
 
+    @JsonIgnore
+    private final String password;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -25,7 +29,7 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public String getPassword() {
-        return "";
+        return password;
     }
 
     @Override
