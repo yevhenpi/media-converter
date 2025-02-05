@@ -1,5 +1,6 @@
 package ua.pidopryhora.mediaconverter.filemanager.service.s3;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
@@ -11,18 +12,15 @@ import java.net.URL;
 import java.time.Duration;
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class S3PresignedUrlService {
 
     private final S3Presigner presigner;
     private final AwsProperties awsProperties;
+    //TODO: move to properties
+    private final long EXPIRATION_TIME = 10L;
 
-    public S3PresignedUrlService(S3Presigner presigner,
-                                 AwsProperties awsProperties){
-        this.presigner = presigner;
-        this.awsProperties = awsProperties;
-    }
-
-    public URL generatePresignedUrl(String fileName, long expirationMinutes) {
+    public URL generatePresignedUrl(String fileName) {
         PutObjectPresignRequest presignRequest = null;
         try {
             // Create a PutObjectRequest
@@ -34,7 +32,7 @@ public class S3PresignedUrlService {
             // Generate the Presigned URL
             presignRequest = PutObjectPresignRequest.builder()
                     .putObjectRequest(objectRequest)
-                    .signatureDuration(Duration.ofMinutes(expirationMinutes))
+                    .signatureDuration(Duration.ofMinutes(EXPIRATION_TIME))
                     .build();
         } catch (Exception e) {
             log.error("Cannot create presigned url ", e);

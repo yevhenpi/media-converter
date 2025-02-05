@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class JwtDecoder {
-
+//TODO: Move secret somewhere safer
     public DecodedJWT decode(String token){
         return JWT.require(Algorithm.HMAC256("secret"))
                 .build()
