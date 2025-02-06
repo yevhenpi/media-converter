@@ -13,8 +13,8 @@ import java.util.Map;
 public class GetController {
 
     @GetMapping("/file")
-    public String getFile(@RequestHeader("X-User-Role") String role,
-                          @RequestHeader("X-User-Id") String userId){
+    public String getFile(@RequestHeader("UserRole") String role,
+                          @RequestHeader("UserId") String userId){
         log.debug("{}{}", role, userId);
         return role + userId;
     }

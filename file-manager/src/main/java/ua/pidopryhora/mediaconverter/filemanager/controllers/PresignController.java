@@ -20,9 +20,11 @@ public class PresignController {
 
     @GetMapping("/upload")
     public ResponseEntity<?> getPresignedUrl(
-            @RequestParam("fileName") String fileName,
-            @RequestHeader("X-User-Id") String userId,
-            @RequestHeader("X-User-Role") String role) {
+            @RequestHeader("FileName") String fileName,
+            @RequestHeader("FileSize") String fileSize,
+            @RequestHeader("TargetFormat") String format,
+            @RequestHeader("UserId") String userId,
+            @RequestHeader("UserRole") String role) {
 
         URL presignedUrl = presignedUrlService.generatePresignedUrl(fileName);
 
