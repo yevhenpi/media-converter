@@ -5,14 +5,13 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.springframework.stereotype.Service;
 
 @Getter
 @Setter
 @RequiredArgsConstructor
 @Entity
 @Table(name = "UserData")
-public class UserEntity {
+public class UserData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false, nullable = false)
