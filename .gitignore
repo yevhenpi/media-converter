@@ -36,3 +36,4 @@ build/
 application.properties
 log/
 uploads/
+file-manager/src/main/resources/application.yaml

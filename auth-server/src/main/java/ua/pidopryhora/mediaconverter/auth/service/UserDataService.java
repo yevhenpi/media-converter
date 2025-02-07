@@ -17,8 +17,8 @@ public class UserDataService {
     public UserData createUser(String email, String rawPassword) {
         UserData user = new UserData();
         user.setEmail(email);
-        user.setPassword(passwordEncoder.encode(rawPassword)); // ✅ Hash password
-        user.setRole("USER"); // ✅ Default role
+        user.setPassword(passwordEncoder.encode(rawPassword));
+        user.setRole("USER");
 
         return userDataRepository.save(user);
     }
