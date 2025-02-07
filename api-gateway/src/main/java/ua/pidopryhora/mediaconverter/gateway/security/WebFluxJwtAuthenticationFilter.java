@@ -1,6 +1,7 @@
 package ua.pidopryhora.mediaconverter.gateway.security;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.ReactiveSecurityContextHolder;
@@ -14,13 +15,14 @@ import ua.pidopryhora.mediaconverter.common.security.JwtDecoder;
 import ua.pidopryhora.mediaconverter.common.security.JwtToPrincipalConverter;
 import ua.pidopryhora.mediaconverter.common.security.UserPrincipal;
 import ua.pidopryhora.mediaconverter.common.security.UserPrincipalAuthenticationToken;
-
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class WebFluxJwtAuthenticationFilter implements WebFilter {
 
     private final JwtDecoder jwtDecoder;
     private final JwtToPrincipalConverter jwtToPrincipalConverter;
+    private final ExceptionHandler exceptionHandler;
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
@@ -37,14 +39,22 @@ public class WebFluxJwtAuthenticationFilter implements WebFilter {
                         return chain.filter(mutatedExchange)
                                 .contextWrite(ReactiveSecurityContextHolder.withAuthentication(authentication));
                     })
-                    .onErrorResume(e -> handleJwtException(exchange, e));
+                    .onErrorResume(e -> exceptionHandler.handleException(exchange,e));
         }
         // If no token is present, continue as usual.
         return chain.filter(exchange);
     }
 
+    private String extractTokenFromRequest(ServerWebExchange exchange) {
+        String token = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
+        if (StringUtils.hasText(token) && token.startsWith("Bearer ")) {
+            return token.substring(7);
+        }
+        return null;
+    }
+
     private static ServerWebExchange getMutatedExchange(ServerWebExchange exchange, UserPrincipal principal) {
-        ServerWebExchange mutatedExchange = exchange.mutate()
+        return exchange.mutate()
                 .request(req -> req.headers(httpHeaders -> {
                     // Remove the Authorization header.
                     httpHeaders.remove(HttpHeaders.AUTHORIZATION);
@@ -58,35 +68,7 @@ public class WebFluxJwtAuthenticationFilter implements WebFilter {
                     httpHeaders.add("UserRole", authority);
                 }))
                 .build();
-        return mutatedExchange;
     }
 
-    private String extractTokenFromRequest(ServerWebExchange exchange) {
-        String token = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
-        if (StringUtils.hasText(token) && token.startsWith("Bearer ")) {
-            return token.substring(7);
-        }
-        return null;
-    }
-    private Mono<Void> handleJwtException(ServerWebExchange exchange, Throwable e) {
-        if (e instanceof com.auth0.jwt.exceptions.TokenExpiredException) {
-            return sendErrorResponse(exchange, "Token expired", 401);
-        } else if (e instanceof com.auth0.jwt.exceptions.JWTVerificationException) {
-            return sendErrorResponse(exchange, "Invalid token", 401);
-        } else {
-            return sendErrorResponse(exchange, "Authentication error", 401);
-        }
-    }
-    private Mono<Void> sendErrorResponse(ServerWebExchange exchange, String message, int statusCode) {
-        exchange.getResponse().setStatusCode(org.springframework.http.HttpStatus.valueOf(statusCode));
-        exchange.getResponse().getHeaders().add("Content-Type", "application/json");
-
-        String errorJson = String.format("{\"error\": \"%s\"}", message);
-        byte[] bytes = errorJson.getBytes(java.nio.charset.StandardCharsets.UTF_8);
-
-        return exchange.getResponse().writeWith(
-                Mono.just(exchange.getResponse().bufferFactory().wrap(bytes))
-        );
-    }
 
 }

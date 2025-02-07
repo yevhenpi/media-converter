@@ -16,8 +16,6 @@
     <root level="info">
         <appender-ref ref="CONSOLE"/>
     </root>
-    <!--    <root level="debug">-->
-    <!--        <appender-ref ref="CONSOLE"/>-->
-    <!--    </root>-->
+
 
 </configuration>
