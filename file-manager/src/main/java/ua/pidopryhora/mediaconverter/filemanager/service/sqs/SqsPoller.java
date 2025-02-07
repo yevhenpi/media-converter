@@ -14,25 +14,26 @@ import ua.pidopryhora.mediaconverter.filemanager.service.EventProcessor;
 import java.util.List;
 @Slf4j
 @Service
-public class SqsUploadListenerOld {
+public class SqsPoller {
+    //TODO: Add exception handling and service reload
 
     private final SqsClient sqsClient;
     private final EventProcessor eventProcessor;
     @Value("${sqs.queue.url}")
     private String queueUrl;
-    private Thread listenerThread;
+    private Thread pollerThread;
 
 
-    public SqsUploadListenerOld(SqsClient sqsClient, EventProcessor eventProcessor){
+    public SqsPoller(SqsClient sqsClient, EventProcessor eventProcessor){
         this.sqsClient = sqsClient;
         this.eventProcessor = eventProcessor;
     }
 
     @PostConstruct
     public void init() {
-        log.debug("Starting SQS Listener...");
-        listenerThread = new Thread(this::listen);
-        listenerThread.start();
+        log.debug("Starting SQS Poller...");
+        pollerThread = new Thread(this::listen);
+        pollerThread.start();
     }
 
     public void listen() {
@@ -58,11 +59,11 @@ public class SqsUploadListenerOld {
             }
             catch (Exception e) {
                 if(Thread.currentThread().isInterrupted()) {
-                    log.debug("Shutting down SQS Listener...");
+                    log.debug("Shutting down SQS Poller...");
                     break;
                 }
 
-                log.error("Error while listening to SQS queue: " ,e);
+                log.error("Error while polling SQS queue: " ,e);
                 break;
             }
         }
@@ -79,8 +80,8 @@ public class SqsUploadListenerOld {
 
     @PreDestroy
     public void shutdown() {
-        if (listenerThread != null && listenerThread.isAlive()) {
-            listenerThread.interrupt();
+        if (pollerThread != null && pollerThread.isAlive()) {
+            pollerThread.interrupt();
         }
         sqsClient.close();
     }
