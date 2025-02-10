@@ -1,4 +1,6 @@
 spring:
+  config:
+    import: "classpath:/application-common.yaml"
   application:
     name: api-gateway
   http:

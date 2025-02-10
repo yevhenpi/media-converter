@@ -15,7 +15,7 @@ import java.util.List;
 public class JwtIssuer {
 
     private final JwtProperties jwtProperties;
-    //TODO Move secret somewhere safer
+
     public String issue(long userId, String email, List<String> roles){
         return JWT.create()
                 .withSubject(String.valueOf(userId))

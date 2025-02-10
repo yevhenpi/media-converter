@@ -1,7 +1,13 @@
+
+
 server:
   port: 8095
 
+
 spring:
+  config:
+    import: "classpath:/application-common.yaml"
+
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
