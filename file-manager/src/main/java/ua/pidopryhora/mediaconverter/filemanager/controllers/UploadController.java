@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ua.pidopryhora.mediaconverter.filemanager.model.RequestData;
+import ua.pidopryhora.mediaconverter.filemanager.model.RequestDataDTO;
 import ua.pidopryhora.mediaconverter.filemanager.model.UserDataDTO;
 import ua.pidopryhora.mediaconverter.filemanager.service.UploadService;
 
@@ -21,7 +21,7 @@ public class UploadController {
     @PostMapping("/upload")
     public ResponseEntity<?> extractRequestData(@RequestHeader("UserId") String userId,
                                                 @RequestHeader("UserRole") String userRole,
-                                                @Valid @RequestBody RequestData requestData) {
+                                                @Valid @RequestBody RequestDataDTO requestDataDTO) {
 
 
         UserDataDTO userDataDTO = UserDataDTO.builder()
@@ -30,7 +30,7 @@ public class UploadController {
                 .build();
 
 
-        return uploadService.handleUploadRequest(requestData, userDataDTO);
+        return uploadService.handleUploadRequest(requestDataDTO, userDataDTO);
 
     }
 }

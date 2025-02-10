@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan(basePackages = {
         "ua.pidopryhora.mediaconverter.gateway",
-        "ua.pidopryhora.mediaconverter.common"  // Include common module package
+        "ua.pidopryhora.mediaconverter.common"
 })
 public class ApiGatewayApplication {
     public static void main(String[] args) {
