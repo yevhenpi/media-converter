@@ -2,7 +2,7 @@ package ua.pidopryhora.mediaconverter.filemanager.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ua.pidopryhora.mediaconverter.filemanager.model.MetadataDTO;
+import ua.pidopryhora.mediaconverter.filemanager.model.RequestMetadataDTO;
 import ua.pidopryhora.mediaconverter.filemanager.model.UserDataDTO;
 @Slf4j
 @Service
@@ -13,10 +13,10 @@ public class FileSizeValidationService {
     private final long ADMIN_SIZE_LIMIT = 524288000L;
 
 
-    public boolean isSizeValid(MetadataDTO metadataDTO, UserDataDTO userDataDTO){
+    public boolean isSizeValid(RequestMetadataDTO requestMetadataDTO){
 
-        long fileSize = metadataDTO.getFileSize();
-        String role = userDataDTO.getUserRole().toUpperCase();// Normalize case to avoid case sensitivity issues
+        long fileSize = requestMetadataDTO.getFileSize();
+        String role = requestMetadataDTO.getRole();// Normalize case to avoid case sensitivity issues
 
         long allowedSizeLimit = switch (role) {
             case "PREMIUM" -> PREMIUM_SIZE_LIMIT;

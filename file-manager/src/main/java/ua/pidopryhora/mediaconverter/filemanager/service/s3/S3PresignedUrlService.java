@@ -14,6 +14,7 @@ import java.time.Duration;
 @Service
 @RequiredArgsConstructor
 public class S3PresignedUrlService {
+    //TODO: Add fileSize to link creation
 
     private final S3Presigner presigner;
     private final AwsProperties awsProperties;
