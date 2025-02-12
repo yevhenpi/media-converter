@@ -5,7 +5,7 @@ import lombok.Getter;
 import jakarta.validation.constraints.NotBlank;
 
 @Getter
-public class RequestDataDTO {
+public class MetadataDTO {
 
 
     @NotBlank(message = "File name is required")

@@ -15,7 +15,7 @@ import java.util.List;
 @Slf4j
 @Service
 public class SqsPoller {
-    //TODO: Add exception handling and service reload
+    //TODO: Add exception handling and service reload. Add polling on request feature.
 
     private final SqsClient sqsClient;
     private final EventProcessor eventProcessor;
@@ -32,11 +32,11 @@ public class SqsPoller {
     @PostConstruct
     public void init() {
         log.debug("Starting SQS Poller...");
-        pollerThread = new Thread(this::listen);
+        pollerThread = new Thread(this::poll);
         pollerThread.start();
     }
 
-    public void listen() {
+    public void poll() {
         while (true) {
             try {
                 ReceiveMessageRequest request = ReceiveMessageRequest.builder()
