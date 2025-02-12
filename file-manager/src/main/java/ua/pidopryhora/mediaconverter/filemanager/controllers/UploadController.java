@@ -2,13 +2,14 @@ package ua.pidopryhora.mediaconverter.filemanager.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ua.pidopryhora.mediaconverter.filemanager.model.MetadataDTO;
 import ua.pidopryhora.mediaconverter.filemanager.model.UserDataDTO;
 import ua.pidopryhora.mediaconverter.filemanager.service.UploadService;
-
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
@@ -28,6 +29,7 @@ public class UploadController {
                 .UserId(userId)
                 .UserRole(userRole)
                 .build();
+
 
 
         return uploadService.handleUploadRequest(metadataDTO, userDataDTO);

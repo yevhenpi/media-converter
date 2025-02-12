@@ -6,12 +6,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ua.pidopryhora.mediaconverter.filemanager.model.MetadataDTO;
 import ua.pidopryhora.mediaconverter.filemanager.model.UserDataDTO;
-import ua.pidopryhora.mediaconverter.filemanager.model.UserRole;
 import ua.pidopryhora.mediaconverter.filemanager.service.jave2.FormatValidationService;
 import ua.pidopryhora.mediaconverter.filemanager.service.s3.S3PresignedUrlService;
-import ua.pidopryhora.mediaconverter.filemanager.service.upload.UploadHandler;
-import ws.schild.jave.EncoderException;
 
+import java.net.URL;
 import java.util.Map;
 @Slf4j
 @Service
@@ -19,29 +17,25 @@ import java.util.Map;
 public class UploadService {
 
     private final S3PresignedUrlService presignedUrlService;
-    private final Map<String, UploadHandler> uploadHandlers;
     private final FormatValidationService formatValidationService;
+    private final FileSizeValidationService sizeValidationService;
 
     public ResponseEntity<?> handleUploadRequest(MetadataDTO metadata, UserDataDTO userDataDTO){
 
-            if(!formatValidationService.isFormatValid(metadata)){
+        if(!formatValidationService.isFormatValid(metadata)){
                return ResponseEntity.badRequest().body(Map.of("error", "format is not valid"));
-            }
+        }
+        if(!sizeValidationService.isSizeValid(metadata, userDataDTO)){
+            return ResponseEntity.badRequest().body(Map.of("error", "file is too big"));
+        }
 
 
-        UploadHandler handler = getHandlerByRole(UserRole.valueOf(userDataDTO.getUserRole()));
+        URL presignedUrl = presignedUrlService.generatePresignedUrl(metadata.getFileName());
 
-        return handler.generateResponse(metadata, userDataDTO, presignedUrlService);
-
-
+        return ResponseEntity.ok().body(Map.of(
+                "url", presignedUrl.toString()));
 
     }
 
-    private UploadHandler getHandlerByRole(UserRole role) {
-        return switch (role) {
-            case USER -> uploadHandlers.get("userUploadHandler");
-            case PREMIUM -> uploadHandlers.get("premiumUploadHandler");
-            case ADMIN -> uploadHandlers.get("adminUploadHandler");
-        };
-    }
+
 }
