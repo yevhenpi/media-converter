@@ -27,4 +27,7 @@ public class UserData {
     @Column(name = "role", nullable = false)
     private String role = "USER";
 
+    @Column(name = "status", nullable = false)
+    private String status = "OK";
+
 }

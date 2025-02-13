@@ -6,6 +6,7 @@ import ua.pidopryhora.mediaconverter.filemanager.model.RequestMetadataDTO;
 import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class CashingService {
+    //TODO: Change to REDIS
 
     private static final ConcurrentHashMap<String, RequestMetadataDTO> cash = new ConcurrentHashMap<>();
 
