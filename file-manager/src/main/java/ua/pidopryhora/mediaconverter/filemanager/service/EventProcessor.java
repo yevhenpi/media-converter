@@ -16,6 +16,7 @@ public class EventProcessor {
 
     private final ObjectMapper objectMapper;
     private final CashingService cashingService;
+    private final FileDataService fileDataService;
 
 
     public void processMessage(String messageBody) throws JsonProcessingException {
@@ -25,22 +26,20 @@ public class EventProcessor {
 
 
         for (S3Event.S3Record record : event.getRecords()) {
-            String bucketName = record.getS3().getBucket().getName();
             String objectKey = record.getS3().getObject().getKey();
-            String eventName = record.getEventName();
             Integer objectSize = record.getS3().getObject().getSize();
 
 
 
-            log.debug("File uploaded: {} in bucket: {}", objectKey, bucketName);
-            log.debug("Event type: {}", eventName);
 
             UploadRequestDTO requestDTO = cashingService.getMetadata(objectKey);
             if(!isUploadValid(objectSize, requestDTO)){
                 log.debug("INVALID UPLOAD");
                 return;
             }
-            log.debug("File is being processed");
+
+            fileDataService.saveFile(requestDTO);
+            log.debug("File is ready");
             cashingService.removeMetadata(objectKey);
 
 
