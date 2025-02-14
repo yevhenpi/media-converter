@@ -1,22 +1,22 @@
 package ua.pidopryhora.mediaconverter.filemanager.service;
 
 import org.springframework.stereotype.Service;
-import ua.pidopryhora.mediaconverter.filemanager.model.RequestMetadataDTO;
+import ua.pidopryhora.mediaconverter.filemanager.model.UploadRequestDTO;
 
 import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class CashingService {
     //TODO: Change to REDIS
 
-    private static final ConcurrentHashMap<String, RequestMetadataDTO> cash = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<String, UploadRequestDTO> cash = new ConcurrentHashMap<>();
 
-    public void cashMetaData(RequestMetadataDTO requestMetadataDTO){
-        cash.put(requestMetadataDTO.getFileName(), requestMetadataDTO);
+    public void cashMetaData(UploadRequestDTO requestDTO){
+        cash.put(requestDTO.getFileName(), requestDTO);
 
     }
 
-    public boolean contains(RequestMetadataDTO requestMetadataDTO){
-        return cash.contains(requestMetadataDTO);
+    public boolean contains(UploadRequestDTO requestDTO){
+        return cash.contains(requestDTO);
 
     }
 
@@ -24,7 +24,7 @@ public class CashingService {
         cash.remove(fileName);
     }
 
-    public RequestMetadataDTO getMetadata(String fileName){
+    public UploadRequestDTO getMetadata(String fileName){
        return cash.get(fileName);
     }
 }

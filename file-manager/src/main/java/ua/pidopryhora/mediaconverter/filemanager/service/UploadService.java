@@ -4,8 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import ua.pidopryhora.mediaconverter.filemanager.model.RequestMetadataDTO;
-import ua.pidopryhora.mediaconverter.filemanager.model.UserDataDTO;
+import ua.pidopryhora.mediaconverter.filemanager.model.UploadRequestDTO;
 import ua.pidopryhora.mediaconverter.filemanager.service.jave2.FormatValidationService;
 import ua.pidopryhora.mediaconverter.filemanager.service.s3.S3PresignedUrlService;
 
@@ -21,7 +20,7 @@ public class UploadService {
     private final FileSizeValidationService sizeValidationService;
     private final CashingService cashingService;
 
-    public ResponseEntity<?> handleUploadRequest(RequestMetadataDTO metadata){
+    public ResponseEntity<?> handleUploadRequest(UploadRequestDTO metadata){
 
         if(!formatValidationService.isFormatValid(metadata)){
                return ResponseEntity.badRequest().body(Map.of("error", "format is not supported"));
@@ -31,13 +30,14 @@ public class UploadService {
         }
 
 
-        URL presignedUrl = presignedUrlService.generatePresignedUrl(metadata.getFileName());
+        URL presignedUrl = presignedUrlService.generatePresignedUrl(metadata);
 
         cashingService.cashMetaData(metadata);
 
 
         return ResponseEntity.ok().body(Map.of(
-                "url", presignedUrl.toString()));
+                "url", presignedUrl.toString(),
+                "requestId", metadata.getRequestId()));
 
     }
 

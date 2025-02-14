@@ -6,9 +6,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ua.pidopryhora.mediaconverter.filemanager.model.RequestMetadataDTO;
-import ua.pidopryhora.mediaconverter.filemanager.model.UserDataDTO;
+import ua.pidopryhora.mediaconverter.filemanager.model.UploadRequestDTO;
 import ua.pidopryhora.mediaconverter.filemanager.service.UploadService;
+
+import java.util.UUID;
+
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -22,13 +24,16 @@ public class UploadController {
     @PostMapping("/upload")
     public ResponseEntity<?> extractRequestData(@RequestHeader("UserId") String userId,
                                                 @RequestHeader("UserRole") String userRole,
-                                                @Valid @RequestBody RequestMetadataDTO requestMetadataDTO) {
+                                                @Valid @RequestBody UploadRequestDTO requestDTO) {
 
-        requestMetadataDTO.setRole(userRole);
-        requestMetadataDTO.setUserId(Long.parseLong(userId));
+        String requestId = UUID.randomUUID().toString();
+
+        requestDTO.setRole(userRole);
+        requestDTO.setUserId(Long.parseLong(userId));
+        requestDTO.setRequestId(requestId);
 
 
-        return uploadService.handleUploadRequest(requestMetadataDTO);
+        return uploadService.handleUploadRequest(requestDTO);
 
     }
 }

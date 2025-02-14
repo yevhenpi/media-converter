@@ -5,8 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ua.pidopryhora.mediaconverter.filemanager.model.RequestMetadataDTO;
 import ua.pidopryhora.mediaconverter.filemanager.model.S3Event;
+import ua.pidopryhora.mediaconverter.filemanager.model.UploadRequestDTO;
+
 @Slf4j
 @RequiredArgsConstructor
 @Service
@@ -34,8 +35,8 @@ public class EventProcessor {
             log.debug("File uploaded: {} in bucket: {}", objectKey, bucketName);
             log.debug("Event type: {}", eventName);
 
-            RequestMetadataDTO requestMetadataDTO = cashingService.getMetadata(objectKey);
-            if(!isUploadValid(objectSize, requestMetadataDTO)){
+            UploadRequestDTO requestDTO = cashingService.getMetadata(objectKey);
+            if(!isUploadValid(objectSize, requestDTO)){
                 log.debug("INVALID UPLOAD");
                 return;
             }
@@ -50,7 +51,7 @@ public class EventProcessor {
 
     }
 
-    private boolean isUploadValid(Integer size, RequestMetadataDTO requestMetadataDTO){
-        return size.longValue() == requestMetadataDTO.getFileSize();
+    private boolean isUploadValid(Integer size, UploadRequestDTO requestDTO){
+        return size.longValue() == requestDTO.getFileSize();
     }
 }
