@@ -13,7 +13,7 @@ import java.util.Map;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class UploadService {
+public class UploadRequestProcessor {
 
     private final S3PresignedUrlService presignedUrlService;
     private final FormatValidationService formatValidationService;

@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ua.pidopryhora.mediaconverter.filemanager.model.UploadRequestDTO;
-import ua.pidopryhora.mediaconverter.filemanager.service.UploadService;
+import ua.pidopryhora.mediaconverter.filemanager.service.UploadRequestProcessor;
 
 import java.util.UUID;
 
@@ -19,7 +19,7 @@ import java.util.UUID;
 @Validated
 public class UploadController {
 
-    private final UploadService uploadService;
+    private final UploadRequestProcessor uploadRequestProcessor;
 
     @PostMapping("/upload")
     public ResponseEntity<?> extractRequestData(@RequestHeader("UserId") String userId,
@@ -33,7 +33,7 @@ public class UploadController {
         requestDTO.setRequestId(requestId);
 
 
-        return uploadService.handleUploadRequest(requestDTO);
+        return uploadRequestProcessor.handleUploadRequest(requestDTO);
 
     }
 }
