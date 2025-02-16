@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 import software.amazon.awssdk.services.s3.presigner.model.PutObjectPresignRequest;
-import ua.pidopryhora.mediaconverter.filemanager.config.AwsProperties;
+import ua.pidopryhora.mediaconverter.common.aws.AwsProperties;
 import ua.pidopryhora.mediaconverter.filemanager.model.UploadRequestDTO;
 
 import java.net.URL;

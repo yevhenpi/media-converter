@@ -7,6 +7,10 @@ import org.springframework.scheduling.annotation.EnableAsync;
 
 @EnableAsync
 @SpringBootApplication
+@ComponentScan(basePackages = {
+        "ua.pidopryhora.mediaconverter.filemanager",
+        "ua.pidopryhora.mediaconverter.common"
+})
 public class FileManagerApplication {
     //TODO: Implement idempotency
 

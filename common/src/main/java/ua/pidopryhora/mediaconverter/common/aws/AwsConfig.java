@@ -1,4 +1,4 @@
-package ua.pidopryhora.mediaconverter.filemanager.config;
+package ua.pidopryhora.mediaconverter.common.aws;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
@@ -26,4 +26,8 @@ public class AwsConfig {
     public Region awsRegion() {
         return Region.of(awsProperties.getRegion());
     }
+
+
+
+
 }

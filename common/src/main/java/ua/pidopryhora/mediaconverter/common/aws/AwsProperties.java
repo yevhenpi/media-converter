@@ -1,4 +1,4 @@
-package ua.pidopryhora.mediaconverter.filemanager.config;
+package ua.pidopryhora.mediaconverter.common.aws;
 
 import lombok.Getter;
 import lombok.Setter;
