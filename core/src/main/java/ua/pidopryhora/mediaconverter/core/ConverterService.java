@@ -15,7 +15,7 @@ import java.util.Arrays;
 public class ConverterService {
 
     public ConverterService(){
-        convert();
+
     }
 
     public void convert(){

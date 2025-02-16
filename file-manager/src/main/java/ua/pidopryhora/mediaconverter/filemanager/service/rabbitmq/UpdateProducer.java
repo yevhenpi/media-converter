@@ -3,7 +3,7 @@ package ua.pidopryhora.mediaconverter.filemanager.service.rabbitmq;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
-import ua.pidopryhora.mediaconverter.filemanager.model.ConversionRequestDTO;
+import ua.pidopryhora.mediaconverter.common.model.ConversionRequestDTO;
 
 @Slf4j
 @Service

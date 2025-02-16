@@ -1,6 +1,5 @@
-package ua.pidopryhora.mediaconverter.filemanager.model;
+package ua.pidopryhora.mediaconverter.common.model;
 
-import jakarta.validation.constraints.Min;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import jakarta.validation.constraints.NotBlank;

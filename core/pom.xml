@@ -9,7 +9,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>converter</artifactId>
+    <artifactId>core</artifactId>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
@@ -17,6 +17,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-amqp</artifactId>
@@ -36,6 +40,12 @@
             <groupId>ws.schild</groupId>
             <artifactId>jave-nativebin-linux64</artifactId>
             <version>3.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>ua.pidopryhora</groupId>
+            <artifactId>common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
 
     </dependencies>

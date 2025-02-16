@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ua.pidopryhora.mediaconverter.filemanager.model.ConversionRequestDTO;
+import ua.pidopryhora.mediaconverter.common.model.ConversionRequestDTO;
 import ua.pidopryhora.mediaconverter.filemanager.service.ConversionRequestProcessor;
 
 import java.util.UUID;

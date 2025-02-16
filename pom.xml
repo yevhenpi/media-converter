@@ -22,7 +22,7 @@
 		<developer/>
 	</developers>
 	<modules>
-		<module>converter</module>
+		<module>core</module>
 		<module>api-gateway</module>
 		<module>file-manager</module>
 		<module>eureka-server</module>
