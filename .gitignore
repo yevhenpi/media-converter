@@ -37,3 +37,4 @@ application.properties
 log/
 uploads/
 file-manager/src/main/resources/application.yaml
+common/src/main/resources/application-common.yaml
