@@ -8,7 +8,7 @@ import ua.pidopryhora.mediaconverter.filemanager.service.rabbitmq.UpdateProducer
 import java.util.Map;
 @Service
 public class ConversionRequestProcessor {
-    //TODO:Add target format validation
+    //TODO:Add target format validation. Check if file present in database.
 
     private final UpdateProducer updateProducer;
 

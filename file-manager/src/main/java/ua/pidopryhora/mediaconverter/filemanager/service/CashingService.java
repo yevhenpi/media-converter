@@ -6,7 +6,7 @@ import ua.pidopryhora.mediaconverter.filemanager.model.UploadRequestDTO;
 import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class CashingService {
-    //TODO: Change to REDIS
+    //TODO: Move to REDIS
 
     private static final ConcurrentHashMap<String, UploadRequestDTO> cash = new ConcurrentHashMap<>();
 

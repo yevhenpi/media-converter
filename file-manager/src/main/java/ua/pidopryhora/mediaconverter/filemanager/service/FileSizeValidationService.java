@@ -7,6 +7,8 @@ import ua.pidopryhora.mediaconverter.filemanager.model.UploadRequestDTO;
 @Service
 public class FileSizeValidationService {
 
+    //TODO: Create more centralised system for userRoles permissions and limits
+
     private final long USER_SIZE_LIMIT = 10485760L;
     private final long PREMIUM_SIZE_LIMIT = 104857600L;
     private final long ADMIN_SIZE_LIMIT = 524288000L;

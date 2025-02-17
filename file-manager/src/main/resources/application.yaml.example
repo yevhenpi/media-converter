@@ -1,12 +1,9 @@
 spring:
   application:
     name: file-manager
+  config:
+    import: "classpath:/application-common.yaml"
 
-aws:
-  access-key:
-  secret-key:
-  upload-bucket-name:
-  region:
 
 sqs:
   queue:
@@ -14,8 +11,3 @@ sqs:
 
 server:
   port: 8081
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
