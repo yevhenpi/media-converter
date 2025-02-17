@@ -27,7 +27,7 @@ public class FormatSupplier {
         try {
             return encoder.getSupportedDecodingFormats();
         } catch (EncoderException e) {
-            log.error("CANT GET ENCODING FORMATS", e);
+            log.error("CANT GET DECODING FORMATS", e);
         }
         return def;
     }

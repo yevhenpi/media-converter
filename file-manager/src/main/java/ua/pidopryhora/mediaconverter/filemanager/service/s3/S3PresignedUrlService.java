@@ -17,6 +17,7 @@ import java.time.Duration;
 @RequiredArgsConstructor
 public class S3PresignedUrlService {
     //TODO: Add fileSize to link creation
+    //TODO: Consider moving to 1.x version for presigned POST implementation or find solution of security flaw.
 
     private final S3Presigner presigner;
     private final AwsProperties awsProperties;
