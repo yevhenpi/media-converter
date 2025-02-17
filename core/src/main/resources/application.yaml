@@ -4,8 +4,10 @@ server:
 spring:
   application:
     name: converter
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: "guest"
+  config:
+    import: "classpath:/application-common.yaml"
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: guest
+#    password: "guest"

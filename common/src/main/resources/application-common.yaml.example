@@ -1,0 +1,8 @@
+jwt:
+  secret:
+
+aws:
+  access-key:
+  secret-key:
+  upload-bucket-name:
+  region:
