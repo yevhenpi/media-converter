@@ -13,3 +13,4 @@ eureka:
 
   server:
     enable-self-preservation: false
+

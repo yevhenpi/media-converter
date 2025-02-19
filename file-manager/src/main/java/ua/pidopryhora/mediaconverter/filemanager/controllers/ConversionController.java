@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @Slf4j
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 @Validated
 @RequiredArgsConstructor
 public class ConversionController {

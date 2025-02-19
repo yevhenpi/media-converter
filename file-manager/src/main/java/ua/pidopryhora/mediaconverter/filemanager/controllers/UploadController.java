@@ -14,7 +14,7 @@ import java.util.UUID;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 @CrossOrigin(origins = "*")
 @Validated
 public class UploadController {

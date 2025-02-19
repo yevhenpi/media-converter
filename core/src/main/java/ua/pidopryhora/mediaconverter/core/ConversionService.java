@@ -4,17 +4,17 @@ package ua.pidopryhora.mediaconverter.core;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ws.schild.jave.Encoder;
-import ws.schild.jave.MultimediaObject;
 import ws.schild.jave.encode.AudioAttributes;
 import ws.schild.jave.encode.EncodingAttributes;
+import ws.schild.jave.encode.VideoAttributes;
 
 import java.io.File;
 import java.util.Arrays;
 @Slf4j
 @Service
-public class ConverterService {
+public class ConversionService {
 
-    public ConverterService(){
+    public ConversionService(){
 
     }
 
@@ -23,6 +23,8 @@ public class ConverterService {
         try {
             File source = new File("file path");
             File target = new File("file path");
+
+            VideoAttributes videoAttributes = new VideoAttributes();
 
             //Audio Attributes
             AudioAttributes audio = new AudioAttributes();

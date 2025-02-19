@@ -2,14 +2,14 @@ package ua.pidopryhora.mediaconverter.filemanager.service.jave2;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import ua.pidopryhora.mediaconverter.common.jave2.FormatSupplier;
+import ua.pidopryhora.mediaconverter.common.jave2.JAVEDataSupplier;
 import ua.pidopryhora.mediaconverter.filemanager.model.UploadRequestDTO;
 
 @Service
 @AllArgsConstructor
 public class FormatValidationService {
 
-    private final FormatSupplier formatSupplier;
+    private final JAVEDataSupplier JAVEDataSupplier;
 
     public boolean isFormatValid(UploadRequestDTO metadata) {
         var fileFormat = extractFormatFromName(metadata.getFileName());
@@ -22,7 +22,7 @@ public class FormatValidationService {
     }
 
     private boolean isFileFormatValid(String fileFormat)  {
-        String[] formats = formatSupplier.getDecodingFormats();
+        String[] formats = JAVEDataSupplier.getDecodingFormats();
         boolean isPresent = false;
         for (String s:formats){
             if (s.equals(fileFormat)) {
