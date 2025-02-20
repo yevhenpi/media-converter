@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ua.pidopryhora.mediaconverter.common.model.ConversionRequestDTO;
+import ua.pidopryhora.mediaconverter.common.model.AudioRequestDTO;
 import ua.pidopryhora.mediaconverter.filemanager.service.ConversionRequestProcessor;
 
 import java.util.UUID;
@@ -23,7 +23,7 @@ public class ConversionController {
     @PostMapping("/convert")
     public ResponseEntity<?> extractRequestData(@RequestHeader("UserRole") String userRole,
                                                 @RequestHeader("UserId") String userId,
-                                                @Valid@RequestBody ConversionRequestDTO requestDTO){
+                                                @Valid@RequestBody AudioRequestDTO requestDTO){
 
         String requestId = UUID.randomUUID().toString();
         requestDTO.setRole(userRole);

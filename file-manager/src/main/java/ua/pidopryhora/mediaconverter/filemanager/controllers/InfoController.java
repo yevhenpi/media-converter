@@ -14,7 +14,7 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
-public class GetController {
+public class InfoController {
 
     private final JAVEDataSupplier JAVEDataSupplier;
 
@@ -28,16 +28,9 @@ public class GetController {
     }
 
     @GetMapping("/formats")
-    public ResponseEntity<?> getFormats(@RequestParam String type){
+    public ResponseEntity<?> getFormats(){
 
-        if(type.equals("encoding")) {
-            return ResponseEntity.ok(JAVEDataSupplier.getEncodingFormats());
-        } else if (type.equals("decoding")) {
-            return ResponseEntity.ok(JAVEDataSupplier.getDecodingFormats());
-        }
-
-
-        return ResponseEntity.badRequest().body(Map.of("message", "wrong type"));
+        return ResponseEntity.ok(JAVEDataSupplier.getAudioFormats());
     }
 
     @GetMapping("/encoders")

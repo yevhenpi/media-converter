@@ -8,16 +8,20 @@ import lombok.Setter;
 @Setter
 @Getter
 @EqualsAndHashCode
-public class ConversionRequestDTO {
+public class AudioRequestDTO {
 
 
     @NotBlank(message = "File name is required")
     private String fileName;
-    @NotBlank(message = "Target format is required")
-    private String targetFormat;
+    @NotBlank(message = "Output format is required")
+    private String outputFormat;
 
-    private String targetResolution;
-    private String targetFrameRate;
+    private String codec = "libmp3lame";
+    private String samplingRate = null;
+    private String bitRate = null;
+    private String channels = null;
+    private String volume = null;
+    private String quality = null;
 
     private String role;
     private long userId;

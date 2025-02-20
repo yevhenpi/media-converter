@@ -2,7 +2,7 @@ package ua.pidopryhora.mediaconverter.filemanager.service;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import ua.pidopryhora.mediaconverter.common.model.ConversionRequestDTO;
+import ua.pidopryhora.mediaconverter.common.model.AudioRequestDTO;
 import ua.pidopryhora.mediaconverter.filemanager.service.rabbitmq.UpdateProducer;
 
 import java.util.Map;
@@ -17,7 +17,7 @@ public class ConversionRequestProcessor {
     }
 
 
-    public ResponseEntity<?> process(ConversionRequestDTO requestDTO){
+    public ResponseEntity<?> process(AudioRequestDTO requestDTO){
 
         updateProducer.produce("CONVERSION_QUEUE", requestDTO);
 

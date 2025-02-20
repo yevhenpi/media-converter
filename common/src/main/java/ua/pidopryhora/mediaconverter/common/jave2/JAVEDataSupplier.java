@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import ws.schild.jave.Encoder;
 import ws.schild.jave.EncoderException;
+
 @Slf4j
 @Component
 public class JAVEDataSupplier {
@@ -70,5 +71,10 @@ public class JAVEDataSupplier {
             log.error("CANT GET VIDEO DECODERS", e);
         }
         return def;
+    }
+    
+    public String[] getAudioFormats(){
+
+        return new String[]{"mp3","aac","wav","flac", "ogg", "opus", "dts", "ac3"};
     }
 }

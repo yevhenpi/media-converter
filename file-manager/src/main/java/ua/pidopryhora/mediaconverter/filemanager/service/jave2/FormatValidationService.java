@@ -22,7 +22,7 @@ public class FormatValidationService {
     }
 
     private boolean isFileFormatValid(String fileFormat)  {
-        String[] formats = JAVEDataSupplier.getDecodingFormats();
+        String[] formats = JAVEDataSupplier.getAudioFormats();
         boolean isPresent = false;
         for (String s:formats){
             if (s.equals(fileFormat)) {
