@@ -4,11 +4,13 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Setter;
+import lombok.ToString;
 
 @Setter
 @Getter
 @EqualsAndHashCode
-public class AudioRequestDTO {
+@ToString
+public class AudioRequestDTO implements RequestDTO {
 
 
     @NotBlank(message = "File name is required")

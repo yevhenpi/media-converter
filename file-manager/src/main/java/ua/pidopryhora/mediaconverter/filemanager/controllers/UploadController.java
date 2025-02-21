@@ -8,6 +8,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ua.pidopryhora.mediaconverter.filemanager.model.UploadRequestDTO;
 import ua.pidopryhora.mediaconverter.filemanager.service.UploadRequestProcessor;
+import ua.pidopryhora.mediaconverter.filemanager.util.HashUtil;
 
 import java.util.UUID;
 
@@ -20,17 +21,21 @@ import java.util.UUID;
 public class UploadController {
 
     private final UploadRequestProcessor uploadRequestProcessor;
+    private final HashUtil hashUtil;
 
     @PostMapping("/upload")
     public ResponseEntity<?> extractRequestData(@RequestHeader("UserId") String userId,
                                                 @RequestHeader("UserRole") String userRole,
                                                 @Valid @RequestBody UploadRequestDTO requestDTO) {
 
-        String requestId = UUID.randomUUID().toString();
+
 
         requestDTO.setRole(userRole);
         requestDTO.setUserId(Long.parseLong(userId));
-        requestDTO.setRequestId(requestId);
+
+        String hash = hashUtil.getHash(requestDTO);
+        log.debug("hash {}", hash);
+
 
 
         return uploadRequestProcessor.handleUploadRequest(requestDTO);

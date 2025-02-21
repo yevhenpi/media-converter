@@ -5,11 +5,14 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+import ua.pidopryhora.mediaconverter.common.model.RequestDTO;
 
 @Setter
 @Getter
 @EqualsAndHashCode
-public class UploadRequestDTO {
+@ToString
+public class UploadRequestDTO implements RequestDTO {
 
     @NotBlank(message = "File name is required")
     private String fileName;
@@ -18,5 +21,5 @@ public class UploadRequestDTO {
 
     private String role;
     private long userId;
-    private String requestId;
+
 }
