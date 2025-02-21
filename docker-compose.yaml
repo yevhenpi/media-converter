@@ -1,5 +1,3 @@
-
-
 services:
   # PostgreSQL database
   db:
@@ -18,12 +16,12 @@ services:
 
   # RabbitMQ message broker
   rabbitmq:
-    image: rabbitmq:3-management  # Includes the management UI
+    image: rabbitmq:3-management
     container_name: rabbitmq
     restart: always
     ports:
-      - "5672:5672"    # RabbitMQ broker port
-      - "15672:15672"  # Management UI port
+      - "5672:5672"
+      - "15672:15672"
     environment:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
@@ -32,18 +30,14 @@ services:
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
 
-
-
-
-
   # Eureka Server
   eureka-server:
     build:
-      context: ./eureka-server  # Path to the eureka-server module
+      context: ./eureka-server
       dockerfile: Dockerfile
     container_name: eureka_server
     ports:
-      - "8761:8761"  # Default Eureka Server port
+      - "8761:8761"
     environment:
       SPRING_PROFILES_ACTIVE: docker
       EUREKA_INSTANCE_HOSTNAME: eureka-server
@@ -52,6 +46,17 @@ services:
     networks:
       - backend_network
 
+  # Redis cache
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"    # Default Redis port
+    restart: always
+    networks:
+      - backend_network
+    volumes:
+      - redis_data:/var/lib/redis
 
 networks:
   backend_network:
@@ -60,3 +65,4 @@ networks:
 volumes:
   postgres_data:
   rabbitmq_data:
+  redis_data:

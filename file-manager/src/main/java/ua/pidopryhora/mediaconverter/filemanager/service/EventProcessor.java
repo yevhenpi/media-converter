@@ -35,6 +35,7 @@ public class EventProcessor {
             UploadRequestDTO requestDTO = cashingService.getMetadata(objectKey);
             if(!isUploadValid(objectSize, requestDTO)){
                 log.debug("INVALID UPLOAD");
+                log.debug(messageBody);
                 return;
             }
 
