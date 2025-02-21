@@ -1,9 +1,13 @@
 package ua.pidopryhora.mediaconverter.common.model;
 
-public interface RequestDTO {
+import lombok.Getter;
+import lombok.Setter;
 
-    String getFileName();
-    long getUserId();
-    String getRole();
-    String toString();
+@Getter
+@Setter
+public abstract class RequestDTO {
+
+    protected String fileName;
+    protected long userId;
+    protected String role;
 }

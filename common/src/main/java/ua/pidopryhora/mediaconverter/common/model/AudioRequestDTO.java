@@ -8,9 +8,8 @@ import lombok.ToString;
 
 @Setter
 @Getter
-@EqualsAndHashCode
 @ToString
-public class AudioRequestDTO implements RequestDTO {
+public class AudioRequestDTO extends RequestDTO {
 
 
     @NotBlank(message = "File name is required")
@@ -27,7 +26,7 @@ public class AudioRequestDTO implements RequestDTO {
 
     private String role;
     private long userId;
-    private String requestId;
+
 
 
 }

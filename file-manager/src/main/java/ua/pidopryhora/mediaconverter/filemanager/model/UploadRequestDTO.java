@@ -10,9 +10,8 @@ import ua.pidopryhora.mediaconverter.common.model.RequestDTO;
 
 @Setter
 @Getter
-@EqualsAndHashCode
 @ToString
-public class UploadRequestDTO implements RequestDTO {
+public class UploadRequestDTO extends RequestDTO {
 
     @NotBlank(message = "File name is required")
     private String fileName;

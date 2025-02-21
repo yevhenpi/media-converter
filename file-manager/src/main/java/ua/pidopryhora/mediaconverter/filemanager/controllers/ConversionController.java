@@ -8,6 +8,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ua.pidopryhora.mediaconverter.common.model.AudioRequestDTO;
 import ua.pidopryhora.mediaconverter.filemanager.service.ConversionRequestProcessor;
+import ua.pidopryhora.mediaconverter.filemanager.util.HashUtil;
 
 import java.util.UUID;
 
@@ -19,16 +20,20 @@ import java.util.UUID;
 public class ConversionController {
 
     private final ConversionRequestProcessor requestProcessor;
+    private final HashUtil hashUtil;
 
     @PostMapping("/convert")
     public ResponseEntity<?> extractRequestData(@RequestHeader("UserRole") String userRole,
                                                 @RequestHeader("UserId") String userId,
                                                 @Valid@RequestBody AudioRequestDTO requestDTO){
 
-        String requestId = UUID.randomUUID().toString();
+
         requestDTO.setRole(userRole);
         requestDTO.setUserId(Long.parseLong(userId));
-        requestDTO.setRequestId(requestId);
+
+        String hash = hashUtil.getHash(requestDTO);
+        log.debug("hash {}", hash);
+
 
 
         return requestProcessor.process(requestDTO);
