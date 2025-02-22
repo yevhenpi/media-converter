@@ -16,13 +16,12 @@ import java.time.Duration;
 @Service
 @RequiredArgsConstructor
 public class S3PresignedUrlService {
-    //TODO: Add fileSize to link creation
     //TODO: Consider moving to 1.x version for presigned POST implementation or find solution of security flaw.
 
     private final S3Presigner presigner;
     private final AwsProperties awsProperties;
     //TODO: move to properties
-    private final long EXPIRATION_TIME = 10L;
+    private final long EXPIRATION_TIME = 1L;
 
     public URL generatePresignedUrl(UploadRequestDTO metadata) {
         PutObjectPresignRequest presignRequest = null;
@@ -31,7 +30,7 @@ public class S3PresignedUrlService {
             PutObjectRequest objectRequest = PutObjectRequest.builder()
                     .bucket(awsProperties.getUploadBucketName())
                     .key(metadata.getFileName())
-                    //.metadata(Map.of("x-amz-meta-request-id", metadata.getRequestId()))
+                    .contentLength(metadata.getFileSize())
                     .build();
 
             // Generate the Presigned URL

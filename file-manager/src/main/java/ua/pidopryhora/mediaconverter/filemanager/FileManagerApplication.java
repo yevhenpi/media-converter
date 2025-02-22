@@ -12,7 +12,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
         "ua.pidopryhora.mediaconverter.common"
 })
 public class FileManagerApplication {
-    //TODO: Implement idempotency
+
 
     public static void main(String[] args){
         SpringApplication.run(FileManagerApplication.class,args );
