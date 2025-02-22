@@ -53,6 +53,7 @@ public class SqsPoller {
                         deleteMessage(message.receiptHandle());
                     } catch (Exception e) {
                         log.error("Failed to process message: " , e);
+                        deleteMessage(message.receiptHandle());
                     }
                 }
 

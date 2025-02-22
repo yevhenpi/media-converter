@@ -32,6 +32,10 @@ public class FileDataService {
         fileDataRepository.delete(findByName(fileName));
     }
 
+    public boolean isPresent(String fileName){
+        return fileDataRepository.existsByName(fileName);
+    }
+
     public FileData findByName(String fileName){
         return fileDataRepository.findByName(fileName);
     }

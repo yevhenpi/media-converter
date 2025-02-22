@@ -19,22 +19,27 @@ public class UploadRequestProcessor {
     private final S3PresignedUrlService presignedUrlService;
     private final FormatValidationService formatValidationService;
     private final FileSizeValidationService sizeValidationService;
-    private final CashingService cashingService;
+    private final FileDataCache FIleDataCache;
     private final HashUtil hashUtil;
+    private final FileDataService fileDataService;
 
     public ResponseEntity<?> handleUploadRequest(UploadRequestDTO requestDTO){
 
         if(!formatValidationService.isFormatValid(requestDTO)){
                return ResponseEntity.badRequest().body(Map.of("error", "format is not supported"));
         }
+
         if(!sizeValidationService.isSizeValid(requestDTO)){
             return ResponseEntity.badRequest().body(Map.of("error", "file is too big"));
         }
 
+        if (fileDataService.isPresent(requestDTO.getFileName())) return ResponseEntity.badRequest().body(Map.of("error", "file is already uploaded"));
+
+
 
         URL presignedUrl = presignedUrlService.generatePresignedUrl(requestDTO);
 
-        cashingService.cashMetaData(requestDTO);
+        FIleDataCache.cashFileData(requestDTO);
 
 
         return ResponseEntity.ok().body(Map.of(
@@ -42,6 +47,8 @@ public class UploadRequestProcessor {
                 "hash", hashUtil.getHash(requestDTO)));
 
     }
+
+
 
 
 }

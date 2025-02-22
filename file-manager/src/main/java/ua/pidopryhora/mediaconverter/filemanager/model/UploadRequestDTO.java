@@ -8,10 +8,12 @@ import lombok.Setter;
 import lombok.ToString;
 import ua.pidopryhora.mediaconverter.common.model.RequestDTO;
 
+import java.io.Serializable;
+
 @Setter
 @Getter
 @ToString
-public class UploadRequestDTO extends RequestDTO {
+public class UploadRequestDTO extends RequestDTO implements Serializable {
 
     @NotBlank(message = "File name is required")
     private String fileName;

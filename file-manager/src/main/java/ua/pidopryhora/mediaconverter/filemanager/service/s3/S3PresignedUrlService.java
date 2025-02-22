@@ -21,7 +21,7 @@ public class S3PresignedUrlService {
     private final S3Presigner presigner;
     private final AwsProperties awsProperties;
     //TODO: move to properties
-    private final long EXPIRATION_TIME = 1L;
+    private final long EXPIRATION_TIME = 5L;
 
     public URL generatePresignedUrl(UploadRequestDTO metadata) {
         PutObjectPresignRequest presignRequest = null;

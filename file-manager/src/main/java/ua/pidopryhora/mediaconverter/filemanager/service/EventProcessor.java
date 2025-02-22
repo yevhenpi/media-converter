@@ -15,7 +15,7 @@ public class EventProcessor {
 
 
     private final ObjectMapper objectMapper;
-    private final CashingService cashingService;
+    private final FileDataCache FIleDataCache;
     private final FileDataService fileDataService;
 
 
@@ -32,7 +32,7 @@ public class EventProcessor {
 
 
 
-            UploadRequestDTO requestDTO = cashingService.getMetadata(objectKey);
+            UploadRequestDTO requestDTO = (UploadRequestDTO) FIleDataCache.getFileData(objectKey);
             if(!isUploadValid(objectSize, requestDTO)){
                 log.debug("INVALID UPLOAD");
                 log.debug(messageBody);
@@ -41,7 +41,7 @@ public class EventProcessor {
 
             fileDataService.saveFile(requestDTO);
             log.debug("File is ready");
-            cashingService.removeMetadata(objectKey);
+            FIleDataCache.removeFileData(objectKey);
 
 
             log.debug(messageBody);
