@@ -13,7 +13,6 @@ import ua.pidopryhora.mediaconverter.filemanager.service.UploadRequestProcessor;
 import ua.pidopryhora.mediaconverter.filemanager.util.HashUtil;
 
 import java.util.Map;
-import java.util.UUID;
 
 @Slf4j
 @RestController

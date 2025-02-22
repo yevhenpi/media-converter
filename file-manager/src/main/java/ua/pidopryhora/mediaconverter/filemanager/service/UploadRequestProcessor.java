@@ -16,10 +16,12 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class UploadRequestProcessor {
 
+    //TODO: Encapsulate validation logic.
+
     private final S3PresignedUrlService presignedUrlService;
     private final FormatValidationService formatValidationService;
     private final FileSizeValidationService sizeValidationService;
-    private final FileDataCache FIleDataCache;
+    private final FileDataCache fileDataCache;
     private final HashUtil hashUtil;
     private final FileDataService fileDataService;
 
@@ -39,7 +41,7 @@ public class UploadRequestProcessor {
 
         URL presignedUrl = presignedUrlService.generatePresignedUrl(requestDTO);
 
-        FIleDataCache.cashFileData(requestDTO);
+        fileDataCache.cashFileData(requestDTO);
 
 
         return ResponseEntity.ok().body(Map.of(
