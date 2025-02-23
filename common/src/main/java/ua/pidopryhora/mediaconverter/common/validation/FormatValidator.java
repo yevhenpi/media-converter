@@ -1,4 +1,4 @@
-package ua.pidopryhora.mediaconverter.filemanager.validation;
+package ua.pidopryhora.mediaconverter.common.validation;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

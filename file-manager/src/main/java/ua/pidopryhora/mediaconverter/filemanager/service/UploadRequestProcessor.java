@@ -19,7 +19,6 @@ public class UploadRequestProcessor {
     //TODO: Encapsulate validation logic.
 
     private final S3PresignedUrlService presignedUrlService;
-    private final FormatValidationService formatValidationService;
     private final FileSizeValidationService sizeValidationService;
     private final FileDataCache fileDataCache;
     private final HashUtil hashUtil;
@@ -27,9 +26,6 @@ public class UploadRequestProcessor {
 
     public ResponseEntity<?> handleUploadRequest(UploadRequestDTO requestDTO){
 
-//        if(!formatValidationService.isFormatValid(requestDTO)){
-//               return ResponseEntity.badRequest().body(Map.of("error", "format is not supported"));
-//        }
 
         if(!sizeValidationService.isSizeValid(requestDTO)){
             return ResponseEntity.badRequest().body(Map.of("error", "file is too big"));

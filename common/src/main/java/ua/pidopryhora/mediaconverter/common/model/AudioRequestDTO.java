@@ -5,6 +5,7 @@ import lombok.Getter;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Setter;
 import lombok.ToString;
+import ua.pidopryhora.mediaconverter.common.validation.FormatValidation;
 
 @Setter
 @Getter
@@ -15,6 +16,7 @@ public class AudioRequestDTO extends RequestDTO {
     @NotBlank(message = "File name is required")
     private String fileName;
     @NotBlank(message = "Output format is required")
+    @FormatValidation
     private String outputFormat;
 
     private String codec = "libmp3lame";

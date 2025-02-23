@@ -6,13 +6,15 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import ua.pidopryhora.mediaconverter.common.model.RequestDTO;
-import ua.pidopryhora.mediaconverter.filemanager.validation.FormatValidation;
+import ua.pidopryhora.mediaconverter.filemanager.validation.FileSizeValidation;
+import ua.pidopryhora.mediaconverter.common.validation.FormatValidation;
 
 import java.io.Serializable;
 
 @Setter
 @Getter
 @ToString
+@FileSizeValidation
 public class UploadRequestDTO extends RequestDTO implements Serializable {
 
     @NotBlank(message = "File name is required")
