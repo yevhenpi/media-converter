@@ -5,76 +5,72 @@ import org.springframework.stereotype.Component;
 import ws.schild.jave.Encoder;
 import ws.schild.jave.EncoderException;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 @Slf4j
 @Component
 public class JAVEDataSupplier {
 
-    private final String[] def = {};
+    private final Encoder encoder;
 
-    private final Encoder encoder = new Encoder();
+    private List<String> encodingFormats;
+    private List<String> decodingFormats;
+    private List<String> audioEncoders;
+    private List<String> audioDecoders;
+    private List<String> videoEncoders;
+    private List<String> videoDecoders;
 
-    public String[] getEncodingFormats()  {
+    private final List<String> supportedAudioFormats = Arrays.asList("mp3", "aac", "wav", "flac", "ogg", "opus", "dts", "ac3");
 
+    public JAVEDataSupplier() {
+        this.encoder = new Encoder();
+        loadSupportedFormats();
+    }
+
+    /**
+     * Loads supported formats on application startup.
+     */
+    private void loadSupportedFormats() {
         try {
-            return encoder.getSupportedEncodingFormats();
+            encodingFormats = Arrays.asList(encoder.getSupportedEncodingFormats());
+            decodingFormats = Arrays.asList(encoder.getSupportedDecodingFormats());
+            audioEncoders = Arrays.asList(encoder.getAudioEncoders());
+            audioDecoders = Arrays.asList(encoder.getAudioDecoders());
+            videoEncoders = Arrays.asList(encoder.getVideoEncoders());
+            videoDecoders = Arrays.asList(encoder.getVideoDecoders());
         } catch (EncoderException e) {
-            log.error("CANT GET ENCODING FORMATS", e);
+            log.error("Failed to load encoding/decoding formats", e);
+            encodingFormats = decodingFormats = audioEncoders = audioDecoders = videoEncoders = videoDecoders = Collections.emptyList();
         }
-        return def;
+    }
+
+    public String[] getEncodingFormats() {
+        return encodingFormats.toArray(new String[0]);
     }
 
     public String[] getDecodingFormats() {
-
-        try {
-            return encoder.getSupportedDecodingFormats();
-        } catch (EncoderException e) {
-            log.error("CANT GET DECODING FORMATS", e);
-        }
-        return def;
+        return decodingFormats.toArray(new String[0]);
     }
 
-    public String[] getAudioEncoders(){
-
-        try {
-            return encoder.getAudioEncoders();
-        } catch (EncoderException e) {
-            log.error("CANT GET AUDIO ENCODERS", e);
-        }
-        return def;
+    public String[] getAudioEncoders() {
+        return audioEncoders.toArray(new String[0]);
     }
 
-    public String[] getAudioDecoders(){
-
-        try {
-            return encoder.getAudioDecoders();
-        } catch (EncoderException e) {
-            log.error("CANT GET AUDIO DECODERS", e);
-        }
-        return def;
+    public String[] getAudioDecoders() {
+        return audioDecoders.toArray(new String[0]);
     }
 
-    public String[] getVideoEncoders(){
-
-        try {
-            return encoder.getVideoEncoders();
-        } catch (EncoderException e) {
-            log.error("CANT GET VIDEO ENCODERS", e);
-        }
-        return def;
+    public String[] getVideoEncoders() {
+        return videoEncoders.toArray(new String[0]);
     }
 
-    public String[] getVideoDecoders(){
-
-        try {
-            return encoder.getVideoDecoders();
-        } catch (EncoderException e) {
-            log.error("CANT GET VIDEO DECODERS", e);
-        }
-        return def;
+    public String[] getVideoDecoders() {
+        return videoDecoders.toArray(new String[0]);
     }
-    
-    public String[] getAudioFormats(){
 
-        return new String[]{"mp3","aac","wav","flac", "ogg", "opus", "dts", "ac3"};
+    public String[] getAudioFormats() {
+        return supportedAudioFormats.toArray(new String[0]);
     }
 }

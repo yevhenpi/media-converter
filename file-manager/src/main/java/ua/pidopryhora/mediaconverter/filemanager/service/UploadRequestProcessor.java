@@ -27,9 +27,9 @@ public class UploadRequestProcessor {
 
     public ResponseEntity<?> handleUploadRequest(UploadRequestDTO requestDTO){
 
-        if(!formatValidationService.isFormatValid(requestDTO)){
-               return ResponseEntity.badRequest().body(Map.of("error", "format is not supported"));
-        }
+//        if(!formatValidationService.isFormatValid(requestDTO)){
+//               return ResponseEntity.badRequest().body(Map.of("error", "format is not supported"));
+//        }
 
         if(!sizeValidationService.isSizeValid(requestDTO)){
             return ResponseEntity.badRequest().body(Map.of("error", "file is too big"));

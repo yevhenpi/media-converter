@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import ua.pidopryhora.mediaconverter.common.model.RequestDTO;
+import ua.pidopryhora.mediaconverter.filemanager.validation.FormatValidation;
 
 import java.io.Serializable;
 
@@ -15,6 +16,7 @@ import java.io.Serializable;
 public class UploadRequestDTO extends RequestDTO implements Serializable {
 
     @NotBlank(message = "File name is required")
+    @FormatValidation
     private String fileName;
     @Min(value = 1, message = "File size must be greater than zero")
     private long fileSize;

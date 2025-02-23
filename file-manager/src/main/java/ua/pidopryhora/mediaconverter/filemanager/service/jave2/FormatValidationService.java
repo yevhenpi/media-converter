@@ -9,7 +9,7 @@ import ua.pidopryhora.mediaconverter.common.model.RequestDTO;
 @AllArgsConstructor
 public class FormatValidationService {
 
-    private final JAVEDataSupplier JAVEDataSupplier;
+    private final JAVEDataSupplier javeDataSupplier;
 
     public boolean isFormatValid(RequestDTO requestDTO) {
         var fileFormat = extractFormatFromName(requestDTO.getFileName());
@@ -22,7 +22,7 @@ public class FormatValidationService {
     }
 
     private boolean isFileFormatValid(String fileFormat)  {
-        String[] formats = JAVEDataSupplier.getAudioFormats();
+        String[] formats = javeDataSupplier.getAudioFormats();
         boolean isPresent = false;
         for (String s:formats){
             if (s.equals(fileFormat)) {

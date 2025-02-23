@@ -16,7 +16,7 @@ import java.util.Map;
 @RequestMapping("/api/v1")
 public class InfoController {
 
-    private final JAVEDataSupplier JAVEDataSupplier;
+    private final JAVEDataSupplier javeDataSupplier;
 
     @GetMapping("/file")
     public ResponseEntity<?> getFile(@RequestHeader("UserRole") String role,
@@ -30,16 +30,16 @@ public class InfoController {
     @GetMapping("/formats")
     public ResponseEntity<?> getFormats(){
 
-        return ResponseEntity.ok(JAVEDataSupplier.getAudioFormats());
+        return ResponseEntity.ok(javeDataSupplier.getAudioFormats());
     }
 
     @GetMapping("/encoders")
     public ResponseEntity<?> getEncoders(@RequestParam String type){
 
         if(type.equals("audio")) {
-            return ResponseEntity.ok(JAVEDataSupplier.getAudioEncoders());
+            return ResponseEntity.ok(javeDataSupplier.getAudioEncoders());
         } else if (type.equals("video")) {
-            return ResponseEntity.ok(JAVEDataSupplier.getVideoEncoders());
+            return ResponseEntity.ok(javeDataSupplier.getVideoEncoders());
         }
 
 
@@ -50,9 +50,9 @@ public class InfoController {
     public ResponseEntity<?> getDecoders(@RequestParam String type){
 
         if(type.equals("audio")) {
-            return ResponseEntity.ok(JAVEDataSupplier.getAudioDecoders());
+            return ResponseEntity.ok(javeDataSupplier.getAudioDecoders());
         } else if (type.equals("video")) {
-            return ResponseEntity.ok(JAVEDataSupplier.getVideoDecoders());
+            return ResponseEntity.ok(javeDataSupplier.getVideoDecoders());
         }
 
 
