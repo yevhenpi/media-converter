@@ -11,8 +11,8 @@ public class FileSizeValidator implements ConstraintValidator<FileSizeValidation
 
     private static final Map<String, Long> MAX_FILE_SIZES = Map.of(
             "ADMIN", 100_000_000L, // 100MB for admins
-            "USER", 10_000_000L,   // 10MB for regular users
-            "GUEST", 1_000_000L    // 1MB for guests
+            "PREMIUM", 10_000_000L,   // 10MB for regular users
+            "USER", 1_000_000L    // 1MB for guests
     );
 
     @Override

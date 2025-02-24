@@ -15,7 +15,7 @@ import java.time.Duration;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class S3PresignedUrlService {
+public class S3PresignedUrlService implements PresignedUrlService {
     //TODO: Consider moving to 1.x version for presigned POST implementation or find solution of security flaw.
 
     private final S3Presigner presigner;

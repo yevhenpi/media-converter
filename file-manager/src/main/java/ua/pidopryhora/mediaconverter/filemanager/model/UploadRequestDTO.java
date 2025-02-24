@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Setter
 @Getter
 @ToString
-@FileSizeValidation
+//@FileSizeValidation
 public class UploadRequestDTO extends RequestDTO implements Serializable {
 
     @NotBlank(message = "File name is required")
