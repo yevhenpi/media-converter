@@ -5,9 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ua.pidopryhora.mediaconverter.filemanager.model.UploadRequestDTO;
-import ua.pidopryhora.mediaconverter.filemanager.service.jave2.FormatValidationService;
 import ua.pidopryhora.mediaconverter.filemanager.service.s3.PresignedUrlService;
-import ua.pidopryhora.mediaconverter.filemanager.service.s3.S3PresignedUrlService;
 import ua.pidopryhora.mediaconverter.filemanager.util.HashUtil;
 
 import java.net.URL;
