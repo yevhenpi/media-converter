@@ -2,7 +2,6 @@ package ua.pidopryhora.mediaconverter.filemanager.service;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +17,7 @@ import java.util.Map;
 @Service
 @Validated
 @RequiredArgsConstructor
-public class UploadRequestProcessor {
+public class UploadRequestProcessor implements RequestProcessor<UploadRequestDTO> {
 
     //TODO: Encapsulate validation logic.
 
@@ -26,8 +25,8 @@ public class UploadRequestProcessor {
     private final FileDataCache fileDataCache;
     private final HashUtil hashUtil;
     private final IdempotencyService idempotencyService;
-
-    public ResponseEntity<?> handleUploadRequest(@Valid UploadRequestDTO requestDTO){
+    @Override
+    public ResponseEntity<?> processRequest(@Valid UploadRequestDTO requestDTO){
 
         String hash = hashUtil.getHash(requestDTO);
 
