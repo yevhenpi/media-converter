@@ -14,15 +14,11 @@ public class FileDataCache {
     private final RedisTemplate<String, Object> objectRedisTemplate;
 
     public void cashFileData(UploadRequestDTO requestDTO){
-
         objectRedisTemplate.opsForValue().setIfAbsent(requestDTO.getFileName(), requestDTO, Duration.ofMinutes(15));
-
     }
-
 
     public void removeFileData(String fileName){
         objectRedisTemplate.delete(fileName);
-
     }
 
     public Object getFileData(String fileName){
