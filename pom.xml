@@ -27,7 +27,9 @@
 		<module>file-manager</module>
 		<module>eureka-server</module>
 		<module>auth-server</module>
+		<module>common-old</module>
 		<module>common</module>
+
 	</modules>
 	<scm>
 		<connection/>

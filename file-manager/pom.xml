@@ -94,7 +94,7 @@
         </dependency>
         <dependency>
             <groupId>ua.pidopryhora</groupId>
-            <artifactId>common</artifactId>
+            <artifactId>common-old</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>

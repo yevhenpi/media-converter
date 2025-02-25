@@ -36,7 +36,7 @@
         </dependency>
         <dependency>
             <groupId>ua.pidopryhora</groupId>
-            <artifactId>common</artifactId>
+            <artifactId>common-old</artifactId>
             <version>${project.version}</version>
         </dependency>
 
