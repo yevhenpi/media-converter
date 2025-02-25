@@ -30,10 +30,10 @@ public class UploadRequestProcessor implements RequestProcessor<UploadRequestDTO
 
         String hash = hashUtil.getHash(requestDTO);
 
-        if(!idempotencyService.addIdempotencyKey(hash)){
-            return ResponseEntity.status(HttpStatus.CONFLICT)
-                    .body(Map.of("error","url for this file is already been created and is not expired yet"));
-        }
+//        if(!idempotencyService.addIdempotencyKey(hash)){
+//            return ResponseEntity.status(HttpStatus.CONFLICT)
+//                    .body(Map.of("error","url for this file is already been created and is not expired yet"));
+//        }
 
         URL presignedUrl = presignedUrlService.generatePresignedUrl(requestDTO);
         fileDataCache.cashFileData(requestDTO);

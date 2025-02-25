@@ -9,6 +9,7 @@ import ua.pidopryhora.mediaconverter.common.model.RequestDTO;
 import ua.pidopryhora.mediaconverter.filemanager.validation.FileMustNotExist;
 import ua.pidopryhora.mediaconverter.filemanager.validation.FileSizeValidation;
 import ua.pidopryhora.mediaconverter.common.validation.FormatValidation;
+import ua.pidopryhora.mediaconverter.filemanager.validation.IdempotencyCheck;
 
 import java.io.Serializable;
 
@@ -16,7 +17,8 @@ import java.io.Serializable;
 @Getter
 @ToString
 @FileSizeValidation
-public class UploadRequestDTO extends RequestDTO implements Serializable {
+@IdempotencyCheck(message = "URL for this file is already created and not expired yet")
+public class UploadRequestDTO extends RequestDTO{
 
     @NotBlank(message = "File name is required")
     @FormatValidation

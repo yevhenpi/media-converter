@@ -6,5 +6,5 @@ import ua.pidopryhora.mediaconverter.common.model.RequestDTO;
 import ua.pidopryhora.mediaconverter.filemanager.model.UploadRequestDTO;
 
 public interface RequestProcessor<T extends RequestDTO> {
-    ResponseEntity<?> processRequest(T requestDTO);
+    ResponseEntity<?> processRequest(@Valid T requestDTO);
 }
