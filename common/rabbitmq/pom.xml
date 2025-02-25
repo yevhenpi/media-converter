@@ -6,8 +6,9 @@
     <parent>
         <groupId>ua.pidopryhora.mediaconverter</groupId>
         <artifactId>common</artifactId>
-        <version>1.0.0</version>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
+    <groupId>ua.pidopryhora.mediaconverter.common</groupId>
 
     <artifactId>rabbitmq</artifactId>
 

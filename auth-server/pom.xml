@@ -45,8 +45,13 @@
             <version>42.7.4</version>
         </dependency>
         <dependency>
-            <groupId>ua.pidopryhora</groupId>
-            <artifactId>common-old</artifactId>
+            <groupId>ua.pidopryhora.mediaconverter.common</groupId>
+            <artifactId>security</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ua.pidopryhora.mediaconverter.common</groupId>
+            <artifactId>config</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

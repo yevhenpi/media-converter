@@ -35,12 +35,12 @@
             <artifactId>spring-security-config</artifactId>
         </dependency>
         <dependency>
-            <groupId>ua.pidopryhora.mediaconverter</groupId>
+            <groupId>ua.pidopryhora.mediaconverter.common</groupId>
             <artifactId>security</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>ua.pidopryhora.mediaconverter</groupId>
+            <groupId>ua.pidopryhora.mediaconverter.common</groupId>
             <artifactId>config</artifactId>
             <version>${project.version}</version>
         </dependency>
