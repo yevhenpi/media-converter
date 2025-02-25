@@ -34,7 +34,9 @@ build/
 
 ### User ###
 application.properties
-log/
-uploads/
+
 file-manager/src/main/resources/application.yaml
 common/src/main/resources/application-common.yaml
+common/aws/src/main/resources/aws-properties.yaml
+common/config/src/main/resources/application-common.yaml
+common/security/src/main/resources/security-properties.yaml
