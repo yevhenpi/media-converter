@@ -92,12 +92,42 @@
             <artifactId>postgresql</artifactId>
             <version>42.7.4</version>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>ua.pidopryhora</groupId>-->
+<!--            <artifactId>common-old</artifactId>-->
+<!--            <version>0.0.1-SNAPSHOT</version>-->
+<!--            <scope>compile</scope>-->
+<!--        </dependency>-->
         <dependency>
-            <groupId>ua.pidopryhora</groupId>
-            <artifactId>common-old</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
+            <groupId>ua.pidopryhora.mediaconverter.common</groupId>
+            <artifactId>jave2</artifactId>
+            <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>ua.pidopryhora.mediaconverter.common</groupId>
+            <artifactId>model</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ua.pidopryhora.mediaconverter.common</groupId>
+            <artifactId>config</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ua.pidopryhora.mediaconverter.common</groupId>
+            <artifactId>rabbitmq</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ua.pidopryhora.mediaconverter.common</groupId>
+            <artifactId>aws</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>ua.pidopryhora.mediaconverter.common</groupId>-->
+<!--            <artifactId>security</artifactId>-->
+<!--            <version>${project.version}</version>-->
+<!--        </dependency>-->
 
 
     </dependencies>

@@ -8,7 +8,7 @@ import lombok.ToString;
 import ua.pidopryhora.mediaconverter.common.model.RequestDTO;
 import ua.pidopryhora.mediaconverter.filemanager.validation.FileMustNotExist;
 import ua.pidopryhora.mediaconverter.filemanager.validation.FileSizeValidation;
-import ua.pidopryhora.mediaconverter.common.validation.FormatValidation;
+import ua.pidopryhora.mediaconverter.common.model.validation.FormatValidation;
 import ua.pidopryhora.mediaconverter.filemanager.validation.IdempotencyCheck;
 
 import java.io.Serializable;
