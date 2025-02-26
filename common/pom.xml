@@ -22,7 +22,6 @@
         <module>model</module>
         <module>security</module>
         <module>rabbitmq</module>
-        <module>validation</module>
         <module>config</module>
 
     </modules>

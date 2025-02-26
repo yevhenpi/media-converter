@@ -5,9 +5,4 @@ spring:
   application:
     name: converter
   config:
-    import: "classpath:/application-common.yaml"
-#  rabbitmq:
-#    host: localhost
-#    port: 5672
-#    username: guest
-#    password: "guest"
+    import: "classpath:/rabbitmq-config.yaml"
