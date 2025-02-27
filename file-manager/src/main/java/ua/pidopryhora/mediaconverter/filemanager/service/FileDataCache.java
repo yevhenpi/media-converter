@@ -8,20 +8,24 @@ import ua.pidopryhora.mediaconverter.filemanager.model.UploadRequestDTO;
 import java.time.Duration;
 
 @Service
-@AllArgsConstructor
-public class FileDataCache {
+public class FileDataCache extends AbstractCachingService<UploadRequestDTO> {
 
-    private final RedisTemplate<String, Object> objectRedisTemplate;
+    private final long TTL_DURATION = 15L;
 
-    public void cashFileData(UploadRequestDTO requestDTO){
-        objectRedisTemplate.opsForValue().setIfAbsent(requestDTO.getFileName(), requestDTO, Duration.ofMinutes(15));
+
+    public FileDataCache(RedisTemplate<String, UploadRequestDTO> redisTemplate) {
+        super(redisTemplate);
     }
 
-    public void removeFileData(String fileName){
-        objectRedisTemplate.delete(fileName);
+    public void cacheFileData(UploadRequestDTO requestDTO) {
+        cacheData(requestDTO.getFileName(), requestDTO, Duration.ofMinutes(TTL_DURATION));
     }
 
-    public Object getFileData(String fileName){
-        return objectRedisTemplate.opsForValue().get(fileName);
+    public void removeFileData(String fileName) {
+        removeData(fileName);
+    }
+
+    public UploadRequestDTO getFileData(String fileName) {
+        return getData(fileName);
     }
 }
