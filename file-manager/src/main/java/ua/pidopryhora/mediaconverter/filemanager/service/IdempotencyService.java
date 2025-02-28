@@ -13,10 +13,10 @@ public class IdempotencyService {
 
     private final RedisTemplate<String, String> redisTemplate;
 
-
     public IdempotencyService(RedisTemplate<String, String> redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
+
     public boolean addIdempotencyKey(String key) {
         // "true" is a placeholder value; it doesn't matter what the value is.
         Boolean added = redisTemplate.opsForValue().setIfAbsent(key, "true", IDEMPOTENCY_TTL_SECONDS, TimeUnit.SECONDS);

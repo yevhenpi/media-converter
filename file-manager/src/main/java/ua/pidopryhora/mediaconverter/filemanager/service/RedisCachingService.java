@@ -5,11 +5,11 @@ package ua.pidopryhora.mediaconverter.filemanager.service;
 import org.springframework.data.redis.core.RedisTemplate;
 import java.time.Duration;
 
-public abstract class AbstractCachingService<T> {
+public abstract class RedisCachingService<T> implements CachingService<T>{
 
     protected final RedisTemplate<String, T> redisTemplate;
 
-    protected AbstractCachingService(RedisTemplate<String, T> redisTemplate) {
+    protected RedisCachingService(RedisTemplate<String, T> redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
 

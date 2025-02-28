@@ -8,6 +8,9 @@ import ua.pidopryhora.mediaconverter.filemanager.service.rabbitmq.UpdateProducer
 import ua.pidopryhora.mediaconverter.filemanager.util.HashUtil;
 
 import java.util.Map;
+
+import static ua.pidopryhora.mediaconverter.common.rabbitmq.RabbitQueues.CONVERSION_QUEUE;
+
 @Service
 @AllArgsConstructor
 public class ConversionRequestProcessor {
@@ -25,9 +28,9 @@ public class ConversionRequestProcessor {
 
         if (!fileDataService.isPresent(requestDTO.getFileName())) return ResponseEntity.badRequest().body(Map.of("error", "file is not found"));
 
-        updateProducer.produce("CONVERSION_QUEUE", requestDTO);
+        updateProducer.produce(CONVERSION_QUEUE, requestDTO);
 
-        return ResponseEntity.ok().body(Map.of("message", "convertion is started",
+        return ResponseEntity.ok().body(Map.of("message", "conversion is started",
                 "hash", hashUtil.getHash(requestDTO)));
     }
 }

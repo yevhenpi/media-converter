@@ -15,7 +15,7 @@ public class EventProcessor {
 
 
     private final ObjectMapper objectMapper;
-    private final FileDataCache FIleDataCache;
+    private final UploadRequestCachingService uploadRequestCachingService;
     private final FileDataService fileDataService;
 
 
@@ -24,15 +24,12 @@ public class EventProcessor {
         // Parse the SQS message body
         S3Event event = objectMapper.readValue(messageBody, S3Event.class);
 
-
         for (S3Event.S3Record record : event.getRecords()) {
             String objectKey = record.getS3().getObject().getKey();
             Integer objectSize = record.getS3().getObject().getSize();
 
 
-
-
-            UploadRequestDTO requestDTO = (UploadRequestDTO) FIleDataCache.getFileData(objectKey);
+            UploadRequestDTO requestDTO = uploadRequestCachingService.getFileData(objectKey);
             if(!isUploadValid(objectSize, requestDTO)){
                 log.debug("INVALID UPLOAD");
                 log.debug(messageBody);
@@ -41,12 +38,10 @@ public class EventProcessor {
 
             fileDataService.saveFile(requestDTO);
             log.debug("File is ready");
-            FIleDataCache.removeFileData(objectKey);
-
+            uploadRequestCachingService.removeFileData(objectKey);
 
             log.debug(messageBody);
 
-            // Add custom logic here, e.g., start a file processing workflow
         }
 
     }

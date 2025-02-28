@@ -1,4 +1,4 @@
-package ua.pidopryhora.mediaconverter.filemanager.validation;
+package ua.pidopryhora.mediaconverter.filemanager.model.validation;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
@@ -8,11 +8,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Constraint(validatedBy = FileMustNotExistValidator.class)
-@Target({ElementType.FIELD})
+@Constraint(validatedBy = IdempotencyValidator.class)
+@Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface FileMustNotExist {
-    String message() default "File is already uploaded";
+public @interface IdempotencyCheck {
+    String message() default "Duplicated request";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

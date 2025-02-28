@@ -1,6 +1,5 @@
 package ua.pidopryhora.mediaconverter.filemanager.service;
 
-import lombok.AllArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import ua.pidopryhora.mediaconverter.filemanager.model.UploadRequestDTO;
@@ -8,16 +7,18 @@ import ua.pidopryhora.mediaconverter.filemanager.model.UploadRequestDTO;
 import java.time.Duration;
 
 @Service
-public class FileDataCache extends AbstractCachingService<UploadRequestDTO> {
+public class UploadRequestCachingService extends RedisCachingService<UploadRequestDTO> {
 
     private final long TTL_DURATION = 15L;
 
 
-    public FileDataCache(RedisTemplate<String, UploadRequestDTO> redisTemplate) {
+
+    public UploadRequestCachingService(RedisTemplate<String, UploadRequestDTO> redisTemplate) {
         super(redisTemplate);
     }
 
-    public void cacheFileData(UploadRequestDTO requestDTO) {
+
+    public void cacheData(UploadRequestDTO requestDTO) {
         cacheData(requestDTO.getFileName(), requestDTO, Duration.ofMinutes(TTL_DURATION));
     }
 

@@ -12,7 +12,6 @@ public class RedisConfig {
 
     @Bean
     public RedisConnectionFactory redisConnectionFactory() {
-        // Adjust host and port if necessary via application.properties
         return new LettuceConnectionFactory();
     }
     @Bean

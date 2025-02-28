@@ -29,8 +29,7 @@ public class ConversionController {
     @PostMapping("/convert")
     public ResponseEntity<?> extractRequestData(@RequestHeader("UserRole") String userRole,
                                                 @RequestHeader("UserId") String userId,
-                                                @Valid@RequestBody AudioRequestDTO requestDTO){
-
+                                                @Valid @RequestBody AudioRequestDTO requestDTO){
 
         requestDTO.setRole(userRole);
         requestDTO.setUserId(Long.parseLong(userId));

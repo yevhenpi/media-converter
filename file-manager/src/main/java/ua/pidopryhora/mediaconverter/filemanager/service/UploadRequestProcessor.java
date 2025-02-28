@@ -3,7 +3,6 @@ package ua.pidopryhora.mediaconverter.filemanager.service;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -19,10 +18,8 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class UploadRequestProcessor implements RequestProcessor<UploadRequestDTO> {
 
-    //TODO: Encapsulate validation logic.
-
     private final PresignedUrlService presignedUrlService;
-    private final FileDataCache fileDataCache;
+    private final UploadRequestCachingService uploadRequestCachingService;
     private final HashUtil hashUtil;
 
     @Override
@@ -31,7 +28,7 @@ public class UploadRequestProcessor implements RequestProcessor<UploadRequestDTO
         String hash = hashUtil.getHash(requestDTO);
 
         URL presignedUrl = presignedUrlService.generatePresignedUrl(requestDTO);
-        fileDataCache.cacheFileData(requestDTO);
+        uploadRequestCachingService.cacheData(requestDTO);
 
 
         return ResponseEntity.ok().body(Map.of(
