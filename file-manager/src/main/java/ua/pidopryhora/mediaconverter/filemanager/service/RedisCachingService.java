@@ -7,21 +7,21 @@ import java.time.Duration;
 
 public abstract class RedisCachingService<T> implements CachingService<T>{
 
-    protected final RedisTemplate<String, T> redisTemplate;
+    protected final RedisTemplate<String, T> objectRedisTemplate;
 
-    protected RedisCachingService(RedisTemplate<String, T> redisTemplate) {
-        this.redisTemplate = redisTemplate;
+    protected RedisCachingService(RedisTemplate<String, T> objectRedisTemplate) {
+        this.objectRedisTemplate = objectRedisTemplate;
     }
 
     public void cacheData(String key, T value, Duration ttl) {
-        redisTemplate.opsForValue().setIfAbsent(key, value, ttl);
+        objectRedisTemplate.opsForValue().setIfAbsent(key, value, ttl);
     }
 
     public void removeData(String key) {
-        redisTemplate.delete(key);
+        objectRedisTemplate.delete(key);
     }
 
     public T getData(String key) {
-        return redisTemplate.opsForValue().get(key);
+        return objectRedisTemplate.opsForValue().get(key);
     }
 }

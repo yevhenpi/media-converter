@@ -12,6 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
         "ua.pidopryhora.mediaconverter.common.security"
 })
 public class ApiGatewayApplication {
+    //TODO: Implement request rate limitation
     public static void main(String[] args) {
         SpringApplication.run(ApiGatewayApplication.class, args);
 

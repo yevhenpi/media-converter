@@ -7,9 +7,10 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan(basePackages = {
         "ua.pidopryhora.mediaconverter.auth",
-        "ua.pidopryhora.mediaconverter.common"  // Include common module package
+        "ua.pidopryhora.mediaconverter.common"
 })
 public class AuthenticationServerApplication {
+    //TODO: Implement request rate limitation
 
     public static void main(String[] args){
         SpringApplication.run(AuthenticationServerApplication.class, args);

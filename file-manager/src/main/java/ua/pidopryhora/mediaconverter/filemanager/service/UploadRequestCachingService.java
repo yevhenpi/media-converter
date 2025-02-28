@@ -13,8 +13,8 @@ public class UploadRequestCachingService extends RedisCachingService<UploadReque
 
 
 
-    public UploadRequestCachingService(RedisTemplate<String, UploadRequestDTO> redisTemplate) {
-        super(redisTemplate);
+    public UploadRequestCachingService(RedisTemplate<String, UploadRequestDTO> objectRedisTemplate) {
+        super(objectRedisTemplate);
     }
 
 
