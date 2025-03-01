@@ -123,11 +123,12 @@
             <artifactId>aws</artifactId>
             <version>${project.version}</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>ua.pidopryhora.mediaconverter.common</groupId>-->
-<!--            <artifactId>security</artifactId>-->
-<!--            <version>${project.version}</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>ua.pidopryhora.mediaconverter.common</groupId>
+            <artifactId>redis</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
 
 
     </dependencies>

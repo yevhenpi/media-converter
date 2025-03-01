@@ -23,6 +23,8 @@
         <module>security</module>
         <module>rabbitmq</module>
         <module>config</module>
+        <module>service</module>
+        <module>redis</module>
 
     </modules>
     <properties>

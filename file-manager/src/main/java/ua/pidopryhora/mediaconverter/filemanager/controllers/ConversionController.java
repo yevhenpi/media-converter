@@ -17,7 +17,7 @@ import java.util.UUID;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/audio")
 @Validated
 @RequiredArgsConstructor
 public class ConversionController {
