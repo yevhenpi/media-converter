@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ua.pidopryhora.mediaconverter.common.jave2.JAVEDataSupplier;
+import ua.pidopryhora.mediaconverter.filemanager.service.FileDataService;
 
 
 import java.util.Map;
@@ -17,14 +18,13 @@ import java.util.Map;
 public class InfoController {
 
     private final JAVEDataSupplier javeDataSupplier;
+    private final FileDataService fileDataService;
 
-    @GetMapping("/file")
+    @GetMapping("/files")
     public ResponseEntity<?> getFile(@RequestHeader("UserRole") String role,
-                          @RequestHeader("UserId") String userId){
+                                     @RequestHeader("UserId") String userId){
 
-        return ResponseEntity.ok(Map.of(
-                                        "UserId", userId,
-                                        "UserRole", role));
+        return ResponseEntity.ok(fileDataService.getUserFiles(Long.valueOf(userId)));
     }
 
     @GetMapping("/audio/formats")

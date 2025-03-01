@@ -2,6 +2,7 @@ package ua.pidopryhora.mediaconverter.filemanager.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import lombok.Setter;
 @Entity
 @Builder
 @Table(name = "FileData")
+@AllArgsConstructor
 public class FileData {
 
     @Id
@@ -26,6 +28,10 @@ public class FileData {
 
     @Column(name = "ownerId", nullable = false)
     private Long ownerId;
+
+    public FileData(){}
+
+
 
 
 }

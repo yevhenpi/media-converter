@@ -6,6 +6,8 @@ import ua.pidopryhora.mediaconverter.filemanager.entity.FileData;
 import ua.pidopryhora.mediaconverter.filemanager.entity.FileDataRepository;
 import ua.pidopryhora.mediaconverter.filemanager.model.UploadRequestDTO;
 
+import java.util.List;
+
 
 @RequiredArgsConstructor
 @Service
@@ -36,5 +38,9 @@ public class FileDataService {
 
     public FileData findByName(String fileName, Long ownerId){
         return fileDataRepository.findByNameAndOwnerId(fileName, ownerId);
+    }
+
+    public List<String> getUserFiles(Long ownerId){
+        return fileDataRepository.findFileNamesByOwnerId(ownerId);
     }
 }

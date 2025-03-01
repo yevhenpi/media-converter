@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import ua.pidopryhora.mediaconverter.filemanager.model.UploadRequestDTO;
 import ua.pidopryhora.mediaconverter.filemanager.service.s3.PresignedUrlService;
-import ua.pidopryhora.mediaconverter.filemanager.util.HashUtil;
+
 
 import java.net.URL;
 import java.util.Map;
@@ -20,20 +20,15 @@ public class UploadRequestProcessor implements RequestProcessor<UploadRequestDTO
 
     private final PresignedUrlService presignedUrlService;
     private final UploadRequestCachingService uploadRequestCachingService;
-    private final HashUtil hashUtil;
 
     @Override
     public ResponseEntity<?> processRequest(@Valid UploadRequestDTO requestDTO){
 
-        String hash = hashUtil.getHash(requestDTO);
-
         URL presignedUrl = presignedUrlService.generatePresignedUrl(requestDTO);
         uploadRequestCachingService.cacheData(requestDTO);
 
-
         return ResponseEntity.ok().body(Map.of(
-                "url", presignedUrl.toString(),
-                "hash", hash));
+                "url", presignedUrl.toString()));
 
     }
 
