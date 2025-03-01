@@ -10,13 +10,14 @@ import ua.pidopryhora.mediaconverter.filemanager.model.validation.*;
 @Setter
 @Getter
 @ToString
+@MustExist
 @IdempotencyCheck(message = "Request is already being processed", groups = AdvancedCheck.class)
 @GroupSequence({BasicCheck.class, AdvancedCheck.class, AudioConversionRequestDTO.class})
 public class AudioConversionRequestDTO extends RequestDTO {
+    //TODO: Advanced validation would be great
 
 
     @NotBlank(message = "File name is required",groups = BasicCheck.class)
-    @MustExist
     private String fileName;
     @NotBlank(message = "Output format is required", groups = BasicCheck.class)
     @AudioFormatValidation(groups = BasicCheck.class)

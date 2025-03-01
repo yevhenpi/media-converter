@@ -18,7 +18,7 @@ public class FileData {
     @Column(name = "id", updatable = false, nullable = false)
     private Long fileId;
 
-    @Column(name = "name", nullable = false, unique = true)
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "size", nullable = false)

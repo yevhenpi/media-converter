@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 
 
 @Constraint(validatedBy = MustExistValidator.class)
-@Target({ElementType.FIELD})
+@Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface MustExist {
     String message() default "File is not found";

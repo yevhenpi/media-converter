@@ -25,16 +25,16 @@ public class FileDataService {
         );
     }
 
-    public void deleteFile(String fileName){
+    public void deleteFile(String fileName, Long ownerId){
 
-        fileDataRepository.delete(findByName(fileName));
+        fileDataRepository.delete(findByName(fileName, ownerId));
     }
 
-    public boolean isPresent(String fileName){
-        return fileDataRepository.existsByName(fileName);
+    public boolean isPresent(String fileName, Long ownerId){
+        return fileDataRepository.existsByNameAndOwnerId(fileName, ownerId);
     }
 
-    public FileData findByName(String fileName){
-        return fileDataRepository.findByName(fileName);
+    public FileData findByName(String fileName, Long ownerId){
+        return fileDataRepository.findByNameAndOwnerId(fileName, ownerId);
     }
 }
