@@ -1,4 +1,4 @@
-package ua.pidopryhora.mediaconverter.filemanager.service;
+package ua.pidopryhora.mediaconverter.common.service;
 
 import java.time.Duration;
 

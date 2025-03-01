@@ -128,6 +128,11 @@
             <artifactId>redis</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>ua.pidopryhora.mediaconverter.common</groupId>
+            <artifactId>service</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
 
 
