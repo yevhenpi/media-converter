@@ -11,6 +11,7 @@ import ua.pidopryhora.mediaconverter.filemanager.service.rabbitmq.UpdateProducer
 import ua.pidopryhora.mediaconverter.filemanager.util.HashUtil;
 
 import java.util.Map;
+import java.util.UUID;
 
 import static ua.pidopryhora.mediaconverter.common.rabbitmq.RabbitQueues.AUDIO_CONVERSION_QUEUE;
 
@@ -18,7 +19,6 @@ import static ua.pidopryhora.mediaconverter.common.rabbitmq.RabbitQueues.AUDIO_C
 @AllArgsConstructor
 @Validated
 public class AudioConversionRequestProcessor implements RequestProcessor<AudioConversionRequestDTO> {
-    //TODO:Add target format validation.
 
     private final UpdateProducer updateProducer;
     private final HashUtil hashUtil;
@@ -27,20 +27,22 @@ public class AudioConversionRequestProcessor implements RequestProcessor<AudioCo
 
     public ResponseEntity<?> processRequest(@Valid AudioConversionRequestDTO requestDTO){
 
-        updateProducer.produce(AUDIO_CONVERSION_QUEUE, createJob(requestDTO));
+        var jobId = UUID.randomUUID().toString();
+
+        updateProducer.produce(AUDIO_CONVERSION_QUEUE, createJob(requestDTO, jobId));
 
         return ResponseEntity.ok().body(Map.of("message", "conversion is started",
-                "hash", hashUtil.getHash(requestDTO)));
+                "jobId", jobId));
     }
 
-    private AudioJobDTO createJob(AudioConversionRequestDTO requestDTO) {
+    private AudioJobDTO createJob(AudioConversionRequestDTO requestDTO, String jobId) {
 
         AudioJobDTO.AudioJobDTOBuilder builder = AudioJobDTO.builder()
                 .fileName(requestDTO.getFileName())
                 .outputFormat(requestDTO.getOutputFormat())
-                .codec(requestDTO.getCodec())      // Assuming codec is optional, may be null
+                .codec(requestDTO.getCodec())
                 .userId(requestDTO.getUserId())
-                .requestHash(hashUtil.getHash(requestDTO));
+                .jobId(jobId);
 
         if (requestDTO.getBitRate() != null && !requestDTO.getBitRate().trim().isEmpty()) {
             builder.bitRate(Integer.parseInt(requestDTO.getBitRate()));

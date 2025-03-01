@@ -20,5 +20,5 @@ public class AudioJobDTO extends JobDTO {
 
 
     private long userId;
-    private String requestHash;
+    private String jobId;
 }

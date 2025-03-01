@@ -27,7 +27,7 @@ public class InfoController {
                                         "UserRole", role));
     }
 
-    @GetMapping("/formats")
+    @GetMapping("/audio/formats")
     public ResponseEntity<?> getFormats(){
 
         return ResponseEntity.ok(javeDataSupplier.getAudioFormats());

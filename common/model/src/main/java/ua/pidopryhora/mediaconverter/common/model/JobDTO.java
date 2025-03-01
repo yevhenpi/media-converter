@@ -12,5 +12,5 @@ public abstract class JobDTO implements Serializable {
     private String fileName;
     private String outputFormat;
     private long userId;
-    private String requestHash;
+    private String jobId;
 }

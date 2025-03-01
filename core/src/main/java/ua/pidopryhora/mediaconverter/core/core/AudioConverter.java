@@ -11,7 +11,7 @@ import java.io.File;
 @Component
 public class AudioConverter {
 
-    public boolean convertAudio(EncodingAttributes attributes, String filePath) {
+    public boolean convert(EncodingAttributes attributes, String filePath) {
         boolean succeeded = true;
 
         try {
@@ -20,7 +20,7 @@ public class AudioConverter {
             Encoder encoder = new Encoder();
             encoder.encode(new MultimediaObject(source), target, attributes);
         } catch (Exception e){
-            log.error("ERROR CONVERTING FILE", e);
+            log.error("FILE CONVERSION FAILED", e);
             succeeded = false;
         }
 

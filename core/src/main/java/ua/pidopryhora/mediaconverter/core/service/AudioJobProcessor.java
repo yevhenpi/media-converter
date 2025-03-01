@@ -19,7 +19,6 @@ public class AudioJobProcessor implements JobProcessor<AudioJobDTO> {
     private final AudioConverter converter;
     private final AudioAttributesBuilder attributesBuilder;
 
-
     @Override
     @Async
     public void processJob(AudioJobDTO jobDTO) {
@@ -27,7 +26,8 @@ public class AudioJobProcessor implements JobProcessor<AudioJobDTO> {
         var filePath = "path";
         var attributes = attributesBuilder.buildEncodingAttributes(jobDTO);
 
-        converter.convertAudio(attributes, filePath);
+        converter.convert(attributes, filePath);
 
     }
+
 }
