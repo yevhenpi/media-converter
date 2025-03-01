@@ -22,7 +22,7 @@ public class AudioConversionRequestDTO extends RequestDTO {
     @AudioFormatValidation(groups = BasicCheck.class)
     private String outputFormat;
 
-    private String codec = "libmp3lame";
+    private String codec = null;
     private String samplingRate = null;
     private String bitRate = null;
     private String channels = null;

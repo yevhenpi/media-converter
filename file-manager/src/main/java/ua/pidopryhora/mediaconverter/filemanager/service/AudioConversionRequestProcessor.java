@@ -22,13 +22,13 @@ public class AudioConversionRequestProcessor implements RequestProcessor<AudioCo
 
     private final UpdateProducer updateProducer;
     private final HashUtil hashUtil;
-    private final FileDataService fileDataService;
+
 
 
     public ResponseEntity<?> processRequest(@Valid AudioConversionRequestDTO requestDTO){
 
+        String hash = hashUtil.getHash(requestDTO);
 
-        //if (!fileDataService.isPresent(requestDTO.getFileName())) return ResponseEntity.badRequest().body(Map.of("error", "file is not found"));
 
         updateProducer.produce(AUDIO_CONVERSION_QUEUE, createJob(requestDTO));
 
@@ -46,6 +46,7 @@ public class AudioConversionRequestProcessor implements RequestProcessor<AudioCo
                 .samplingRate(requestDTO.getSamplingRate())
                 .volume(requestDTO.getVolume())
                 .userId(requestDTO.getUserId())
+                .requestHash(hashUtil.getHash(requestDTO))
                 .build();
     }
 }

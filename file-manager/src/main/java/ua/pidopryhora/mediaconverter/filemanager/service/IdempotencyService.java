@@ -7,6 +7,8 @@ import ua.pidopryhora.mediaconverter.filemanager.util.HashUtil;
 
 import java.util.concurrent.TimeUnit;
 
+import static ua.pidopryhora.mediaconverter.common.model.JobStatus.PROCESSING;
+
 @Service
 public class IdempotencyService {
     private final HashUtil hashUtil;
@@ -23,8 +25,7 @@ public class IdempotencyService {
 
     public boolean addIdempotencyKey(RequestDTO requestDTO) {
         var key = hashUtil.getHash(requestDTO);
-        // "true" is a placeholder value; it doesn't matter what the value is.
-        Boolean added = redisTemplate.opsForValue().setIfAbsent(key, "true", IDEMPOTENCY_TTL_SECONDS, TimeUnit.SECONDS);
+        Boolean added = redisTemplate.opsForValue().setIfAbsent(key, String.valueOf(PROCESSING), IDEMPOTENCY_TTL_SECONDS, TimeUnit.SECONDS);
         return added != null && added;
     }
 

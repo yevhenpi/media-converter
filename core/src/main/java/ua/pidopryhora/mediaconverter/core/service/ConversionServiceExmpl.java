@@ -1,4 +1,4 @@
-package ua.pidopryhora.mediaconverter.core;
+package ua.pidopryhora.mediaconverter.core.service;
 
 
 import lombok.extern.slf4j.Slf4j;
@@ -12,9 +12,9 @@ import java.io.File;
 import java.util.Arrays;
 @Slf4j
 @Service
-public class ConversionService {
+public class ConversionServiceExmpl {
 
-    public ConversionService(){
+    public ConversionServiceExmpl(){
 
     }
 

@@ -10,14 +10,14 @@ import ua.pidopryhora.mediaconverter.filemanager.service.RequestProcessor;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/v1/audio")
+@RequestMapping("/api/v1/convert")
 @Validated
 @RequiredArgsConstructor
 public class AudioConversionController {
 
     private final RequestProcessor<AudioConversionRequestDTO> requestProcessor;
 
-    @PostMapping("/convert")
+    @PostMapping("/audio")
     public ResponseEntity<?> extractRequestData(@RequestHeader("UserRole") String userRole,
                                                 @RequestHeader("UserId") String userId,
                                                 @RequestBody AudioConversionRequestDTO requestDTO){
