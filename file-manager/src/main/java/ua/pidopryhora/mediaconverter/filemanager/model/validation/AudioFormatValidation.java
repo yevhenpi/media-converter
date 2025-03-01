@@ -7,10 +7,10 @@ import jakarta.validation.Payload;
 import java.lang.annotation.*;
 
 @Documented
-@Constraint(validatedBy = FormatValidator.class)
+@Constraint(validatedBy = AudioFormatValidator.class)
 @Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface FormatValidation {
+public @interface AudioFormatValidation {
     String message() default "Format is not supported";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};

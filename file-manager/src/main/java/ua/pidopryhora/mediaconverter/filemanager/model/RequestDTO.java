@@ -1,4 +1,4 @@
-package ua.pidopryhora.mediaconverter.common.model;
+package ua.pidopryhora.mediaconverter.filemanager.model;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -8,7 +8,7 @@ import ua.pidopryhora.mediaconverter.common.jave2.JAVEDataSupplier;
 import java.util.Arrays;
 
 @RequiredArgsConstructor
-public class FormatValidator implements ConstraintValidator<AudioFormatValidation, String> {
+public class AudioFormatValidator implements ConstraintValidator<AudioFormatValidation, String> {
 
     private final JAVEDataSupplier javeDataSupplier;
 

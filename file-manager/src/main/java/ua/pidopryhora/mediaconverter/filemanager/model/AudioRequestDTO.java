@@ -1,21 +1,27 @@
-package ua.pidopryhora.mediaconverter.common.model;
+package ua.pidopryhora.mediaconverter.filemanager.model;
 
+import jakarta.validation.GroupSequence;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import ua.pidopryhora.mediaconverter.common.model.validation.FormatValidation;
+import ua.pidopryhora.mediaconverter.filemanager.model.validation.AdvancedCheck;
+import ua.pidopryhora.mediaconverter.filemanager.model.validation.BasicCheck;
+import ua.pidopryhora.mediaconverter.filemanager.model.validation.AudioFormatValidation;
+import ua.pidopryhora.mediaconverter.filemanager.model.validation.IdempotencyCheck;
 
 @Setter
 @Getter
 @ToString
+@IdempotencyCheck(message = "Request is already being processed", groups = AdvancedCheck.class)
+@GroupSequence({BasicCheck.class, AdvancedCheck.class, AudioRequestDTO.class})
 public class AudioRequestDTO extends RequestDTO {
 
 
-    @NotBlank(message = "File name is required")
+    @NotBlank(message = "File name is required",groups = BasicCheck.class)
     private String fileName;
-    @NotBlank(message = "Output format is required")
-    @FormatValidation
+    @NotBlank(message = "Output format is required", groups = BasicCheck.class)
+    @AudioFormatValidation(groups = BasicCheck.class)
     private String outputFormat;
 
     private String codec = "libmp3lame";

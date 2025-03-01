@@ -6,9 +6,8 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import ua.pidopryhora.mediaconverter.common.model.RequestDTO;
 import ua.pidopryhora.mediaconverter.filemanager.model.validation.*;
-import ua.pidopryhora.mediaconverter.common.model.validation.FormatValidation;
+import ua.pidopryhora.mediaconverter.filemanager.model.validation.AudioFormatValidation;
 
 @Setter
 @Getter
@@ -17,9 +16,12 @@ import ua.pidopryhora.mediaconverter.common.model.validation.FormatValidation;
 @IdempotencyCheck(message = "URL for this file is already created and not expired yet", groups = AdvancedCheck.class)
 @GroupSequence({BasicCheck.class, AdvancedCheck.class, UploadRequestDTO.class})
 public class UploadRequestDTO extends RequestDTO{
+    //TODO: Create GenericFormatValidation annotation
+
+    //Switch to GenericFormatValidation to enable video upload
 
     @NotBlank(message = "File name is required",groups = BasicCheck.class)
-    @FormatValidation
+    @AudioFormatValidation(groups = BasicCheck.class)
     @FileMustNotExist(groups = BasicCheck.class)
     private String fileName;
 

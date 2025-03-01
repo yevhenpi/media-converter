@@ -2,7 +2,7 @@ package ua.pidopryhora.mediaconverter.filemanager.util;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import ua.pidopryhora.mediaconverter.common.model.RequestDTO;
+import ua.pidopryhora.mediaconverter.filemanager.model.RequestDTO;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
