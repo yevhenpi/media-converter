@@ -8,11 +8,12 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Constraint(validatedBy = FileMustNotExistValidator.class)
+
+@Constraint(validatedBy = MustExistValidator.class)
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface FileMustNotExist {
-    String message() default "File is already uploaded";
+public @interface MustExist {
+    String message() default "File is not found";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

@@ -2,5 +2,5 @@ package ua.pidopryhora.mediaconverter.common.rabbitmq;
 
 public class RabbitQueues {
 
-    public static final String CONVERSION_QUEUE = "CONVERSION_QUEUE";
+    public static final String AUDIO_CONVERSION_QUEUE = "AUDIO_CONVERSION_QUEUE";
 }

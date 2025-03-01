@@ -12,6 +12,6 @@ public class IdempotencyValidator  implements ConstraintValidator<IdempotencyChe
 
     @Override
     public boolean isValid(RequestDTO requestDTO, ConstraintValidatorContext constraintValidatorContext) {
-        return idempotencyService.addIdempotencyKey(requestDTO.toString());
+        return idempotencyService.addIdempotencyKey(requestDTO);
     }
 }

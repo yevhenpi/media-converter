@@ -22,7 +22,7 @@ public class UploadRequestDTO extends RequestDTO{
 
     @NotBlank(message = "File name is required",groups = BasicCheck.class)
     @AudioFormatValidation(groups = BasicCheck.class)
-    @FileMustNotExist(groups = BasicCheck.class)
+    @MustNotExist(groups = BasicCheck.class)
     private String fileName;
 
     @Min(value = 1, message = "File size must be greater than zero",groups = BasicCheck.class)

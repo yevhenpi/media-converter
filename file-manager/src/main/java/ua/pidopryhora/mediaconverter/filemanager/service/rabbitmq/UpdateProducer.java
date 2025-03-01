@@ -3,7 +3,7 @@ package ua.pidopryhora.mediaconverter.filemanager.service.rabbitmq;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
-import ua.pidopryhora.mediaconverter.common.model.JobDTO;
+import ua.pidopryhora.mediaconverter.common.model.AudioJobDTO;
 
 @Slf4j
 @Service
@@ -15,8 +15,8 @@ public class UpdateProducer {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    public void produce(String queueName, JobDTO jobDTO){
-        rabbitTemplate.convertAndSend(queueName, jobDTO);
+    public void produce(String queueName, AudioJobDTO audioJobDTO){
+        rabbitTemplate.convertAndSend(queueName, audioJobDTO);
 
     }
 }

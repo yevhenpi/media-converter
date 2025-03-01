@@ -6,14 +6,14 @@ import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import static ua.pidopryhora.mediaconverter.common.rabbitmq.RabbitQueues.CONVERSION_QUEUE;
+import static ua.pidopryhora.mediaconverter.common.rabbitmq.RabbitQueues.AUDIO_CONVERSION_QUEUE;
 
 @Configuration
 public class RabbitConfig {
 
     @Bean
     public Queue queue(){
-        return new Queue(CONVERSION_QUEUE, false);
+        return new Queue(AUDIO_CONVERSION_QUEUE, false);
     }
 
     @Bean

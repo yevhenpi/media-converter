@@ -4,14 +4,12 @@ import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import lombok.AllArgsConstructor;
 import ua.pidopryhora.mediaconverter.filemanager.service.FileDataService;
-
 @AllArgsConstructor
-public class FileMustNotExistValidator implements ConstraintValidator<MustNotExist, String> {
-    //TODO: Deal with file name uniqueness. Right now cant upload duplicates.
+public class MustExistValidator implements ConstraintValidator<MustExist, String> {
 
     private final FileDataService fileDataService;
     @Override
     public boolean isValid(String input, ConstraintValidatorContext constraintValidatorContext) {
-        return !fileDataService.isPresent(input);
+        return fileDataService.isPresent(input);
     }
 }
