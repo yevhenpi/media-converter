@@ -24,5 +24,5 @@ public class AudioJobDTO extends JobDTO {
     private String jobId;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    public String getS3Key(){ return  userId +fileName;}
+    public String getS3Key(){ return  userId +"/"+fileName;}
 }

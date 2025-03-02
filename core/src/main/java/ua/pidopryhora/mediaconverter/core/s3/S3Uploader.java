@@ -27,11 +27,12 @@ public class S3Uploader {
 
 
     public boolean upload(Path filePath){
-        log.info("File {} is being uploaded to s3", filePath.getFileName());
+        log.debug("File {} is being uploaded to s3", filePath.getFileName());
         try {
             byte[] fileContent = Files.readAllBytes(filePath);
             String bucketName = awsProperties.getCoreBucketName();
-            String name = filePath.getFileName().toString();
+            String name = filePath.getParent().getFileName().toString()+"/"+filePath.getFileName().toString();
+
 
 
             s3Client.putObject(
@@ -43,7 +44,7 @@ public class S3Uploader {
 
             );
 
-            log.info("File {} is uploaded to s3", name);
+            log.debug("File {} is uploaded to s3", name);
             return true;
         } catch (IOException e) {
             log.error("ERROR LOADING FILE TO S3", e);

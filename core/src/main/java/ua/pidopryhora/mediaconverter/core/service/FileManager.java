@@ -1,6 +1,6 @@
 package ua.pidopryhora.mediaconverter.core.service;
 
-import lombok.RequiredArgsConstructor;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ua.pidopryhora.mediaconverter.core.s3.S3Downloader;
@@ -30,12 +30,16 @@ public class FileManager implements IFileManager{
 
     @Override
     public String downloadFile(String key) {
-        return s3Downloader.download(key, Paths.get(INPUT_DIRECTORY));
+
+        if(lookForLocalFile(key)) return getInputFilePath(key);
+
+        return s3Downloader.download(key, Paths.get(getInputFilePath(key)));
     }
 
     @Override
     public boolean uploadFile(Path path) {
-        return s3Uploader.upload(path);
+        s3Uploader.upload(path);
+        return deleteLocalFile(path);
     }
 
     private void createDirectory(){
@@ -52,10 +56,30 @@ public class FileManager implements IFileManager{
             log.error("CAN NOT CREATE DIRECTORIES", e);
         }
     }
+
     public String getTargetPath(String fileName, String targetFormat){
         int dotIndex = fileName.lastIndexOf('.');
 
         return OUTPUT_DIRECTORY + "/"+ fileName.substring(0,dotIndex+1) + targetFormat;
 
+    }
+
+    public boolean deleteLocalFile(Path path){
+        File file = new File(String.valueOf(path));
+        return file.delete();
+
+    }
+
+    public boolean lookForLocalFile(String s3Key){
+        File file = new File(INPUT_DIRECTORY + "/"+ s3Key);
+        return file.exists();
+    }
+
+    public String getInputFilePath(String s3Key){
+        return INPUT_DIRECTORY + "/"+ s3Key;
+    }
+
+    public String getOutputFilePath(String s3Key){
+        return OUTPUT_DIRECTORY + "/"+ s3Key;
     }
 }

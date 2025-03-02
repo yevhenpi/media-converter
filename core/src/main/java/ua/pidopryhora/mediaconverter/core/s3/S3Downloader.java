@@ -26,9 +26,9 @@ public class S3Downloader {
         this.awsProperties = awsProperties;
     }
 
-    public String download(String key, Path destinationPath) {
-        log.info("Downloading file with key {} from S3 to {}", key, destinationPath.toAbsolutePath());
-        Path filePath = destinationPath.resolve(key);
+    public String download(String key, Path filePath) {
+        log.debug("Downloading file with key {} from S3 to {}", key, filePath);
+        createDir(filePath);
         try {
             String bucketName = awsProperties.getUploadBucketName();
 
@@ -40,11 +40,21 @@ public class S3Downloader {
             ResponseInputStream<GetObjectResponse> s3Object = s3Client.getObject(getObjectRequest);
             Files.copy(s3Object, filePath, StandardCopyOption.REPLACE_EXISTING);
 
-            log.info("File {} downloaded successfully to {}", key, filePath.toAbsolutePath());
+            log.debug("File {} downloaded successfully to {}", key, filePath.toAbsolutePath());
         } catch (IOException e) {
             log.error("ERROR DOWNLOADING FILE FROM S3", e);
 
         }
         return filePath.toString();
+    }
+    public void createDir(Path path){
+        Path parent = path.getParent();
+        if(!Files.exists(parent)){
+            try {
+                Files.createDirectories(parent);
+            } catch (IOException e) {
+                log.error("CANT CREATE DIR");
+            }
+        }
     }
 }

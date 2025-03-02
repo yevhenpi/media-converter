@@ -34,6 +34,6 @@ public class UploadRequestDTO extends RequestDTO{
     private long userId;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    public String getS3Key(){ return  userId+fileName;}
+    public String getS3Key(){ return  userId+"/"+fileName;}
 
 }
