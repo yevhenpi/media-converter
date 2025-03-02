@@ -22,7 +22,7 @@ public class JAVEDataSupplier {
     private List<String> videoEncoders;
     private List<String> videoDecoders;
 
-    private final List<String> supportedAudioFormats = Arrays.asList("mp3", "aac", "wav", "flac", "ogg", "opus", "dts", "ac3");
+    private final List<String> supportedAudioFormats = Arrays.asList("mp3", "wav", "flac", "ogg", "opus", "ac3");
 
     public JAVEDataSupplier() {
         this.encoder = new Encoder();

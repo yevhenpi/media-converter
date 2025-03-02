@@ -15,5 +15,6 @@ public class AwsProperties {
     private String secretKey;
     private String region;
     private String uploadBucketName;
+    private String coreBucketName;
 
 }

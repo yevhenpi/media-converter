@@ -5,4 +5,6 @@ spring:
   application:
     name: converter
   config:
-    import: "classpath:/rabbitmq-config.yaml"
+    import:
+       - "classpath:/rabbitmq-config.yaml"
+       - "classpath:/aws-properties.yaml"

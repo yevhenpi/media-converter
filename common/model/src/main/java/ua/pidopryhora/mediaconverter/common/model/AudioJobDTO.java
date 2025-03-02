@@ -1,5 +1,6 @@
 package ua.pidopryhora.mediaconverter.common.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,4 +22,7 @@ public class AudioJobDTO extends JobDTO {
 
     private long userId;
     private String jobId;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    public String getS3Key(){ return  userId +fileName;}
 }

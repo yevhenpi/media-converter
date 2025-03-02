@@ -7,21 +7,28 @@ import ws.schild.jave.MultimediaObject;
 import ws.schild.jave.encode.EncodingAttributes;
 
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 @Slf4j
 @Component
 public class AudioConverter {
 
-    public boolean convert(EncodingAttributes attributes, String filePath) {
+    private final String LOCAL_DIRECTORY = "upload_dir";
+
+    public boolean convert(EncodingAttributes attributes, String inputPath, String outputPath) {
         boolean succeeded = true;
 
         try {
-            File source = new File(filePath);
-            File target = new File("file path");
+            File source = new File(inputPath);
+            File target = new File(outputPath);
+
             Encoder encoder = new Encoder();
             encoder.encode(new MultimediaObject(source), target, attributes);
         } catch (Exception e){
             log.error("FILE CONVERSION FAILED", e);
             succeeded = false;
+
         }
 
         return succeeded;

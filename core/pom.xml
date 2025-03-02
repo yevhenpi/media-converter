@@ -73,6 +73,11 @@
             <artifactId>rabbitmq</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>ua.pidopryhora.mediaconverter.common</groupId>
+            <artifactId>aws</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
     </dependencies>
 
