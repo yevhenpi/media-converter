@@ -29,7 +29,7 @@ public class S3PresignedUrlService implements PresignedUrlService {
             // Create a PutObjectRequest
             PutObjectRequest objectRequest = PutObjectRequest.builder()
                     .bucket(awsProperties.getUploadBucketName())
-                    .key(metadata.getFileName())
+                    .key(metadata.getS3Key())
                     .contentLength(metadata.getFileSize())
                     .build();
 

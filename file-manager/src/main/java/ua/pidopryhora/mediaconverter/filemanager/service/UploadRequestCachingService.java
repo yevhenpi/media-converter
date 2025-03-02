@@ -20,14 +20,14 @@ public class UploadRequestCachingService extends RedisCachingService<UploadReque
 
 
     public void cacheData(UploadRequestDTO requestDTO) {
-        cacheData(requestDTO.getFileName(), requestDTO, Duration.ofMinutes(TTL_DURATION));
+        cacheData(requestDTO.getS3Key(), requestDTO, Duration.ofMinutes(TTL_DURATION));
     }
 
-    public void removeFileData(String fileName) {
-        removeData(fileName);
+    public void removeFileData(String s3Key) {
+        removeData(s3Key);
     }
 
-    public UploadRequestDTO getFileData(String fileName) {
-        return getData(fileName);
+    public UploadRequestDTO getFileData(String s3Key) {
+        return getData(s3Key);
     }
 }

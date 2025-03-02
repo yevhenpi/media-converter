@@ -2,10 +2,12 @@ package ua.pidopryhora.mediaconverter.core.core;
 
 
 
+import org.springframework.stereotype.Component;
 import ua.pidopryhora.mediaconverter.common.model.AudioJobDTO;
 import ws.schild.jave.encode.AudioAttributes;
 import ws.schild.jave.encode.EncodingAttributes;
 
+@Component
 public class AudioAttributesBuilder {
 
     public  EncodingAttributes buildEncodingAttributes(AudioJobDTO dto) {
