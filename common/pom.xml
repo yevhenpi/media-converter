@@ -25,6 +25,7 @@
         <module>config</module>
         <module>service</module>
         <module>cache</module>
+        <module>data</module>
 
     </modules>
     <properties>

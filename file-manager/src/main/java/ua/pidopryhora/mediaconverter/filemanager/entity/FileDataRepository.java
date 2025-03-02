@@ -13,5 +13,6 @@ public interface FileDataRepository extends JpaRepository<FileData, Long> {
   @Query("SELECT f.name FROM FileData f WHERE f.ownerId = :ownerId")
   List<String> findFileNamesByOwnerId(@Param("ownerId") Long ownerId);
 
+
   boolean existsByNameAndOwnerId(String fileName, Long ownerId);
 }

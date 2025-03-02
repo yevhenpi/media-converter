@@ -6,14 +6,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ua.pidopryhora.mediaconverter.filemanager.model.UploadRequestDTO;
 import ua.pidopryhora.mediaconverter.filemanager.service.RequestProcessor;
-import ua.pidopryhora.mediaconverter.filemanager.service.UploadRequestProcessor;
 
 @Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/upload")
 @CrossOrigin(origins = "*")
-public class UploadController {
+public class UploadUrlController {
 
 
     private final RequestProcessor<UploadRequestDTO> uploadRequestProcessor;

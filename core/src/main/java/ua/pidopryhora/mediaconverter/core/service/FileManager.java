@@ -16,6 +16,8 @@ import java.nio.file.Paths;
 
 public class FileManager implements IFileManager{
 
+    //TODO: Add scheduled removing of local files
+
     private final String INPUT_DIRECTORY = "download_dir";
     private final String OUTPUT_DIRECTORY = "upload_dir";
 
