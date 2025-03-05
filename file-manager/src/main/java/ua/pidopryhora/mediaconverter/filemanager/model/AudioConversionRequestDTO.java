@@ -1,5 +1,6 @@
 package ua.pidopryhora.mediaconverter.filemanager.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.GroupSequence;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -32,6 +33,9 @@ public class AudioConversionRequestDTO extends RequestDTO {
 
     private String role;
     private long userId;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    public String getS3Key(){ return  userId+"/"+fileName;}
 
 
 

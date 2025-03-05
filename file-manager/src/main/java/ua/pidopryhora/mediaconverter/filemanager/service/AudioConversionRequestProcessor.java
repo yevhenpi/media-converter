@@ -46,7 +46,8 @@ public class AudioConversionRequestProcessor implements RequestProcessor<AudioCo
                 .outputFormat(requestDTO.getOutputFormat())
                 .codec(requestDTO.getCodec())
                 .userId(requestDTO.getUserId())
-                .jobId(jobId);
+                .jobId(jobId)
+                .s3Key(requestDTO.getS3Key());
 
         if (requestDTO.getBitRate() != null && !requestDTO.getBitRate().trim().isEmpty()) {
             builder.bitRate(Integer.parseInt(requestDTO.getBitRate()));

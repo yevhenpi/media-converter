@@ -14,7 +14,7 @@ public abstract class JobDTO implements Serializable {
     private String outputFormat;
     private long userId;
     private String jobId;
+    private String s3Key;
 
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    public String getS3Key(){ return  userId +"/"+fileName;}
+
 }
