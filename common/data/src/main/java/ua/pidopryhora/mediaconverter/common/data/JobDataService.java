@@ -4,6 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import ua.pidopryhora.mediaconverter.common.model.JobDTO;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +43,7 @@ public class JobDataService {
         }
         return jobs;
     }
+
     public JobData getJob(String jobId){
         return jobDataRepository.getByJobId(jobId);
     }
@@ -53,7 +55,12 @@ public class JobDataService {
     public String getS3Key(String jobId){
         return jobDataRepository.findS3KeyByJobId(jobId);
     }
+
     public void updateS3Key(String jobId,String key){
         jobDataRepository.updateS3Key(jobId,key);
+    }
+
+    public void deleteExpired(LocalDateTime threshold){
+        jobDataRepository.deleteByCompletedAtBefore(threshold);
     }
 }

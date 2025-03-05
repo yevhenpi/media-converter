@@ -33,7 +33,7 @@ public class FileManager implements IFileManager{
     @Override
     public String downloadFile(String key) {
 
-        if(lookForLocalFile(key)) return getInputFilePath(key);
+        if(isFileStoredLocally(key)) return getInputFilePath(key);
 
         return s3Downloader.download(key, Paths.get(getInputFilePath(key)));
     }
@@ -72,16 +72,17 @@ public class FileManager implements IFileManager{
 
     }
 
-    public boolean lookForLocalFile(String s3Key){
-        File file = new File(INPUT_DIRECTORY + "/"+ s3Key);
-        return file.exists();
+    public boolean isFileStoredLocally(String s3Key) {
+        return Files.exists(Paths.get(INPUT_DIRECTORY, s3Key));
     }
 
-    public String getInputFilePath(String s3Key){
-        return INPUT_DIRECTORY + "/"+ s3Key;
+
+    public String getInputFilePath(String s3Key) {
+        return Paths.get(INPUT_DIRECTORY, s3Key).toString();
     }
 
-    public String getOutputFilePath(String s3Key){
-        return OUTPUT_DIRECTORY + "/"+ s3Key;
+    public String getOutputFilePath(String s3Key) {
+        return Paths.get(OUTPUT_DIRECTORY, s3Key).toString();
     }
 }
+

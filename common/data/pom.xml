@@ -36,6 +36,10 @@
             <artifactId>model</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-core</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

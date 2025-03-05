@@ -7,14 +7,17 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
 public interface JobDataRepository extends JpaRepository<JobData, String> {
     JobData getByJobId(String jobId);
     List<JobData> findByOwnerId(Long ownerId);
+    void deleteByCompletedAtBefore(LocalDateTime threshold);
     @Query("SELECT j.s3Key FROM JobData j WHERE j.jobId = :jobId")
     String findS3KeyByJobId(@Param("jobId") String jobId);
+
     @Modifying
     @Transactional
     @Query("UPDATE JobData j SET j.jobStatus = :status WHERE j.jobId = :jobId")

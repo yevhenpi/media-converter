@@ -14,8 +14,6 @@ import java.nio.file.Paths;
 @Component
 public class AudioConverter {
 
-    private final String LOCAL_DIRECTORY = "upload_dir";
-
     public boolean convert(EncodingAttributes attributes, String inputPath, String outputPath) {
         boolean succeeded = true;
 

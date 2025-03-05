@@ -9,6 +9,7 @@ import ua.pidopryhora.mediaconverter.common.data.JobDataService;
 import ua.pidopryhora.mediaconverter.common.model.AudioJobDTO;
 import ua.pidopryhora.mediaconverter.core.core.AudioAttributesBuilder;
 import ua.pidopryhora.mediaconverter.core.core.AudioConverter;
+import ws.schild.jave.encode.EncodingAttributes;
 
 import java.nio.file.Path;
 
@@ -30,11 +31,11 @@ public class AudioJobProcessor implements JobProcessor<AudioJobDTO> {
     @Async
     public void processJob(AudioJobDTO jobDTO) {
 
-        var filePath = fileManager.downloadFile(jobDTO.getS3Key());
+        String filePath = fileManager.downloadFile(jobDTO.getS3Key());
 
-        var attributes = attributesBuilder.buildEncodingAttributes(jobDTO);
+        EncodingAttributes attributes = attributesBuilder.buildEncodingAttributes(jobDTO);
 
-        var targetPath = fileManager.getTargetPath(jobDTO.getS3Key(), jobDTO.getOutputFormat());
+        String targetPath = fileManager.getTargetPath(jobDTO.getS3Key(), jobDTO.getOutputFormat());
 
         if(converter.convert(attributes, filePath, targetPath)){
             fileManager.uploadFile(Path.of(targetPath));
