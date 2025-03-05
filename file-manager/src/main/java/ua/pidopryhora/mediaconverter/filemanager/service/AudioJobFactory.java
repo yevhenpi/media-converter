@@ -5,7 +5,7 @@ import ua.pidopryhora.mediaconverter.common.model.AudioJobDTO;
 import ua.pidopryhora.mediaconverter.filemanager.model.AudioConversionRequestDTO;
 
 @Component
-public class AudioJobFactory {
+public class AudioJobFactory implements JobFactory<AudioConversionRequestDTO, AudioJobDTO> {
 
     public AudioJobDTO createJob(AudioConversionRequestDTO requestDTO, String jobId) {
         AudioJobDTO.AudioJobDTOBuilder builder = AudioJobDTO.builder()

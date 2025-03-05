@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import ua.pidopryhora.mediaconverter.common.data.JobDataService;
+import ua.pidopryhora.mediaconverter.common.model.JobDTO;
 import ua.pidopryhora.mediaconverter.filemanager.model.AudioConversionRequestDTO;
 import ua.pidopryhora.mediaconverter.common.model.AudioJobDTO;
 import ua.pidopryhora.mediaconverter.filemanager.service.rabbitmq.UpdateProducer;
@@ -23,7 +24,7 @@ public class AudioConversionRequestProcessor implements RequestProcessor<AudioCo
 
     private final UpdateProducer updateProducer;
     private final JobDataService jobDataService;
-    private final AudioJobFactory jobFactory;
+    private final JobFactory<AudioConversionRequestDTO, AudioJobDTO> jobFactory;
 
     public ResponseEntity<?> processRequest(@Valid AudioConversionRequestDTO requestDTO){
 
