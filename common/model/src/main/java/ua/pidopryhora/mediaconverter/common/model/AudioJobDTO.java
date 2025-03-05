@@ -1,6 +1,6 @@
 package ua.pidopryhora.mediaconverter.common.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

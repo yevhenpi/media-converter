@@ -23,14 +23,12 @@ public class AudioConversionRequestProcessor implements RequestProcessor<AudioCo
 
     private final UpdateProducer updateProducer;
     private final JobDataService jobDataService;
-
-
-
+    private final AudioJobFactory jobFactory;
 
     public ResponseEntity<?> processRequest(@Valid AudioConversionRequestDTO requestDTO){
 
         var jobId = UUID.randomUUID().toString();
-        var job = createJob(requestDTO, jobId);
+        var job = jobFactory.createJob(requestDTO, jobId);
 
         updateProducer.produce(AUDIO_CONVERSION_QUEUE, job);
         jobDataService.saveData(job);
@@ -38,31 +36,4 @@ public class AudioConversionRequestProcessor implements RequestProcessor<AudioCo
         return ResponseEntity.ok().body(Map.of("message", "conversion is started",
                 "jobId", jobId));
     }
-
-    private AudioJobDTO createJob(AudioConversionRequestDTO requestDTO, String jobId) {
-
-        AudioJobDTO.AudioJobDTOBuilder builder = AudioJobDTO.builder()
-                .fileName(requestDTO.getFileName())
-                .outputFormat(requestDTO.getOutputFormat())
-                .codec(requestDTO.getCodec())
-                .userId(requestDTO.getUserId())
-                .jobId(jobId)
-                .s3Key(requestDTO.getS3Key());
-
-        if (requestDTO.getBitRate() != null && !requestDTO.getBitRate().trim().isEmpty()) {
-            builder.bitRate(Integer.parseInt(requestDTO.getBitRate()));
-        }
-        if (requestDTO.getChannels() != null && !requestDTO.getChannels().trim().isEmpty()) {
-            builder.channels(Integer.parseInt(requestDTO.getChannels()));
-        }
-        if (requestDTO.getSamplingRate() != null && !requestDTO.getSamplingRate().trim().isEmpty()) {
-            builder.samplingRate(Integer.parseInt(requestDTO.getSamplingRate()));
-        }
-        if (requestDTO.getVolume() != null && !requestDTO.getVolume().trim().isEmpty()) {
-            builder.volume(Integer.parseInt(requestDTO.getVolume()));
-        }
-
-        return builder.build();
-    }
-
 }
