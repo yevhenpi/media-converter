@@ -46,6 +46,25 @@ services:
     networks:
       - backend_network
 
+#  api-gateway:
+#    build:
+#      context: ./api-gateway
+#      dockerfile: Dockerfile
+#    container_name: api_gateway
+#    ports:
+#      - "8080:8080"
+#    environment:
+#      SPRING_PROFILES_ACTIVE: docker
+#      SPRING_REDIS_HOST: redis
+#      # EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+#    networks:
+#      - backend_network
+#    depends_on:
+#      - eureka-server
+
+
+
+
   # Redis cache
   redis:
     image: redis:latest
