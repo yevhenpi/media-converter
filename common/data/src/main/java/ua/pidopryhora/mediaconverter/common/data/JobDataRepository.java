@@ -14,7 +14,7 @@ import java.util.List;
 public interface JobDataRepository extends JpaRepository<JobData, String> {
     JobData getByJobId(String jobId);
     List<JobData> findByOwnerId(Long ownerId);
-    void deleteByCompletedAtBefore(LocalDateTime threshold);
+    List<JobData> findByCreatedAtBefore(LocalDateTime threshold);
     @Query("SELECT j.s3Key FROM JobData j WHERE j.jobId = :jobId")
     String findS3KeyByJobId(@Param("jobId") String jobId);
 

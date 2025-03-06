@@ -60,7 +60,11 @@ public class JobDataService {
         jobDataRepository.updateS3Key(jobId,key);
     }
 
-    public void deleteExpired(LocalDateTime threshold){
-        jobDataRepository.deleteByCompletedAtBefore(threshold);
+    public List<JobData> deleteExpired(LocalDateTime threshold){
+        List<JobData> jobsToDelete = jobDataRepository.findByCreatedAtBefore(threshold);
+
+        jobDataRepository.deleteAll(jobsToDelete);
+
+        return jobsToDelete;
     }
 }
