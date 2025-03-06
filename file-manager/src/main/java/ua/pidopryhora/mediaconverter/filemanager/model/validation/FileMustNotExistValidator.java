@@ -8,7 +8,6 @@ import ua.pidopryhora.mediaconverter.filemanager.service.FileDataService;
 
 @AllArgsConstructor
 public class FileMustNotExistValidator implements ConstraintValidator<MustNotExist, RequestDTO> {
-    //TODO: Deal with file name uniqueness. Right now cant upload duplicates.
 
     private final FileDataService fileDataService;
     @Override

@@ -17,7 +17,8 @@ import org.springframework.scheduling.annotation.EnableAsync;
         "ua.pidopryhora.mediaconverter.filemanager",
         "ua.pidopryhora.mediaconverter.common"
 })
-@EntityScan(basePackages = {"ua.pidopryhora.mediaconverter.common.data",
+@EntityScan(basePackages = {
+        "ua.pidopryhora.mediaconverter.common.data",
         "ua.pidopryhora.mediaconverter.filemanager"})
 public class FileManagerApplication {
 
