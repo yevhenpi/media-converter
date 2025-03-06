@@ -14,24 +14,32 @@ import java.util.List;
 @Component
 public class JobDataCleaner {
 
+    private final DirectoryCleaner directoryCleaner;
+
     private final JobDataService jobDataService;
     private final S3Deleter s3Deleter;
 
-    public JobDataCleaner(JobDataService jobDataService, S3Deleter s3Deleter) {
+    public JobDataCleaner(DirectoryCleaner directoryCleaner, JobDataService jobDataService, S3Deleter s3Deleter) {
+        this.directoryCleaner = directoryCleaner;
         this.jobDataService = jobDataService;
         this.s3Deleter = s3Deleter;
         cleanExpiredJobs();
+        directoryCleanup();
     }
 
     @Scheduled(cron = "0 0 0 * * ?")
     public void scheduleCleanup() {
         cleanExpiredJobs();
+        directoryCleanup();
     }
     private void cleanExpiredJobs(){
         log.debug("Cleaning jobs...");
         LocalDateTime expiry = LocalDateTime.now().minusDays(1);
         List<JobData> jobsToDelete = jobDataService.deleteExpired(expiry);
         s3Deleter.batchDelete(jobsToDelete);
+    }
+    private void directoryCleanup(){
+        directoryCleaner.cleanDownloadDirectory();
     }
 
 }

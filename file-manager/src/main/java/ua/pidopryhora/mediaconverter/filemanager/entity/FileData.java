@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -28,6 +31,11 @@ public class FileData {
 
     @Column(name = "ownerId", nullable = false)
     private Long ownerId;
+
+    @CreationTimestamp
+    @Column(name = "uploaded_at", nullable = false, updatable = false)
+    private LocalDateTime uploadedAt;
+
 
     public FileData(){}
 
