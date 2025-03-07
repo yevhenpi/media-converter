@@ -2,6 +2,7 @@ FROM ubuntu:latest
 LABEL authors="euji"
 # Use an official OpenJDK runtime as a base image
 FROM openjdk:21-jdk-slim
+RUN apt-get update && apt-get install -y curl
 
 # Set the working directory inside the container
 WORKDIR /eureka-server

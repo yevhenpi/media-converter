@@ -45,6 +45,11 @@ services:
       EUREKA_CLIENT_FETCH_REGISTRY: "false"
     networks:
       - backend_network
+    healthcheck:
+      test: [ "CMD", "curl", "-fLs", "http://localhost:8761/actuator/health"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
 
 #  api-gateway:
 #    build:
@@ -55,12 +60,13 @@ services:
 #      - "8080:8080"
 #    environment:
 #      SPRING_PROFILES_ACTIVE: docker
-#      SPRING_REDIS_HOST: redis
-#      # EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+#      spring.redis.host: redis
+#      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://eureka-server:8761/eureka/
 #    networks:
 #      - backend_network
 #    depends_on:
-#      - eureka-server
+#      eureka-server:
+#        condition: service_healthy
 
 
 
