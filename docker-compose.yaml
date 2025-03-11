@@ -48,7 +48,7 @@ services:
     healthcheck:
       test: [ "CMD", "curl", "-fLs", "http://localhost:8761/actuator/health"]
       interval: 10s
-      timeout: 10s
+      timeout: 5s
       retries: 3
 
 #  api-gateway:
@@ -60,7 +60,7 @@ services:
 #      - "8080:8080"
 #    environment:
 #      SPRING_PROFILES_ACTIVE: docker
-#      spring.redis.host: redis
+#      SPRING_REDIS_HOST: redis
 #      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://eureka-server:8761/eureka/
 #    networks:
 #      - backend_network

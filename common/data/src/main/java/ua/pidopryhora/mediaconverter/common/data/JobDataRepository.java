@@ -18,6 +18,8 @@ public interface JobDataRepository extends JpaRepository<JobData, String> {
     @Query("SELECT j.s3Key FROM JobData j WHERE j.jobId = :jobId")
     String findS3KeyByJobId(@Param("jobId") String jobId);
 
+    boolean existsByJobId(String jobId);
+
     @Modifying
     @Transactional
     @Query("UPDATE JobData j SET j.jobStatus = :status WHERE j.jobId = :jobId")

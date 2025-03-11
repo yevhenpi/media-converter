@@ -36,6 +36,10 @@ public class JobDataService {
         }
     }
 
+    public boolean isPresent(String jobId){
+        return jobDataRepository.existsByJobId(jobId);
+    }
+
     public List<JobData> getJobs(List<String> jobId){
         List<JobData> jobs = new ArrayList<>();
         for(String job:jobId){

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.GroupSequence;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -22,6 +23,7 @@ public class UploadRequestDTO extends RequestDTO{
 
     //Switch to GenericFormatValidation to enable video upload
 
+    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Only alphanumeric characters are allowed", groups = BasicCheck.class)
     @NotBlank(message = "File name is required",groups = BasicCheck.class)
     @AudioFormatValidation(groups = BasicCheck.class)
     private String fileName;

@@ -58,7 +58,7 @@ public class S3PresignedUrlService implements PresignedUrlService {
                 .build();
 
         GetObjectPresignRequest presignRequest = GetObjectPresignRequest.builder()
-                .signatureDuration(Duration.ofMinutes(15))
+                .signatureDuration(Duration.ofMinutes(EXPIRATION_TIME))
                 .getObjectRequest(getObjectRequest)
                 .build();
 
