@@ -1,7 +1,7 @@
 spring:
   redis:
     host: localhost
-    port: 6376
+    port: 6379
   config:
     import:
       - "classpath:/security-properties.yaml"
@@ -20,8 +20,8 @@ spring:
           filters:
           - name: RequestRateLimiter
             args:
-              redis-rate-limiter.replenishRate: 1
-              redis-rate-limiter.burstCapacity: 1
+              redis-rate-limiter.replenishRate: 10
+              redis-rate-limiter.burstCapacity: 20
               redis-rate-limiter.requestedTokens: 1
               key-resolver: "#{@ipKeyResolver}"
   server:

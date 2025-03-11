@@ -11,6 +11,8 @@
     </appender>
 
     <logger name="ua.pidopryhora" level="debug" />
+<!--    <logger name="io.lettuce.core" level="debug" />-->
+<!--    <logger name="org.springframework.data.redis" level="debug" />-->
 
     <!-- Root logger -->
     <root level="info">
