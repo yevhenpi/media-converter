@@ -19,11 +19,11 @@ import ua.pidopryhora.mediaconverter.filemanager.model.validation.AudioFormatVal
 @IdempotencyCheck(message = "URL for this file is already created and not expired yet", groups = AdvancedCheck.class)
 @GroupSequence({BasicCheck.class, AdvancedCheck.class, UploadRequestDTO.class})
 public class UploadRequestDTO extends RequestDTO{
-    //TODO: Create GenericFormatValidation annotation. Add special character validation.
+    //TODO: Create GenericFormatValidation annotation.
 
     //Switch to GenericFormatValidation to enable video upload
 
-    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Only alphanumeric characters are allowed", groups = BasicCheck.class)
+    @Pattern(regexp = "^[a-zA-Z0-9_.]+$", message = "Only alphanumeric characters are allowed", groups = BasicCheck.class)
     @NotBlank(message = "File name is required",groups = BasicCheck.class)
     @AudioFormatValidation(groups = BasicCheck.class)
     private String fileName;

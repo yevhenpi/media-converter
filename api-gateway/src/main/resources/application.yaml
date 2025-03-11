@@ -4,7 +4,6 @@ spring:
     port: 6376
   config:
     import:
-#      - "classpath:/eureka-url.yaml"
       - "classpath:/security-properties.yaml"
   application:
     name: api-gateway
@@ -21,8 +20,8 @@ spring:
           filters:
           - name: RequestRateLimiter
             args:
-              redis-rate-limiter.replenishRate: 10
-              redis-rate-limiter.burstCapacity: 20
+              redis-rate-limiter.replenishRate: 1
+              redis-rate-limiter.burstCapacity: 1
               redis-rate-limiter.requestedTokens: 1
               key-resolver: "#{@ipKeyResolver}"
   server:
