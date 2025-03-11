@@ -51,22 +51,23 @@ services:
       timeout: 5s
       retries: 3
 
-#  api-gateway:
-#    build:
-#      context: ./api-gateway
-#      dockerfile: Dockerfile
-#    container_name: api_gateway
-#    ports:
-#      - "8080:8080"
-#    environment:
-#      SPRING_PROFILES_ACTIVE: docker
-#      SPRING_REDIS_HOST: redis
-#      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://eureka-server:8761/eureka/
-#    networks:
-#      - backend_network
-#    depends_on:
-#      eureka-server:
-#        condition: service_healthy
+  api-gateway:
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    container_name: api_gateway
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://eureka-server:8761/eureka/
+    networks:
+      - backend_network
+    depends_on:
+      eureka-server:
+        condition: service_healthy
 
 
 

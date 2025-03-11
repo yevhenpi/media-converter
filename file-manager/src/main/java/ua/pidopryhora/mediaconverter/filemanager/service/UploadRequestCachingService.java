@@ -2,7 +2,7 @@ package ua.pidopryhora.mediaconverter.filemanager.service;
 
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import ua.pidopryhora.mediaconverter.common.redis.RedisCachingService;
+import ua.pidopryhora.mediaconverter.common.cache.RedisCachingService;
 import ua.pidopryhora.mediaconverter.filemanager.model.UploadRequestDTO;
 
 import java.time.Duration;
