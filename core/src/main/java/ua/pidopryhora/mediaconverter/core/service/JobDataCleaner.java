@@ -13,6 +13,8 @@ import java.util.List;
 @Slf4j
 @Component
 public class JobDataCleaner {
+    private final String INPUT_DIRECTORY = "download_dir";
+    private final String OUTPUT_DIRECTORY = "upload_dir";
 
     private final DirectoryCleaner directoryCleaner;
 
@@ -39,7 +41,8 @@ public class JobDataCleaner {
         s3Deleter.batchDelete(jobsToDelete);
     }
     private void directoryCleanup(){
-        directoryCleaner.cleanDownloadDirectory();
+        directoryCleaner.cleanDirectory(INPUT_DIRECTORY);
+        directoryCleaner.cleanDirectory(OUTPUT_DIRECTORY);
     }
 
 }

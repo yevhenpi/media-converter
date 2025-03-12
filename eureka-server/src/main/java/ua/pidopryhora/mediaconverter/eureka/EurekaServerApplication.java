@@ -11,5 +11,4 @@ public class EurekaServerApplication {
         SpringApplication.run(EurekaServerApplication.class, args);
     }
 
-    //TODO: Check region setting. Reconfigure update rate.
 }

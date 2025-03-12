@@ -11,15 +11,14 @@ import java.util.stream.Stream;
 @Slf4j
 @Component
 public class DirectoryCleaner {
-    private final String INPUT_DIRECTORY = "download_dir";
 
-    public  void cleanDownloadDirectory() {
+    public  void cleanDirectory(String directory) {
 
         try {
-            try (Stream<Path> paths = Files.walk(Path.of(INPUT_DIRECTORY))) {
+            try (Stream<Path> paths = Files.walk(Path.of(directory))) {
                 paths
                         .sorted(Comparator.reverseOrder())
-                        .filter(path -> !path.equals(Path.of(INPUT_DIRECTORY)))
+                        .filter(path -> !path.equals(Path.of(directory)))
                         .forEach(path -> {
                             try {
                                 Files.delete(path);
@@ -29,8 +28,10 @@ public class DirectoryCleaner {
                         });
             }
         } catch (IOException e) {
-            log.error("Error cleaning directory");
+            log.error("Error cleaning directory{}", directory);
         }
     }
+
+
 
 }

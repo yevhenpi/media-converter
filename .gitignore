@@ -42,3 +42,4 @@ common/config/src/main/resources/application-common.yaml
 common/security/src/main/resources/security-properties.yaml
 upload_dir
 download_dir
+.env

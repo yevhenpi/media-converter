@@ -14,6 +14,7 @@ import ws.schild.jave.encode.EncodingAttributes;
 import java.nio.file.Path;
 
 import static ua.pidopryhora.mediaconverter.common.model.JobStatus.DONE;
+import static ua.pidopryhora.mediaconverter.common.model.JobStatus.FAILED;
 
 
 @Slf4j
@@ -41,6 +42,8 @@ public class AudioJobProcessor implements JobProcessor<AudioJobDTO> {
             fileManager.uploadFile(Path.of(targetPath));
             jobDataService.updateJobStatus(jobDTO.getJobId(), String.valueOf(DONE));
             jobDataService.updateS3Key(jobDTO.getJobId(), getKeyFromTarget(targetPath));
+        } else {
+            jobDataService.updateJobStatus(jobDTO.getJobId(), String.valueOf(FAILED));
         }
 
 
