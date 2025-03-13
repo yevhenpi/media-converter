@@ -1,7 +1,6 @@
-# Project Title
+# Media Converter 
 
-A brief description of what this project does and who it's for.
-
+This application provides a REST API for file conversion, allowing transformation of audio and video files between various formats using a JAVE2-based service.
 
 ## About
 
@@ -9,65 +8,60 @@ Provide a detailed introduction to your project here. Explain the problem it sol
 
 ## Installation
 
-Describe how to install and set up your project locally.
 
-Example:
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/yourusername/yourproject.git
+  **1. Clone the repository:**
+  
+    git clone git@github.com:yevhenpi/media-converter.git
+  **2. Configure .env.example file and rename it to .env**
 
 ## Usage
 
  Explain how to run and use your project. Provide code examples or screenshots if needed.
  Running the Application
 
-## Example command to start the application
-npm start
 
-API Endpoints
+
+## API Endpoints
 
 Below is a list of the main API endpoints. For each endpoint, provide a brief description, the HTTP method, required headers, parameters, and example request/response.
-Endpoint Name
 
-    URL: /api/endpoint
-    Method: GET / POST / PUT / DELETE
+### Upload endpoint
+
+    URL: /api/v1/upload/audio
+    Method: POST
     Headers:
         Content-Type: application/json
-        (Add any other required headers)
-    Query Parameters: (if applicable)
-        param1: Description of parameter 1.
-        param2: Description of parameter 2.
-    Request Body: (for POST/PUT requests)
-
+        Authorization: Bearer YOUR_TOKEN
+    Request Body:
     {
-     "key1": "value1",
-     "key2": "value2"
+     "fileName": "sample.mp3",
+     "fileSize": "1829938"
     }
 
 Example Request:
 
-    curl -X GET "http://localhost:3000/api/endpoint?param1=value1" -H "Content-Type: application/json"
+    curl -X POST "http://localhost:8080/api/v1/upload/audio" \
+         -H "Content-Type: application/json" \
+         -H "Authorization: Bearer YOUR_TOKEN" \
+         -d {"fileName": "sample.mp3", "fileSize": "1829938"}
 
 Example Response:
 
     {
-      "status": "success",
-      "data": {
-        "id": 1,
-        "key1": "value1"
-      }
+      "url": PRESIGNED_URL
     }
 
 (Repeat the above structure for additional endpoints as needed)
-Docker Compose Setup
+## Docker Compose Setup
 
 This project uses Docker Compose to manage containerized services.
-Prerequisites
+
+### Prerequisites
 
 Docker installed on your system.
 Docker Compose installed.
 
-Running with Docker Compose
+### Running with Docker Compose
 
 Build and start the containers:
 
@@ -101,17 +95,18 @@ Please update tests and documentation as appropriate.
 License
 
 Distributed under the MIT License. See the LICENSE file for more details.
-Contact
 
-    Name: Your Name
-    Email: your.email@example.com
-    Project Link: https://github.com/yourusername/yourproject
-
-Acknowledgements
-
-    Resource 1 - Brief description of its contribution.
-    Resource 2 - Brief description of its contribution.
+## Contact
 
 
-Simply copy the above content, paste it into your `README.md` file, and modify the fields as needed for your project. Enjoy!
+    yevhen.pidopryhora@gmail.com
+  
+
+## Credits
+
+ Conversion service is based on JAVE2 library by a-schild.
+
+ https://github.com/a-schild/jave2
+
+
 
