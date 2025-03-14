@@ -58,10 +58,10 @@ public class FileManager implements IFileManager{
         }
     }
 
-    public String getTargetPath(String fileName, String targetFormat){
-        int dotIndex = fileName.lastIndexOf('.');
+    public String getTargetPath(String jobId, String targetFormat){
+        //int dotIndex = jobId.lastIndexOf('.');
 
-        return OUTPUT_DIRECTORY + "/"+ fileName.substring(0,dotIndex+1) + targetFormat;
+        return OUTPUT_DIRECTORY + "/"+ jobId +"."+ targetFormat;
 
     }
 

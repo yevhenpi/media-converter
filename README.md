@@ -9,10 +9,10 @@ Provide a detailed introduction to your project here. Explain the problem it sol
 ## Installation
 
 
-  **1. Clone the repository:**
+  1. Clone the repository:
   
     git clone git@github.com:yevhenpi/media-converter.git
-  **2. Configure .env.example file and rename it to .env**
+  2. Configure .env.example file and rename it to .env
 
 ## Usage
 
@@ -51,7 +51,7 @@ Example Response:
       "url": PRESIGNED_URL
     }
 
-(Repeat the above structure for additional endpoints as needed)
+
 ## Docker Compose Setup
 
 This project uses Docker Compose to manage containerized services.

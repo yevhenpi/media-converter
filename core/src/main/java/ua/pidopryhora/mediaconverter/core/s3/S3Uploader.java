@@ -31,7 +31,7 @@ public class S3Uploader {
         try {
             byte[] fileContent = Files.readAllBytes(filePath);
             String bucketName = awsProperties.getCoreBucketName();
-            String name = filePath.getParent().getFileName().toString()+"/"+filePath.getFileName().toString();
+            String name = filePath.getFileName().toString();
 
 
 

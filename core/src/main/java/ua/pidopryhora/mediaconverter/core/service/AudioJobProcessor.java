@@ -36,7 +36,7 @@ public class AudioJobProcessor implements JobProcessor<AudioJobDTO> {
 
         EncodingAttributes attributes = attributesBuilder.buildEncodingAttributes(jobDTO);
 
-        String targetPath = fileManager.getTargetPath(jobDTO.getS3Key(), jobDTO.getOutputFormat());
+        String targetPath = fileManager.getTargetPath(jobDTO.getJobId(), jobDTO.getOutputFormat());
 
         if(converter.convert(attributes, filePath, targetPath)){
             fileManager.uploadFile(Path.of(targetPath));
@@ -52,7 +52,7 @@ public class AudioJobProcessor implements JobProcessor<AudioJobDTO> {
 
     private String getKeyFromTarget(String target){
         Path filePath = Path.of(target);
-        return filePath.getParent().getFileName().toString()+"/"+filePath.getFileName().toString();
+        return filePath.getFileName().toString();
     }
 
 
