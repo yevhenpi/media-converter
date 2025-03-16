@@ -4,8 +4,12 @@ server:
   port: 8095
 
 
+
 spring:
   config:
-    import: "classpath:/application-common.yaml"
+    import:
+     - "classpath:/application-common.yaml"
+     - "classpath:/security-properties.yaml"
+
 
 

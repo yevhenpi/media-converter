@@ -13,9 +13,9 @@ services:
       - backend_network
     volumes:
       - postgres_data:/var/lib/postgresql/data
-#    profiles:
-#      - dev
-#      - prod
+    profiles:
+      - dev
+      - prod
 
   # RabbitMQ message broker
   rabbitmq:
@@ -32,9 +32,9 @@ services:
       - backend_network
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
-#    profiles:
-#      - dev
-#      - prod
+    profiles:
+      - dev
+      - prod
 
   # Eureka Server
   eureka-server:
@@ -56,8 +56,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 3
-#    profiles:
-#      - prod
+    profiles:
+      - prod
 
 
   api-gateway:
@@ -80,8 +80,8 @@ services:
     depends_on:
       eureka-server:
         condition: service_healthy
-#    profiles:
-#      - prod
+    profiles:
+      - prod
 
 
 
@@ -97,9 +97,9 @@ services:
       - backend_network
     volumes:
       - redis_data:/var/lib/redis
-#    profiles:
-#      - dev
-#      - prod
+    profiles:
+      - dev
+      - prod
 
 networks:
   backend_network:

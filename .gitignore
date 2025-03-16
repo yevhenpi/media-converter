@@ -43,3 +43,5 @@ common/security/src/main/resources/security-properties.yaml
 upload_dir
 download_dir
 .env
+auth-server/src/main/resources/keystore.jks
+api-gateway/src/main/resources/keystore.jks

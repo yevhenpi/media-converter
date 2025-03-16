@@ -1,17 +1,18 @@
-# Media Converter 
+# Media Converter 1.0.0
 
 This application provides a REST API for file conversion, allowing transformation of audio and video files between various formats using a JAVE2-based service.
 
 ## About
 
-Provide a detailed introduction to your project here. Explain the problem it solves, the technologies used, and any other important details.
+Current version supports audio files conversion and transformation. Video file support is planned for version 2.0.0.
 
 ## Installation
 
 
   1. Clone the repository:
-  
+
     git clone git@github.com:yevhenpi/media-converter.git
+
   2. Configure .env.example file and rename it to .env
 
 ## Usage

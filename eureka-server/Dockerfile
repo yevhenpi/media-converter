@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y curl
 WORKDIR /eureka-server
 
 # Copy the compiled JAR file into the container
-COPY target/eureka-server-0.0.1-SNAPSHOT.jar eureka-server.jar
+COPY target/*.jar eureka-server.jar
 
 # Expose the Eureka Server port
 EXPOSE 8761
