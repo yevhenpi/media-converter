@@ -4,11 +4,10 @@ LABEL authors="yevhenpi"
 FROM openjdk:21-jdk-slim
 
 # Set the working directory inside the container
-WORKDIR /api-gateway
+WORKDIR /auth-server
 
 # Copy the compiled JAR file into the container
-COPY target/*.jar api-gateway.jar
+COPY target/*.jar auth-server.jar
 
 
-
-CMD ["java", "-jar", "/api-gateway/api-gateway.jar"]
+CMD ["java", "-jar", "/auth-server/auth-server.jar"]
