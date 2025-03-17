@@ -39,9 +39,8 @@ file-manager/src/main/resources/application.yaml
 common/src/main/resources/application-common.yaml
 common/aws/src/main/resources/aws-properties.yaml
 common/config/src/main/resources/application-common.yaml
-common/security/src/main/resources/security-properties.yaml
 upload_dir
 download_dir
-.env
+secret.env
 auth-server/src/main/resources/keystore1.jks
 api-gateway/src/main/resources/keystore.jks
