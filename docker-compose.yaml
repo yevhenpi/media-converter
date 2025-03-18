@@ -57,6 +57,7 @@ services:
       timeout: 5s
       retries: 3
     profiles:
+      - dev
       - prod
 
 

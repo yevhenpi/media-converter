@@ -83,6 +83,11 @@
             <version>42.7.4</version>
         </dependency>
         <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>ua.pidopryhora.mediaconverter.common</groupId>
             <artifactId>jave2</artifactId>
             <version>${project.version}</version>

@@ -29,7 +29,7 @@ public class JobData {
     @Column(name = "ownerId", nullable = false)
     private Long ownerId;
 
-    @Column(name = "key")
+    @Column(name = "s3key")
     private String s3Key;
 
     @Column(name = "status", nullable = false)

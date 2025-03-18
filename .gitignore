@@ -43,4 +43,4 @@ upload_dir
 download_dir
 secret.env
 auth-server/src/main/resources/keystore1.jks
-api-gateway/src/main/resources/keystore.jks
+api-gateway/src/main/resources/keystore1.jks
