@@ -10,9 +10,12 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
+import software.amazon.awssdk.services.s3.presigner.S3Presigner;
+import software.amazon.awssdk.services.sqs.SqsClient;
 import ua.pidopryhora.mediaconverter.filemanager.entity.FileData;
 import ua.pidopryhora.mediaconverter.filemanager.entity.FileDataRepository;
 import ua.pidopryhora.mediaconverter.filemanager.service.EventProcessor;
+import ua.pidopryhora.mediaconverter.filemanager.service.s3.S3PresignedUrlService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +24,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
-
 class FileDataRepositoryTest {
 
     @Autowired
@@ -96,5 +98,7 @@ class FileDataRepositoryTest {
         public EventProcessor eventProcessor() {
             return Mockito.mock(EventProcessor.class);
         }
+
+
     }
 }
