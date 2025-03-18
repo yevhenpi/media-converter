@@ -18,8 +18,11 @@ public class AudioConversionRequestDTO extends RequestDTO {
     //TODO: Advanced validation would be great
 
 
-    @NotBlank(message = "File name is required",groups = BasicCheck.class)
-    private String fileName;
+    @Override
+    @NotBlank(message = "File name is required", groups = BasicCheck.class)
+    public String getFileName() {
+        return super.getFileName();
+    }
     @NotBlank(message = "Output format is required", groups = BasicCheck.class)
     @AudioFormatValidation(groups = BasicCheck.class)
     private String outputFormat;
@@ -31,8 +34,6 @@ public class AudioConversionRequestDTO extends RequestDTO {
     private String volume = null;
     private String quality = null;
 
-    private String role;
-    private long userId;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     public String getS3Key(){ return  userId+"/"+fileName;}

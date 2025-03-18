@@ -5,6 +5,8 @@ import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ContextConfiguration;
 
@@ -16,6 +18,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @DataJpaTest
 @ContextConfiguration(classes = TestApplication.class)
+@AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
 class JobDataRepositoryTest {
     private static final String JOB_ID = "jobId";
     private static final String FILE_NAME = "filename";

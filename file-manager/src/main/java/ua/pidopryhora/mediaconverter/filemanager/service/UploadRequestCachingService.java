@@ -18,7 +18,6 @@ public class UploadRequestCachingService extends RedisCachingService<UploadReque
         super(objectRedisTemplate);
     }
 
-
     public void cacheData(UploadRequestDTO requestDTO) {
         cacheData(requestDTO.getS3Key(), requestDTO, Duration.ofMinutes(TTL_DURATION));
     }

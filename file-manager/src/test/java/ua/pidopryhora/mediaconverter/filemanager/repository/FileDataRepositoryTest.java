@@ -1,15 +1,18 @@
-package ua.pidopryhora.mediaconverter.filemanager.entity;
+package ua.pidopryhora.mediaconverter.filemanager.repository;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-
+import org.mockito.Mockito;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
+import ua.pidopryhora.mediaconverter.filemanager.entity.FileData;
+import ua.pidopryhora.mediaconverter.filemanager.entity.FileDataRepository;
 import ua.pidopryhora.mediaconverter.filemanager.service.EventProcessor;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +20,8 @@ import java.util.List;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @DataJpaTest
+@AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
+
 class FileDataRepositoryTest {
 
     @Autowired
@@ -28,7 +33,7 @@ class FileDataRepositoryTest {
     }
 
     @Test
-    void itShouldFindByNameAndOwnerId() {
+    void shouldFindByNameAndOwnerId() {
         //given
         long testSize = 1000000L;
         FileData fileData = FileData.builder()
@@ -47,7 +52,7 @@ class FileDataRepositoryTest {
     }
 
     @Test
-    void itShouldFindFileNamesByOwnerId() {
+    void shouldFindFileNamesByOwnerId() {
         List<String> testNames = new ArrayList<>();
         String testName = "test.mp3";
         testNames.add(testName);
@@ -65,7 +70,7 @@ class FileDataRepositoryTest {
     }
 
     @Test
-    void itShouldExistsByNameAndOwnerId() {
+    void shouldExistsByNameAndOwnerId() {
         //given
         FileData fileData = FileData.builder()
                 .name("test.mp3")
@@ -84,12 +89,12 @@ class FileDataRepositoryTest {
     static class MocksConfig {
         @Bean
         public RabbitTemplate rabbitTemplate() {
-            return org.mockito.Mockito.mock(RabbitTemplate.class);
+            return Mockito.mock(RabbitTemplate.class);
         }
 
         @Bean
         public EventProcessor eventProcessor() {
-            return org.mockito.Mockito.mock(EventProcessor.class);
+            return Mockito.mock(EventProcessor.class);
         }
     }
 }

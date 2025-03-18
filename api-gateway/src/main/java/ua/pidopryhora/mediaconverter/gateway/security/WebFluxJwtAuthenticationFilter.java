@@ -1,5 +1,6 @@
 package ua.pidopryhora.mediaconverter.gateway.security;
 
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -25,7 +26,8 @@ public class WebFluxJwtAuthenticationFilter implements WebFilter {
     private final ExceptionHandler exceptionHandler;
 
     @Override
-    public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
+    @NonNull
+    public Mono<Void> filter(@NonNull ServerWebExchange exchange,@NonNull WebFilterChain chain) {
         String token = extractTokenFromRequest(exchange);
         if (token != null) {
             return Mono.just(token)

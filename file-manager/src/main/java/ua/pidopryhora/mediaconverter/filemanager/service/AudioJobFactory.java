@@ -8,7 +8,7 @@ import ua.pidopryhora.mediaconverter.filemanager.model.AudioConversionRequestDTO
 public class AudioJobFactory implements JobFactory<AudioConversionRequestDTO, AudioJobDTO> {
 
     public AudioJobDTO createJob(AudioConversionRequestDTO requestDTO, String jobId) {
-        AudioJobDTO.AudioJobDTOBuilder builder = AudioJobDTO.builder()
+        var builder = AudioJobDTO.builder()
                 .fileName(requestDTO.getFileName())
                 .outputFormat(requestDTO.getOutputFormat())
                 .codec(requestDTO.getCodec())

@@ -21,7 +21,7 @@ public class EventProcessor {
 
     public void processMessage(String messageBody) throws JsonProcessingException {
 
-        // Parse the SQS message body
+
         S3Event event = objectMapper.readValue(messageBody, S3Event.class);
 
         for (S3Event.S3Record record : event.getRecords()) {
