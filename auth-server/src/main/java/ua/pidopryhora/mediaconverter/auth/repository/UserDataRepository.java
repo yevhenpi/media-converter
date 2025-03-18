@@ -1,6 +1,7 @@
-package ua.pidopryhora.mediaconverter.auth.entity;
+package ua.pidopryhora.mediaconverter.auth.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import ua.pidopryhora.mediaconverter.auth.entity.UserData;
 
 import java.util.Optional;
 

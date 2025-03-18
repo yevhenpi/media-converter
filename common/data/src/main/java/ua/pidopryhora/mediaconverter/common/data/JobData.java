@@ -4,10 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
@@ -17,10 +14,11 @@ import java.time.LocalDateTime;
 @Builder
 @Table(name = "JobData")
 @Entity
+@Data
 @AllArgsConstructor
 public class JobData {
     @Id
-    @Column(name = "id", updatable = false, nullable = false)
+    @Column(name = "jobId", updatable = false, nullable = false)
     private String jobId;
 
     @Column(name = "name", nullable = false)
@@ -29,7 +27,7 @@ public class JobData {
     @Column(name = "ownerId", nullable = false)
     private Long ownerId;
 
-    @Column(name = "s3key")
+    @Column(name = "s3Key")
     private String s3Key;
 
     @Column(name = "status", nullable = false)

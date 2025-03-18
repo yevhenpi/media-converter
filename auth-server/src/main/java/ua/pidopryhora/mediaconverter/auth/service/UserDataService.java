@@ -4,7 +4,7 @@ package ua.pidopryhora.mediaconverter.auth.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ua.pidopryhora.mediaconverter.auth.entity.UserDataRepository;
+import ua.pidopryhora.mediaconverter.auth.repository.UserDataRepository;
 import ua.pidopryhora.mediaconverter.auth.entity.UserData;
 
 import java.util.Optional;
