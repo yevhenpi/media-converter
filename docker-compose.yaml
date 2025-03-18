@@ -67,7 +67,7 @@ services:
       dockerfile: Dockerfile
     container_name: api_gateway
     ports:
-      - "8080:8080"
+      - "8443:8443"
     env_file:
       - secret.env
     environment:
@@ -75,6 +75,31 @@ services:
       SPRING_REDIS_HOST: redis
       SPRING_REDIS_PORT: 6379
       EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://eureka-server:8761/eureka/
+
+    networks:
+      - backend_network
+    depends_on:
+      eureka-server:
+        condition: service_healthy
+    profiles:
+      - prod
+
+
+  auth-server:
+    build:
+      context: ./auth-server
+      dockerfile: Dockerfile
+    container_name: auth_server
+    ports:
+      - "8095:8095"
+    env_file:
+      - secret.env
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres_db:5432/postgres
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
 
     networks:
       - backend_network

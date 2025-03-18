@@ -23,6 +23,7 @@ public class InfoController {
     @GetMapping("/files")
     public ResponseEntity<?> getFile(@RequestHeader("UserRole") String role,
                                      @RequestHeader("UserId") String userId){
+        log.debug("GET FILES request for user{}",userId);
 
         return ResponseEntity.ok(fileDataService.getUserFiles(Long.valueOf(userId)));
     }

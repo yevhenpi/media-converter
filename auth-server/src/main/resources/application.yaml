@@ -5,11 +5,27 @@ server:
 
 
 
+
 spring:
   config:
     import:
-     - "classpath:/application-common.yaml"
-     - "classpath:/security-properties.yaml"
+#     - "classpath:/application-common.yaml"
+#    - "classpath:/security-properties.yaml"
+  redis:
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/postgres
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
 
 
 

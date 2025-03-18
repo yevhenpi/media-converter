@@ -42,5 +42,4 @@ common/config/src/main/resources/application-common.yaml
 upload_dir
 download_dir
 secret.env
-auth-server/src/main/resources/keystore1.jks
-api-gateway/src/main/resources/keystore1.jks
+

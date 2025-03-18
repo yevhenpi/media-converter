@@ -6,7 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
-
+//TODO: Eureka url is not overridden by docker compose when imported as config.
+// It works only when eureka config written down in main application.yaml
 
 @SpringBootApplication
 @ComponentScan(basePackages = {
