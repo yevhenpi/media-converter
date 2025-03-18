@@ -69,7 +69,7 @@ services:
     ports:
       - "8443:8443"
     env_file:
-      - secret.env
+      - security.env
     environment:
       SPRING_PROFILES_ACTIVE: docker
       SPRING_REDIS_HOST: redis
@@ -93,20 +93,45 @@ services:
     ports:
       - "8095:8095"
     env_file:
-      - secret.env
+      - security.env
     environment:
       SPRING_PROFILES_ACTIVE: docker
       SPRING_REDIS_HOST: redis
       SPRING_REDIS_PORT: 6379
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres_db:5432/postgres
       DB_USER: postgres
-
-
     networks:
       - backend_network
     depends_on:
       - db
       - redis
+
+    profiles:
+      - prod
+
+  request-manager:
+    build:
+      context: ./file-manager
+      dockerfile: Dockerfile
+    container_name: request_manager
+    ports:
+      - "8081:8081"
+    env_file:
+      - aws.env
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres_db:5432/postgres
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+    networks:
+      - backend_network
+    depends_on:
+      - db
+      - redis
+      - api-gateway
 
     profiles:
       - prod

@@ -41,5 +41,5 @@ common/aws/src/main/resources/aws-properties.yaml
 common/config/src/main/resources/application-common.yaml
 upload_dir
 download_dir
-secret.env
-
+security.env
+aws.env
