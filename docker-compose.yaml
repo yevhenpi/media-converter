@@ -99,13 +99,15 @@ services:
       SPRING_REDIS_HOST: redis
       SPRING_REDIS_PORT: 6379
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres_db:5432/postgres
-      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
+      DB_USER: postgres
+
 
     networks:
       - backend_network
     depends_on:
-      eureka-server:
-        condition: service_healthy
+      - db
+      - redis
+
     profiles:
       - prod
 

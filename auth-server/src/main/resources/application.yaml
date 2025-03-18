@@ -1,16 +1,8 @@
 
-
 server:
   port: 8095
 
-
-
-
 spring:
-  config:
-    import:
-#     - "classpath:/application-common.yaml"
-#    - "classpath:/security-properties.yaml"
   redis:
     host: ${REDIS_HOST:localhost}
     port: ${REDIS_PORT:6379}
@@ -26,6 +18,5 @@ spring:
     properties:
       hibernate:
         format_sql: true
-
 
 
