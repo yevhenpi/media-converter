@@ -19,13 +19,19 @@ This application provides a REST API for file conversion, allowing transformatio
     mvn -v
    ...
 
-    sudo apt update
+    sudo apt update 
+
+...
+
     sudo apt install maven
 
  4. Install docker or make sure its installed:
 
 
-    sudo apt update
+
+    sudo apt update 
+...
+
     sudo apt install docker.io
 
 ...
