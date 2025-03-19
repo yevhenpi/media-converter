@@ -1,10 +1,10 @@
-# Media Converter 1.0.0
+# Media Converter 
 
 This application provides a REST API for file conversion, allowing transformation of audio and video files between various formats using a JAVE2-based service.
 
 ## About
 
-Current version supports audio files conversion and transformation. Video file support is planned for version 2.0.0.
+
 
 ## Installation
 
@@ -13,12 +13,43 @@ Current version supports audio files conversion and transformation. Video file s
 
     git clone git@github.com:yevhenpi/media-converter.git
 
-  2. Configure .env.example file and rename it to .env
+  2. Configure .env.example files and rename it to .env
+  3. Install maven or check if it is already installed:
+
+    mvn -v
+   ...
+
+    sudo apt update
+    sudo apt install maven
+
+ 4. Install docker or make sure its installed:
+
+
+    sudo apt update
+    sudo apt install docker.io
+
+...
+
+
+
+    docker compose version
+
+
 
 ## Usage
 
- Explain how to run and use your project. Provide code examples or screenshots if needed.
- Running the Application
+   You can run application with
+
+    docker compose --profile prod up
+
+Workflow looks like this: 
+1. Send POST request with file metadata to /upload endpoint and receive presigned URL.
+2. Upload actual file with PUT request using acquired URL. 
+3. Send POST request with conversion metadata to /jobs/convert endpoint and receive JobID.
+4. If job status on /jobs/status endpoint is DONE, get download URL from /jobs/download endpoint.
+
+More detailed endpoint documentation is down below.
+
 
 
 
