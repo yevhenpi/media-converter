@@ -19,9 +19,7 @@ This application provides a REST API for file conversion, allowing transformatio
     mvn -v
    ...
 
-    sudo apt update 
-
-...
+    sudo apt update
 
     sudo apt install maven
 
@@ -29,9 +27,7 @@ This application provides a REST API for file conversion, allowing transformatio
 
 
 
-    sudo apt update 
-...
-
+    sudo apt update
     sudo apt install docker.io
 
 ...
