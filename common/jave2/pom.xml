@@ -21,12 +21,7 @@
     <dependencies>
         <dependency>
             <groupId>ws.schild</groupId>
-            <artifactId>jave-core</artifactId>
-            <version>3.5.0</version>
-        </dependency>
-        <dependency>
-            <groupId>ws.schild</groupId>
-            <artifactId>jave-nativebin-linux64</artifactId>
+            <artifactId>jave-all-deps</artifactId>
             <version>3.5.0</version>
         </dependency>
     </dependencies>
