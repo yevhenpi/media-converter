@@ -50,14 +50,14 @@
 
         <dependency>
             <groupId>ws.schild</groupId>
-            <artifactId>jave-core</artifactId>
+            <artifactId>jave-all-deps</artifactId>
             <version>3.5.0</version>
         </dependency>
-        <dependency>
-            <groupId>ws.schild</groupId>
-            <artifactId>jave-nativebin-linux64</artifactId>
-            <version>3.5.0</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>ws.schild</groupId>-->
+<!--            <artifactId>jave-nativebin-linux64</artifactId>-->
+<!--            <version>3.5.0</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>ua.pidopryhora.mediaconverter.common</groupId>
             <artifactId>jave2</artifactId>
