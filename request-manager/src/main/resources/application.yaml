@@ -1,6 +1,6 @@
 spring:
   application:
-    name: file-manager
+    name: request-manager
   config:
     import:
 #      - "classpath:/application-common.yaml"

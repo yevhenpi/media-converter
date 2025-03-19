@@ -111,7 +111,7 @@ services:
 
   request-manager:
     build:
-      context: ./file-manager
+      context: ./request-manager
       dockerfile: Dockerfile
     container_name: request_manager
     ports:
