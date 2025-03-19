@@ -3,9 +3,36 @@ server:
 
 spring:
   application:
-    name: converter
+    name: core
   config:
     import:
-       - "classpath:/application-common.yaml"
-       - "classpath:/rabbitmq-config.yaml"
-       - "classpath:/aws-properties.yaml"
+#       - "classpath:/application-common.yaml"
+#      - "classpath:/rabbitmq-config.yaml"
+#       - "classpath:/aws-properties.yaml"
+  redis:
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/postgres
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USER:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+
+aws:
+  access-key: ${AWS_ACCESS_KEY}
+  secret-key: ${AWS_SECRET_KEY}
+  upload-bucket-name: ${AWS_UPLOAD_BUCKET_NAME}
+  core-bucket-name: ${AWS_CORE_BUCKET_NAME}
+  region: ${AWS_REGION:eu-north-1}

@@ -73,9 +73,9 @@ public class AudioJobFactoryTest {
         assertThat(job.getUserId()).isEqualTo(DEFAULT_USER_ID);
         assertThat(job.getS3Key()).isEqualTo(EXPECTED_S3_KEY);
         assertThat(job.getJobId()).isEqualTo(DEFAULT_JOB_ID);
-        assertThat(job.getBitRate()).isNull();
-        assertThat(job.getChannels()).isNull();
-        assertThat(job.getSamplingRate()).isNull();
-        assertThat(job.getVolume()).isNull();
+        assertThat(job.getBitRate()).isEqualTo(0);
+        assertThat(job.getChannels()).isEqualTo(0);
+        assertThat(job.getSamplingRate()).isEqualTo(0);
+        assertThat(job.getVolume()).isEqualTo(0);
     }
 }

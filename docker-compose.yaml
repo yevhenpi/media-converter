@@ -124,6 +124,7 @@ services:
       SPRING_REDIS_PORT: 6379
       EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://eureka-server:8761/eureka/
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres_db:5432/postgres
+      RABBITMQ_HOST: rabbitmq
       DB_USER: postgres
       DB_PASSWORD: postgres
     networks:
@@ -131,6 +132,36 @@ services:
     depends_on:
       - db
       - redis
+      - api-gateway
+
+    profiles:
+      - prod
+
+
+  core:
+    build:
+      context: ./core
+      dockerfile: Dockerfile
+    container_name: core
+    ports:
+      - "8085:8085"
+    env_file:
+      - aws.env
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres_db:5432/postgres
+      RABBITMQ_HOST: rabbitmq
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+    networks:
+      - backend_network
+    depends_on:
+      - db
+      - redis
+      - rabbitmq
       - api-gateway
 
     profiles:

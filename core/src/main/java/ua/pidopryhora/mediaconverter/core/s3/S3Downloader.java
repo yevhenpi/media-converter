@@ -31,6 +31,7 @@ public class S3Downloader {
         createDir(filePath);
         try {
             String bucketName = awsProperties.getUploadBucketName();
+            log.debug("Bucket name {}", bucketName);
 
             GetObjectRequest getObjectRequest = GetObjectRequest.builder()
                     .bucket(bucketName)
