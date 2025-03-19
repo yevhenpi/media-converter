@@ -24,7 +24,7 @@
 	<modules>
 		<module>core</module>
 		<module>api-gateway</module>
-		<module>file-manager</module>
+		<module>request-manager</module>
 		<module>eureka-server</module>
 		<module>auth-server</module>
 		<module>common</module>

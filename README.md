@@ -9,15 +9,15 @@ This application provides a REST API for file conversion, allowing transformatio
 ## Installation
 
 
-1. Clone the repository: 
+1.Clone the repository: 
 
 
-     git clone git@github.com:yevhenpi/media-converter.git  
+    git clone git@github.com:yevhenpi/media-converter.git  
 
 
-2. Configure .env.example files and rename it to .env 
+2.Configure .env.example files and rename it to .env 
  
-3. Install maven or check if it is already installed:
+3.Install maven or check if it is already installed:
 
 
     mvn -v
@@ -27,7 +27,7 @@ This application provides a REST API for file conversion, allowing transformatio
 
     sudo apt install maven
 
-4. Install docker or make sure its installed:
+4.Install docker or make sure its installed:
 
 
 
