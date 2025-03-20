@@ -29,36 +29,24 @@ public class InfoController {
         return ResponseEntity.ok(fileDataService.getUserFiles(Long.valueOf(userId)));
     }
 
-    @GetMapping("/audio/formats")
+    @GetMapping("/formats/audio")
     public ResponseEntity<?> getFormats(){
 
         return ResponseEntity.ok(javeDataSupplier.getAudioFormats());
     }
 
-    @GetMapping("/encoders")
-    public ResponseEntity<?> getEncoders(@RequestParam String type){
+    @GetMapping("/encoders/audio")
+    public ResponseEntity<?> getEncoders(){
 
-        if(type.equals("audio")) {
-            return ResponseEntity.ok(javeDataSupplier.getAudioEncoders());
-        } else if (type.equals("video")) {
-            return ResponseEntity.ok(javeDataSupplier.getVideoEncoders());
-        }
+        return ResponseEntity.ok(javeDataSupplier.getAudioEncoders());
 
-
-        return ResponseEntity.badRequest().body(Map.of("message", "wrong type"));
     }
 
-    @GetMapping("/decoders")
-    public ResponseEntity<?> getDecoders(@RequestParam String type){
+    @GetMapping("/decoders/audio")
+    public ResponseEntity<?> getDecoders(){
 
-        if(type.equals("audio")) {
-            return ResponseEntity.ok(javeDataSupplier.getAudioDecoders());
-        } else if (type.equals("video")) {
-            return ResponseEntity.ok(javeDataSupplier.getVideoDecoders());
-        }
+        return ResponseEntity.ok(javeDataSupplier.getAudioDecoders());
 
-
-        return ResponseEntity.badRequest().body(Map.of("message", "wrong type"));
     }
 
 }

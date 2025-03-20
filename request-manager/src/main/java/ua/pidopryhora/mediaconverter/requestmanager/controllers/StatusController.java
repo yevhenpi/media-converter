@@ -17,11 +17,11 @@ public class StatusController {
         this.jobDataService = jobDataService;
     }
 
-    @GetMapping("/status")
+    @PostMapping("/status")
     public ResponseEntity<?> getStatus(@RequestHeader("UserId") String userId,
                                        @RequestBody List<String> jobIdList){
 
-        if(jobIdList.isEmpty()) return ResponseEntity.ok(jobDataService.getUserJobs(Long.valueOf(userId)));
+        if(jobIdList.isEmpty()) return ResponseEntity.ok(jobDataService.getStatuses(Long.valueOf(userId)));
 
         return ResponseEntity.ok(jobDataService.getJobs(jobIdList));
     }

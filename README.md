@@ -98,20 +98,9 @@ More detailed endpoint documentation is down below.
 
 ## API Endpoints
 
-Below is a list of the main API endpoints. For each endpoint, provide a brief description, the HTTP method, required headers, parameters, and example request/response.
+Using --insecure flag because working with self-signed ssl certificate in dev environment.
 
 ### Upload endpoint
-
-    URL: /api/v1/upload/audio
-    Method: POST
-    Headers:
-        Content-Type: application/json
-        Authorization: Bearer YOUR_TOKEN
-    Request Body:
-    {
-     "fileName": "sample.mp3",
-     "fileSize": "1829938"
-    }
 
 Example Request:
 
@@ -123,25 +112,125 @@ Example Request:
 Example Response:
 
     {
-      "url": PRESIGNED_URL
+      "url": "PRESIGNED_URL"
     }
 
-...
+### Files endpoint
+
+Example Request:
 
     curl --insecure -X GET "https://localhost:8443/api/v1/files" \
-      -H "Content-Type: application/json" \
       -H "Authorization: Bearer YOUR_TOKEN" 
 
+Example Response:
+
+    {
+      sample.mp3,
+      sample2.wav
+    }
+
+### Conversion endpoint
+
+This endpoint includes both required fields and optional fields.
+For a better understanding of the value requirements for the optional fields,
+please refer to the official JAVE documentation:
+https://www.sauronsoftware.it/projects/jave/manual.php"
+
+Example request with required fields only:
+
+    curl --insecure -X POST "https://localhost:8443/api/v1/jobs/convert/audio" \
+      -H "Content-Type: application/json" \
+      -H "Authorization: Bearer YOUR_TOKEN" 
+      -d '{"fileName": "sample.mp3", "outputFormat": "wav"}'
+
+Example request with required fields and ALL optional fields:
+
+    curl --insecure -X POST "https://localhost:8443/api/v1/jobs/convert/audio" \
+      -H "Content-Type: application/json" \
+      -H "Authorization: Bearer YOUR_TOKEN" 
+      -d '{
+           "fileName": "sample.mp3", 
+           "outputFormat": "wav",
+           "codec": "libmp3lame", 
+           "samplingRate": "44100",
+           "bitRate": "128000", 
+           "channels": "2",
+           "volume": "256"
+          }'
+
+Example Response:
+
+    {
+      "message":"file is being processed",
+      "jobId": "11uh3u-kdkdjd-ifosi1"
+    }
+### Status endpoint 
+This endpoint (/api/v1/jobs/status) accepts a JSON array in the request body containing job IDs. 
+The behavior varies based on the contents of the array:
+
+Single Job ID:
+
+If the array contains one job ID (e.g., ["job1"]), the response will include the status for that specific job.
+
+Multiple Job IDs:
+
+If the array contains two or more job IDs (e.g., ["job1", "job2"]), the response will include the statuses for all the provided jobs.
+
+Empty Array:
+
+If the array is empty (e.g., []), the response will return a list of all jobs for this specific user.
+
+Example requets:
+
+    curl -X POST "https://api.example.com/api/v1/jobs/status" \
+     -H "Content-Type: application/json" \
+     -H "Authorization: Bearer YOUR_TOKEN" \
+     -d '["JOB_ID_1","JOB_ID_2","JOB_ID_3]'
+Example response:
+
+    [
+    {
+        "jobId": "JOB_ID_1",
+        "jobStatus": "DONE"
+    },
+    {
+        "jobId": "JOB_ID_2",
+        "jobStatus": "PROCESSING"
+    }
+    {
+        "jobId": "JOB_ID_3",
+        "jobStatus": "FAILED"
+    }
+    ]
 
 
 
-Features
+### Download endpoint
 
-List the main features or functionalities of your project:
+Example request:
 
-    Feature 1: Description.
-    Feature 2: Description.
-    Feature 3: Description.
+     curl --insecure -X GET "https://localhost:8443/api/v1/download?jobId=JOB_ID_1" \
+      -H "Authorization: Bearer YOUR_TOKEN" 
+
+Example response:
+
+    {
+        "url": "URL",
+        "jobId": "JOB_ID_1"
+    }
+
+### Info endpoints
+
+Get list of codecs:
+
+    /api/v1/encoders/audio
+  
+Get list of supported audio format extensions:
+     
+    /api/v1/formats/audio
+
+
+
 
 ## Contributing
 

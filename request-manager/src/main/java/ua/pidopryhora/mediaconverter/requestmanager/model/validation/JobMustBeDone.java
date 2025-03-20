@@ -8,11 +8,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Constraint(validatedBy = JobMustExistValidator.class)
+@Constraint(validatedBy = JobMustBeDoneValidator.class)
 @Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface JobMustExist {
-    String message() default "Job is not found";
+public @interface JobMustBeDone {
+    String message() default "Job is not done yet";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

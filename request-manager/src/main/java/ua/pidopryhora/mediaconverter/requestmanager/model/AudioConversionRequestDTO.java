@@ -18,11 +18,8 @@ public class AudioConversionRequestDTO extends RequestDTO {
     //TODO: Advanced validation would be great
 
 
-    @Override
-    @NotBlank(message = "File name is required", groups = BasicCheck.class)
-    public String getFileName() {
-        return super.getFileName();
-    }
+    @NotBlank(message = "File name is required",groups = BasicCheck.class)
+    private String fileName;
     @NotBlank(message = "Output format is required", groups = BasicCheck.class)
     @AudioFormatValidation(groups = BasicCheck.class)
     private String outputFormat;
@@ -32,7 +29,7 @@ public class AudioConversionRequestDTO extends RequestDTO {
     private String bitRate = null;
     private String channels = null;
     private String volume = null;
-    private String quality = null;
+
 
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)

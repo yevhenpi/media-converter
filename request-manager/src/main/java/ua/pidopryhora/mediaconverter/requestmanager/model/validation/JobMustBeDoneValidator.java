@@ -4,17 +4,18 @@ import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import ua.pidopryhora.mediaconverter.common.data.JobDataService;
 
-public class JobMustExistValidator implements ConstraintValidator<JobMustExist, String> {
-    //TODO: Should return 404 if job not exists
+import static ua.pidopryhora.mediaconverter.common.model.JobStatus.DONE;
+
+public class JobMustBeDoneValidator implements ConstraintValidator<JobMustBeDone, String> {
 
     private final JobDataService jobDataService;
 
-    public JobMustExistValidator(JobDataService jobDataService) {
+    public JobMustBeDoneValidator(JobDataService jobDataService) {
         this.jobDataService = jobDataService;
     }
 
     @Override
     public boolean isValid(String jobId, ConstraintValidatorContext constraintValidatorContext) {
-        return jobDataService.isPresent(jobId);
+        return jobDataService.getJob(jobId).getJobStatus().equals(String.valueOf(DONE));
     }
 }
