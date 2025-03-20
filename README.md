@@ -86,10 +86,11 @@ Ensure that all these AWS configurations are correctly set up to allow the appli
 
  
 Workflow looks like this: 
-1. Send POST request with file metadata to /upload endpoint and receive presigned URL.
-2. Upload actual file with PUT request using acquired URL. 
-3. Send POST request with conversion metadata to /jobs/convert endpoint and receive JobID.
-4. If job status on /jobs/status endpoint is DONE, get download URL from /jobs/download endpoint.
+1. Get JWT token from /auth/login endpoint.
+2. Send POST request with file metadata to /upload endpoint and receive presigned URL.
+3. Upload actual file with PUT request using acquired URL. 
+4. Send POST request with conversion metadata to /jobs/convert endpoint and receive JobID.
+5. If job status on /jobs/status endpoint is DONE, get download URL from /jobs/download endpoint.
 
 More detailed endpoint documentation is down below.
 
@@ -134,7 +135,8 @@ Example Response:
 This endpoint includes both required fields and optional fields.
 For a better understanding of the value requirements for the optional fields,
 please refer to the official JAVE documentation:
-https://www.sauronsoftware.it/projects/jave/manual.php"
+
+https://www.sauronsoftware.it/projects/jave/manual.php
 
 Example request with required fields only:
 
@@ -219,6 +221,15 @@ Example response:
         "jobId": "JOB_ID_1"
     }
 
+### Authentication endpoint
+
+For now this endpoint is underdeveloped so no registration available, only test accounts.
+Test credentials are provided in example below. 
+
+    curl --insecure -X POST "https://localhost:8443/auth/login" \
+         -H "Content-Type: application/json" \
+         -d '{"login": "admin@gmail.com", "password": "test"}'
+
 ### Info endpoints
 
 Get list of codecs:
@@ -255,6 +266,9 @@ and I look forward to sharing future updates as the project matures.
  Conversion service is based on JAVE2 library by a-schild.
 
  https://github.com/a-schild/jave2
+
+## License
+This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
 
 
 
