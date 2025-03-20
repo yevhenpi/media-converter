@@ -106,9 +106,9 @@ Using --insecure flag because working with self-signed ssl certificate in dev en
 Example Request:
 
     curl --insecure -X POST "https://localhost:8443/api/v1/upload/audio" \
-         -H "Content-Type: application/json" \
-         -H "Authorization: Bearer YOUR_TOKEN" \
-         -d '{"fileName": "sample.mp3", "fileSize": "1829938"}'
+          -H "Content-Type: application/json" \
+          -H "Authorization: Bearer YOUR_TOKEN" \
+          -d '{"fileName": "sample.mp3", "fileSize": "1829938"}'
 
 Example Response:
 
@@ -121,7 +121,7 @@ Example Response:
 Example Request:
 
     curl --insecure -X GET "https://localhost:8443/api/v1/files" \
-      -H "Authorization: Bearer YOUR_TOKEN" 
+          -H "Authorization: Bearer YOUR_TOKEN" 
 
 Example Response:
 
@@ -141,24 +141,24 @@ https://www.sauronsoftware.it/projects/jave/manual.php
 Example request with required fields only:
 
     curl --insecure -X POST "https://localhost:8443/api/v1/jobs/convert/audio" \
-      -H "Content-Type: application/json" \
-      -H "Authorization: Bearer YOUR_TOKEN" 
-      -d '{"fileName": "sample.mp3", "outputFormat": "wav"}'
+          -H "Content-Type: application/json" \
+          -H "Authorization: Bearer YOUR_TOKEN" 
+          -d '{"fileName": "sample.mp3", "outputFormat": "wav"}'
 
 Example request with required fields and ALL optional fields:
 
     curl --insecure -X POST "https://localhost:8443/api/v1/jobs/convert/audio" \
-      -H "Content-Type: application/json" \
-      -H "Authorization: Bearer YOUR_TOKEN" 
-      -d '{
-           "fileName": "sample.mp3", 
-           "outputFormat": "wav",
-           "codec": "libmp3lame", 
-           "samplingRate": "44100",
-           "bitRate": "128000", 
-           "channels": "2",
-           "volume": "256"
-          }'
+          -H "Content-Type: application/json" \
+          -H "Authorization: Bearer YOUR_TOKEN" 
+          -d '{
+               "fileName": "sample.mp3", 
+               "outputFormat": "wav",
+               "codec": "libmp3lame", 
+               "samplingRate": "44100",
+               "bitRate": "128000", 
+               "channels": "2",
+               "volume": "256"
+              }'
 
 Example Response:
 
@@ -184,10 +184,10 @@ If the array is empty (e.g., []), the response will return a list of all jobs fo
 
 Example requets:
 
-    curl -X POST "https://api.example.com/api/v1/jobs/status" \
-     -H "Content-Type: application/json" \
-     -H "Authorization: Bearer YOUR_TOKEN" \
-     -d '["JOB_ID_1","JOB_ID_2","JOB_ID_3]'
+    curl --insecure -X POST "https://api.example.com/api/v1/jobs/status" \
+          -H "Content-Type: application/json" \
+          -H "Authorization: Bearer YOUR_TOKEN" \
+          -d '["JOB_ID_1","JOB_ID_2","JOB_ID_3]'
 Example response:
 
     [
@@ -212,7 +212,7 @@ Example response:
 Example request:
 
      curl --insecure -X GET "https://localhost:8443/api/v1/download?jobId=JOB_ID_1" \
-      -H "Authorization: Bearer YOUR_TOKEN" 
+           -H "Authorization: Bearer YOUR_TOKEN" 
 
 Example response:
 
@@ -227,8 +227,8 @@ For now this endpoint is underdeveloped so no registration available, only test 
 Test credentials are provided in example below. 
 
     curl --insecure -X POST "https://localhost:8443/auth/login" \
-         -H "Content-Type: application/json" \
-         -d '{"login": "admin@gmail.com", "password": "test"}'
+          -H "Content-Type: application/json" \
+          -d '{"login": "admin@gmail.com", "password": "test"}'
 
 ### Info endpoints
 
@@ -251,8 +251,7 @@ While you are welcome to fork the repository and build upon it,
 please note that I will not be accepting pull requests to the main branch at this time.
 
 Feel free to experiment and use the project as a starting point for your own ideas.
-I appreciate your understanding and support,
-and I look forward to sharing future updates as the project matures.
+
 
 
 ## Contact

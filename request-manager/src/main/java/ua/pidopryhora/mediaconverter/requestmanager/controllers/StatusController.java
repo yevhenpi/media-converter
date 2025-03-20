@@ -23,6 +23,6 @@ public class StatusController {
 
         if(jobIdList.isEmpty()) return ResponseEntity.ok(jobDataService.getStatuses(Long.valueOf(userId)));
 
-        return ResponseEntity.ok(jobDataService.getJobs(jobIdList));
+        return ResponseEntity.ok(jobDataService.getStatuses(jobIdList));
     }
 }

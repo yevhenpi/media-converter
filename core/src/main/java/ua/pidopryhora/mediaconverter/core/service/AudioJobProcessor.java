@@ -32,27 +32,25 @@ public class AudioJobProcessor implements JobProcessor<AudioJobDTO> {
     @Async
     public void processJob(AudioJobDTO jobDTO) {
 
-        String filePath = fileManager.downloadFile(jobDTO.getS3Key());
+        Path filePath = fileManager.downloadFile(jobDTO.getS3Key());
 
         EncodingAttributes attributes = attributesBuilder.buildEncodingAttributes(jobDTO);
 
-        String targetPath = fileManager.getTargetPath(jobDTO.getJobId(), jobDTO.getOutputFormat());
+        Path targetPath = fileManager.getTargetPath(jobDTO.getJobId(), jobDTO.getOutputFormat());
 
         if(converter.convert(attributes, filePath, targetPath)){
-            fileManager.uploadFile(Path.of(targetPath));
+            fileManager.uploadFile(targetPath);
             jobDataService.updateJobStatus(jobDTO.getJobId(), String.valueOf(DONE));
             jobDataService.updateS3Key(jobDTO.getJobId(), getKeyFromTarget(targetPath));
         } else {
             jobDataService.updateJobStatus(jobDTO.getJobId(), String.valueOf(FAILED));
         }
 
-
-
     }
 
-    private String getKeyFromTarget(String target){
-        Path filePath = Path.of(target);
-        return filePath.getFileName().toString();
+    private String getKeyFromTarget(Path target){
+
+        return target.getFileName().toString();
     }
 
 

@@ -8,6 +8,7 @@ import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.services.s3.model.GetObjectResponse;
 import ua.pidopryhora.mediaconverter.common.aws.AwsProperties;
+import ua.pidopryhora.mediaconverter.core.service.DirectoryManager;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -20,15 +21,18 @@ public class S3Downloader {
 
     private final S3Client s3Client;
     private final AwsProperties awsProperties;
+    private final DirectoryManager directoryManager;
 
-    public S3Downloader(S3Client s3Client, AwsProperties awsProperties) {
+    public S3Downloader(S3Client s3Client, AwsProperties awsProperties, DirectoryManager directoryManager) {
         this.s3Client = s3Client;
         this.awsProperties = awsProperties;
+        this.directoryManager = directoryManager;
     }
+    //TODO: Needs investigation why two parameters needed in this method input. Looks unnecessary.
 
-    public String download(String key, Path filePath) {
+    public Path download(String key, Path filePath) {
         log.debug("Downloading file with key {} from S3 to {}", key, filePath);
-        createDir(filePath);
+        directoryManager.createDirectory(filePath.getParent());
         try {
             String bucketName = awsProperties.getUploadBucketName();
             log.debug("Bucket name {}", bucketName);
@@ -46,17 +50,7 @@ public class S3Downloader {
             log.error("ERROR DOWNLOADING FILE FROM S3", e);
 
         }
-        return filePath.toString();
+        return filePath;
     }
 
-    public void createDir(Path path){
-        Path parent = path.getParent();
-        if(!Files.exists(parent)){
-            try {
-                Files.createDirectories(parent);
-            } catch (IOException e) {
-                log.error("CANT CREATE DIR");
-            }
-        }
-    }
 }

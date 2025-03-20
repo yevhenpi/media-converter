@@ -12,13 +12,13 @@ import java.util.stream.Stream;
 @Component
 public class DirectoryCleaner {
 
-    public  void cleanDirectory(String directory) {
+    public  void cleanDirectory(Path directory) {
 
         try {
-            try (Stream<Path> paths = Files.walk(Path.of(directory))) {
+            try (Stream<Path> paths = Files.walk(directory)) {
                 paths
                         .sorted(Comparator.reverseOrder())
-                        .filter(path -> !path.equals(Path.of(directory)))
+                        .filter(path -> !path.equals(directory))
                         .forEach(path -> {
                             try {
                                 Files.delete(path);

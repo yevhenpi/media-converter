@@ -3,85 +3,40 @@ package ua.pidopryhora.mediaconverter.core.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ua.pidopryhora.mediaconverter.core.s3.S3Downloader;
-import ua.pidopryhora.mediaconverter.core.s3.S3Uploader;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
+
+
 @Slf4j
 @Service
+public class FileManager implements IFileManager {
 
-public class FileManager implements IFileManager{
+    private final IStorageService storageService;
+    private final LocalFileService localFileService;
 
-
-    private final String INPUT_DIRECTORY = "download_dir";
-    private final String OUTPUT_DIRECTORY = "upload_dir";
-
-    private final S3Uploader s3Uploader;
-    private final S3Downloader s3Downloader;
-
-    public FileManager(S3Uploader s3Uploader, S3Downloader s3Downloader) {
-        this.s3Uploader = s3Uploader;
-        this.s3Downloader = s3Downloader;
-        createDirectory();
+    public FileManager(IStorageService storageService, LocalFileService localFileService) {
+        this.storageService = storageService;
+        this.localFileService = localFileService;
     }
 
     @Override
-    public String downloadFile(String key) {
-
-        if(isFileStoredLocally(key)) return getInputFilePath(key);
-
-        return s3Downloader.download(key, Paths.get(getInputFilePath(key)));
+    public Path downloadFile(String key) {
+        Path localPath = localFileService.getInputFilePath(key);
+        if (localFileService.isFileStoredLocally(localPath)) {
+            return localPath;
+        }
+        return storageService.downloadFile(key);
     }
 
     @Override
     public boolean uploadFile(Path path) {
-        s3Uploader.upload(path);
-        return deleteLocalFile(path);
+        storageService.uploadFile(path);
+        return localFileService.deleteFile(path);
     }
 
-    private void createDirectory(){
-        Path inputDirectory = Paths.get(INPUT_DIRECTORY);
-        Path outputDirectory = Paths.get(OUTPUT_DIRECTORY);
-        try {
-            if (!Files.exists(inputDirectory)) {
-                Files.createDirectories(inputDirectory);
-            }
-            if(!Files.exists(outputDirectory)){
-                Files.createDirectories(outputDirectory);
-            }
-        } catch (IOException e) {
-            log.error("CAN NOT CREATE DIRECTORIES", e);
-        }
-    }
-
-    public String getTargetPath(String jobId, String targetFormat){
-        //int dotIndex = jobId.lastIndexOf('.');
-
-        return OUTPUT_DIRECTORY + "/"+ jobId +"."+ targetFormat;
-
-    }
-
-    public boolean deleteLocalFile(Path path){
-        File file = new File(String.valueOf(path));
-        return file.delete();
-
-    }
-
-    public boolean isFileStoredLocally(String s3Key) {
-        return Files.exists(Paths.get(INPUT_DIRECTORY, s3Key));
-    }
-
-
-    public String getInputFilePath(String s3Key) {
-        return Paths.get(INPUT_DIRECTORY, s3Key).toString();
-    }
-
-    public String getOutputFilePath(String s3Key) {
-        return Paths.get(OUTPUT_DIRECTORY, s3Key).toString();
+    public Path getTargetPath(String jobId, String targetFormat) {
+        return localFileService.getTargetPath(jobId, targetFormat);
     }
 }
+
 

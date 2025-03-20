@@ -7,6 +7,7 @@ import ws.schild.jave.MultimediaObject;
 import ws.schild.jave.encode.EncodingAttributes;
 
 import java.io.File;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -14,22 +15,38 @@ import java.nio.file.Paths;
 @Component
 public class AudioConverter {
 
-    public boolean convert(EncodingAttributes attributes, String inputPath, String outputPath) {
-        boolean succeeded = true;
+    private final Encoder encoder;
 
-        try {
-            File source = new File(inputPath);
-            File target = new File(outputPath);
+    public AudioConverter() {
+        this.encoder = new Encoder();
+    }
 
-            Encoder encoder = new Encoder();
-            encoder.encode(new MultimediaObject(source), target, attributes);
-        } catch (Exception e){
-            log.error("FILE CONVERSION FAILED", e);
-            succeeded = false;
-
+    public boolean convert(EncodingAttributes attributes, Path inputPath, Path outputPath) {
+        if (!validateInput(inputPath)) {
+            return false;
         }
 
-        return succeeded;
+        try {
+            encoder.encode(new MultimediaObject(inputPath.toFile()), outputPath.toFile(), attributes);
+            return true;
+        } catch (IllegalArgumentException e) {
+            log.error("Invalid encoding attributes: {}", attributes, e);
+        } catch (Exception e) {
+            log.error("File conversion failed for {} -> {}", inputPath, outputPath, e);
+        }
 
+        return false;
+    }
+
+    private boolean validateInput(Path inputPath) {
+        if (!Files.exists(inputPath)) {
+            log.error("Input file does not exist: {}", inputPath);
+            return false;
+        }
+        if (!Files.isReadable(inputPath)) {
+            log.error("Input file is not readable: {}", inputPath);
+            return false;
+        }
+        return true;
     }
 }

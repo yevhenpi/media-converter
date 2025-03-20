@@ -65,6 +65,13 @@ public class JobDataService {
                 .toList();
 
     }
+    public List<JobStatusDto> getStatuses(List<String> jobId){
+        return   getJobs(jobId)
+                .stream()
+                .map(jobData -> new JobStatusDto(jobData.getJobId(), jobData.getJobStatus()))
+                .toList();
+
+    }
 
     public String getS3Key(String jobId){
         return jobDataRepository.findS3KeyByJobId(jobId);
