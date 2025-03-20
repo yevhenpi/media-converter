@@ -16,14 +16,15 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
 public class InfoController {
+    //TODO: Cleanup
+
 
     private final JAVEDataSupplier javeDataSupplier;
     private final FileDataService fileDataService;
 
     @GetMapping("/files")
-    public ResponseEntity<?> getFile(@RequestHeader("UserRole") String role,
-                                     @RequestHeader("UserId") String userId){
-        log.debug("GET FILES request for user{}",userId);
+    public ResponseEntity<?> getFile(@RequestHeader("UserId") String userId){
+
 
         return ResponseEntity.ok(fileDataService.getUserFiles(Long.valueOf(userId)));
     }

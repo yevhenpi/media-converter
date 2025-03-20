@@ -38,7 +38,7 @@ public class JobDataCleaner {
         log.debug("Cleaning jobs...");
         LocalDateTime expiry = LocalDateTime.now().minusDays(1);
         List<JobData> jobsToDelete = jobDataService.deleteExpired(expiry);
-        s3Deleter.batchDelete(jobsToDelete);
+        if(!jobsToDelete.isEmpty()) s3Deleter.batchDelete(jobsToDelete);
     }
     private void directoryCleanup(){
         directoryCleaner.cleanDirectory(INPUT_DIRECTORY);

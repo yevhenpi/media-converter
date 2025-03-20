@@ -13,8 +13,8 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: file-manager
-          uri: lb://file-manager
+        - id: request-manager
+          uri: lb://request-manager
           predicates:
             - Path=/api/**
           filters:

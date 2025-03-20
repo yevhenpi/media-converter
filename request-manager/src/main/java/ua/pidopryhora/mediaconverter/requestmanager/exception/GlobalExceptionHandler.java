@@ -1,5 +1,6 @@
 package ua.pidopryhora.mediaconverter.requestmanager.exception;
 import jakarta.validation.ConstraintViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -31,5 +32,11 @@ public class GlobalExceptionHandler {
             errors.put(fieldName, message);
         });
         return ResponseEntity.badRequest().body(errors);
+    }
+    @ExceptionHandler(FileAlreadyUploadedException.class)
+    public ResponseEntity<Map<String, String>> handleFileAlreadyUploadedException(FileAlreadyUploadedException ex) {
+        Map<String, String> error = new HashMap<>();
+        error.put("error", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
 }
