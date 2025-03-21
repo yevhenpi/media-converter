@@ -17,13 +17,13 @@ import java.util.Map;
 @RequestMapping("/api/v1/jobs")
 @CrossOrigin(origins = "*")
 @Validated
-public class DownloadUrlController {
+public class DownloadRequestController {
     private final S3PresignedUrlService presignedUrlService;
 
     @GetMapping("/download")
     public ResponseEntity<?> extractRequestData(@Valid DownloadRequestDTO request){
 
-        String url = presignedUrlService.generatePresignedUrl(request.getJobId()).toString();
+        String url = presignedUrlService.generateDownloadPresignedUrl(request.getJobId()).toString();
 
 
         return ResponseEntity.ok(Map.of("url",url,

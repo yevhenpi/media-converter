@@ -14,7 +14,7 @@ public class IdempotencyService {
     private final HashUtil hashUtil;
 
 
-    private static final long IDEMPOTENCY_TTL_SECONDS = 60;
+   public static final long IDEMPOTENCY_TTL_SECONDS = 60;
 
     private final RedisTemplate<String, String> redisTemplate;
 

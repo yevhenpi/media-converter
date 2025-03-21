@@ -29,13 +29,12 @@ public class AudioConversionRequestProcessor implements RequestProcessor<AudioCo
 
         validationService.validate(requestDTO);
 
-        var jobId = UUID.randomUUID().toString();
-        var job = jobFactory.createJob(requestDTO, jobId);
+        var job = jobFactory.createJob(requestDTO);
 
         updateProducer.produce(AUDIO_CONVERSION_QUEUE, job);
         jobDataService.saveData(job);
 
         return ResponseEntity.ok().body(Map.of("message", "conversion is started",
-                "jobId", jobId));
+                "jobId", job.getJobId()));
     }
 }

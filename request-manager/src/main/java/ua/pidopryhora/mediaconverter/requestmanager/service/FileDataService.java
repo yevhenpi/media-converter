@@ -28,7 +28,6 @@ public class FileDataService {
     }
 
     public void deleteFile(String fileName, Long ownerId){
-
         fileDataRepository.delete(findByName(fileName, ownerId));
     }
 

@@ -21,17 +21,16 @@ public class EventProcessor {
 
     public void processMessage(String messageBody) throws JsonProcessingException {
 
-
         S3Event event = objectMapper.readValue(messageBody, S3Event.class);
 
         for (S3Event.S3Record record : event.getRecords()) {
             String objectKey = record.getS3().getObject().getKey();
             Integer objectSize = record.getS3().getObject().getSize();
 
-
             UploadRequestDTO requestDTO = uploadRequestCachingService.getFileData(objectKey);
+
             if(!isUploadValid(objectSize, requestDTO)){
-                log.debug("INVALID UPLOAD");
+                log.warn("INVALID UPLOAD: {}", objectKey);
                 log.debug(messageBody);
                 return;
             }

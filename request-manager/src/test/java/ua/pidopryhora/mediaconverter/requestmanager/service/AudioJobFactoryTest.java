@@ -16,7 +16,7 @@ public class AudioJobFactoryTest {
     private static final String DEFAULT_OUTPUT_FORMAT = "mp3";
     private static final String DEFAULT_CODEC = "aac";
     private static final Long DEFAULT_USER_ID = 123L;
-    private static final String DEFAULT_JOB_ID = "job123";
+
     private static final String EXPECTED_S3_KEY = "123/test.mp3";
 
 
@@ -39,7 +39,7 @@ public class AudioJobFactoryTest {
         requestDTO.setVolume("10");
 
         // when
-        AudioJobDTO job = factory.createJob(requestDTO, DEFAULT_JOB_ID);
+        AudioJobDTO job = factory.createJob(requestDTO);
 
         // then
         assertThat(job.getFileName()).isEqualTo(DEFAULT_FILENAME);
@@ -47,7 +47,6 @@ public class AudioJobFactoryTest {
         assertThat(job.getCodec()).isEqualTo(DEFAULT_CODEC);
         assertThat(job.getUserId()).isEqualTo(DEFAULT_USER_ID);
         assertThat(job.getS3Key()).isEqualTo(EXPECTED_S3_KEY);
-        assertThat(job.getJobId()).isEqualTo(DEFAULT_JOB_ID);
         assertThat(job.getBitRate()).isEqualTo(128);
         assertThat(job.getChannels()).isEqualTo(2);
         assertThat(job.getSamplingRate()).isEqualTo(44100);
@@ -64,7 +63,7 @@ public class AudioJobFactoryTest {
         requestDTO.setVolume(null);
 
         // when
-        AudioJobDTO job = factory.createJob(requestDTO, DEFAULT_JOB_ID);
+        AudioJobDTO job = factory.createJob(requestDTO);
 
         // then
         assertThat(job.getFileName()).isEqualTo(DEFAULT_FILENAME);
@@ -72,7 +71,7 @@ public class AudioJobFactoryTest {
         assertThat(job.getCodec()).isEqualTo(DEFAULT_CODEC);
         assertThat(job.getUserId()).isEqualTo(DEFAULT_USER_ID);
         assertThat(job.getS3Key()).isEqualTo(EXPECTED_S3_KEY);
-        assertThat(job.getJobId()).isEqualTo(DEFAULT_JOB_ID);
+
         assertThat(job.getBitRate()).isEqualTo(0);
         assertThat(job.getChannels()).isEqualTo(0);
         assertThat(job.getSamplingRate()).isEqualTo(0);

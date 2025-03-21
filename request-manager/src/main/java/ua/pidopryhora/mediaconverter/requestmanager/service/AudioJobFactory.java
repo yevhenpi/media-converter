@@ -4,16 +4,18 @@ import org.springframework.stereotype.Component;
 import ua.pidopryhora.mediaconverter.common.model.AudioJobDTO;
 import ua.pidopryhora.mediaconverter.requestmanager.model.AudioConversionRequestDTO;
 
+import java.util.UUID;
+
 @Component
 public class AudioJobFactory implements JobFactory<AudioConversionRequestDTO, AudioJobDTO> {
 
-    public AudioJobDTO createJob(AudioConversionRequestDTO requestDTO, String jobId) {
+    public AudioJobDTO createJob(AudioConversionRequestDTO requestDTO) {
         var builder = AudioJobDTO.builder()
                 .fileName(requestDTO.getFileName())
                 .outputFormat(requestDTO.getOutputFormat())
                 .codec(requestDTO.getCodec())
                 .userId(requestDTO.getUserId())
-                .jobId(jobId)
+                .jobId(createUuid())
                 .s3Key(requestDTO.getS3Key());
 
         if (isNotBlank(requestDTO.getBitRate())) {
@@ -33,5 +35,9 @@ public class AudioJobFactory implements JobFactory<AudioConversionRequestDTO, Au
 
     private boolean isNotBlank(String value) {
         return value != null && !value.trim().isEmpty();
+    }
+
+    private String createUuid(){
+      return UUID.randomUUID().toString();
     }
 }

@@ -4,12 +4,13 @@ package ua.pidopryhora.mediaconverter.common.model;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-
+import lombok.ToString;
 
 
 @Builder
 @Getter
 @Setter
+@ToString
 public class AudioJobDTO extends JobDTO {
 
     private String fileName;

@@ -12,7 +12,7 @@ import ua.pidopryhora.mediaconverter.requestmanager.service.RequestProcessor;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/upload")
 @CrossOrigin(origins = "*")
-public class UploadUrlController {
+public class UploadRequestController {
 
 
     private final RequestProcessor<UploadRequestDTO> uploadRequestProcessor;

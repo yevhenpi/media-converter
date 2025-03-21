@@ -2,7 +2,6 @@ package ua.pidopryhora.mediaconverter.requestmanager.service.s3;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
@@ -31,14 +30,14 @@ public class S3PresignedUrlService implements PresignedUrlService {
     public URL generatePresignedUrl(UploadRequestDTO metadata) {
         PutObjectPresignRequest presignRequest = null;
         try {
-            // Create a PutObjectRequest
+
             PutObjectRequest objectRequest = PutObjectRequest.builder()
                     .bucket(awsProperties.getUploadBucketName())
                     .key(metadata.getS3Key())
                     .contentLength(metadata.getFileSize())
                     .build();
 
-            // Generate the Presigned URL
+
             presignRequest = PutObjectPresignRequest.builder()
                     .putObjectRequest(objectRequest)
                     .signatureDuration(Duration.ofMinutes(expirationProperties.getUpload()))
@@ -52,7 +51,7 @@ public class S3PresignedUrlService implements PresignedUrlService {
         return presigner.presignPutObject(presignRequest).url();
     }
 
-    public URL generatePresignedUrl(String jobId){
+    public URL generateDownloadPresignedUrl(String jobId){
         String key = jobDataService.getJob(jobId).getS3Key();
         GetObjectRequest getObjectRequest = GetObjectRequest.builder()
                 .bucket(awsProperties.getCoreBucketName())
