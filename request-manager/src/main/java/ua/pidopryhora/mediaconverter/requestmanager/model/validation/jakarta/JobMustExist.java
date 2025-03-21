@@ -1,4 +1,4 @@
-package ua.pidopryhora.mediaconverter.requestmanager.model.validation;
+package ua.pidopryhora.mediaconverter.requestmanager.model.validation.jakarta;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
@@ -8,11 +8,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Constraint(validatedBy = FileMustNotExistValidator.class)
-@Target({ElementType.TYPE})
+@Constraint(validatedBy = JobMustExistValidator.class)
+@Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface MustNotExist {
-    String message() default "File is already uploaded";
+public @interface JobMustExist {
+    String message() default "Job is not found";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

@@ -8,8 +8,7 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import ua.pidopryhora.mediaconverter.requestmanager.model.validation.*;
-import ua.pidopryhora.mediaconverter.requestmanager.model.validation.AudioFormatValidation;
+import ua.pidopryhora.mediaconverter.requestmanager.model.validation.jakarta.*;
 
 @Setter
 @Getter

@@ -13,7 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ua.pidopryhora.mediaconverter.requestmanager.entity.FileData;
-import ua.pidopryhora.mediaconverter.requestmanager.entity.FileDataRepository;
+import ua.pidopryhora.mediaconverter.requestmanager.repository.FileDataRepository;
 import ua.pidopryhora.mediaconverter.requestmanager.model.UploadRequestDTO;
 
 @ExtendWith(MockitoExtension.class)

@@ -8,7 +8,6 @@ import ua.pidopryhora.mediaconverter.common.model.JobStatusDto;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static ua.pidopryhora.mediaconverter.common.model.JobStatus.PROCESSING;
 @Service
@@ -58,7 +57,7 @@ public class JobDataService {
         return jobDataRepository.findByOwnerId(userId);
     }
 
-    public List<JobStatusDto> getStatuses(Long userId){
+    public List<JobStatusDto> getAllStatuses(Long userId){
         return jobDataRepository.findByOwnerId(userId)
                 .stream()
                 .map(jobData -> new JobStatusDto(jobData.getJobId(), jobData.getJobStatus()))

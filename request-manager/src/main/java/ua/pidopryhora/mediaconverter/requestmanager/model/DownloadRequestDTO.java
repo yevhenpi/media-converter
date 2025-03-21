@@ -3,10 +3,10 @@ package ua.pidopryhora.mediaconverter.requestmanager.model;
 import jakarta.validation.GroupSequence;
 import lombok.Getter;
 import lombok.Setter;
-import ua.pidopryhora.mediaconverter.requestmanager.model.validation.AdvancedCheck;
-import ua.pidopryhora.mediaconverter.requestmanager.model.validation.BasicCheck;
-import ua.pidopryhora.mediaconverter.requestmanager.model.validation.JobMustBeDone;
-import ua.pidopryhora.mediaconverter.requestmanager.model.validation.JobMustExist;
+import ua.pidopryhora.mediaconverter.requestmanager.model.validation.jakarta.AdvancedCheck;
+import ua.pidopryhora.mediaconverter.requestmanager.model.validation.jakarta.BasicCheck;
+import ua.pidopryhora.mediaconverter.requestmanager.model.validation.jakarta.JobMustBeDone;
+import ua.pidopryhora.mediaconverter.requestmanager.model.validation.jakarta.JobMustExist;
 
 @Getter
 @Setter

@@ -3,7 +3,7 @@ package ua.pidopryhora.mediaconverter.requestmanager.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ua.pidopryhora.mediaconverter.requestmanager.entity.FileData;
-import ua.pidopryhora.mediaconverter.requestmanager.entity.FileDataRepository;
+import ua.pidopryhora.mediaconverter.requestmanager.repository.FileDataRepository;
 import ua.pidopryhora.mediaconverter.requestmanager.model.UploadRequestDTO;
 
 import java.util.List;

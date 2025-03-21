@@ -21,7 +21,8 @@ public class StatusController {
     public ResponseEntity<?> getStatus(@RequestHeader("UserId") String userId,
                                        @RequestBody List<String> jobIdList){
 
-        if(jobIdList.isEmpty()) return ResponseEntity.ok(jobDataService.getStatuses(Long.valueOf(userId)));
+
+        if(jobIdList.isEmpty()) return ResponseEntity.ok(jobDataService.getAllStatuses(Long.valueOf(userId)));
 
         return ResponseEntity.ok(jobDataService.getStatuses(jobIdList));
     }

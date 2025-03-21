@@ -11,7 +11,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import ua.pidopryhora.mediaconverter.requestmanager.entity.FileData;
-import ua.pidopryhora.mediaconverter.requestmanager.entity.FileDataRepository;
 import ua.pidopryhora.mediaconverter.requestmanager.service.EventProcessor;
 
 import java.util.ArrayList;

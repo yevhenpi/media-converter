@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import ua.pidopryhora.mediaconverter.requestmanager.model.validation.*;
+import ua.pidopryhora.mediaconverter.requestmanager.model.validation.jakarta.*;
 
 @Setter
 @Getter

@@ -38,4 +38,10 @@ public class GlobalExceptionHandler {
         error.put("error", ex.getMessage());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
+
+    @ExceptionHandler(ValidationException.class)
+    public ResponseEntity<?> handleValidationException(ValidationException e) {
+        // Return a response with the appropriate status code
+        return new ResponseEntity<>(e.getMessage(), e.getHttpStatus());
+    }
 }
