@@ -33,15 +33,17 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(errors);
     }
     @ExceptionHandler(FileAlreadyUploadedException.class)
-    public ResponseEntity<Map<String, String>> handleFileAlreadyUploadedException(FileAlreadyUploadedException ex) {
+    public ResponseEntity<Map<String, String>> handleFileAlreadyUploadedException(FileAlreadyUploadedException e) {
         Map<String, String> error = new HashMap<>();
-        error.put("error", ex.getMessage());
+        error.put("error", e.getMessage());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
 
     @ExceptionHandler(ValidationException.class)
     public ResponseEntity<?> handleValidationException(ValidationException e) {
-        // Return a response with the appropriate status code
-        return new ResponseEntity<>(e.getMessage(), e.getHttpStatus());
+        Map<String, String> error = new HashMap<>();
+        error.put("error", e.getMessage());
+
+        return  ResponseEntity.status(e.getHttpStatus()).body(error);
     }
 }

@@ -6,7 +6,7 @@ import ua.pidopryhora.mediaconverter.requestmanager.model.RequestDTO;
 public class RoleValidator<T extends RequestDTO> implements RequestValidator<T>{
 
     @Override
-    public boolean validate(T request) throws ValidationException {
-        return false;
+    public void validate(T request) throws ValidationException {
+
     }
 }
