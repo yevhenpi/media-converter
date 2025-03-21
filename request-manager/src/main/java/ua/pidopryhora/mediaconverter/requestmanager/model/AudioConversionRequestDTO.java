@@ -12,7 +12,6 @@ import ua.pidopryhora.mediaconverter.requestmanager.model.validation.jakarta.*;
 @Getter
 @ToString
 @MustExist
-@IdempotencyCheck(message = "Request is already being processed", groups = AdvancedCheck.class)
 @GroupSequence({BasicCheck.class, AdvancedCheck.class, AudioConversionRequestDTO.class})
 public class AudioConversionRequestDTO extends RequestDTO {
     //TODO: Advanced validation would be great

@@ -15,7 +15,6 @@ import ua.pidopryhora.mediaconverter.requestmanager.model.validation.jakarta.*;
 @ToString
 @FileSizeValidation
 @MustNotExist(groups = BasicCheck.class)
-//@IdempotencyCheck(message = "URL for this file is already created and not expired yet", groups = AdvancedCheck.class)
 @GroupSequence({BasicCheck.class, AdvancedCheck.class, UploadRequestDTO.class})
 public class UploadRequestDTO extends RequestDTO{
     //TODO: Create GenericFormatValidation annotation.Complex validation IS TEMPORARY here, complex logic should be moved to service layer.

@@ -23,8 +23,11 @@ public class AudioConversionRequestProcessor implements RequestProcessor<AudioCo
     private final UpdateProducer updateProducer;
     private final JobDataService jobDataService;
     private final JobFactory<AudioConversionRequestDTO, AudioJobDTO> jobFactory;
+    private final ValidationService<AudioConversionRequestDTO> validationService;
 
     public ResponseEntity<?> processRequest(@Valid AudioConversionRequestDTO requestDTO){
+
+        validationService.validate(requestDTO);
 
         var jobId = UUID.randomUUID().toString();
         var job = jobFactory.createJob(requestDTO, jobId);
