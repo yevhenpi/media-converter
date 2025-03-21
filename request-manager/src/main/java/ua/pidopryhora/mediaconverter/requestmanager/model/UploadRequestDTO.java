@@ -19,7 +19,7 @@ import ua.pidopryhora.mediaconverter.requestmanager.model.validation.AudioFormat
 @IdempotencyCheck(message = "URL for this file is already created and not expired yet", groups = AdvancedCheck.class)
 @GroupSequence({BasicCheck.class, AdvancedCheck.class, UploadRequestDTO.class})
 public class UploadRequestDTO extends RequestDTO{
-    //TODO: Create GenericFormatValidation annotation.
+    //TODO: Create GenericFormatValidation annotation.Complex validation IS TEMPORARY here, complex logic should be moved to service layer.
 
     //Switch to GenericFormatValidation to enable video upload
 

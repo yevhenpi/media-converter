@@ -48,3 +48,10 @@ aws:
   upload-bucket-name: ${AWS_UPLOAD_BUCKET_NAME}
   core-bucket-name: ${AWS_CORE_BUCKET_NAME}
   region: ${AWS_REGION:eu-north-1}
+
+url:
+  expiration-time:
+    upload: 5
+    download: 10
+
+

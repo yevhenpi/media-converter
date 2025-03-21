@@ -2,6 +2,7 @@ package ua.pidopryhora.mediaconverter.requestmanager.service.s3;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
@@ -23,8 +24,9 @@ public class S3PresignedUrlService implements PresignedUrlService {
     private final S3Presigner presigner;
     private final AwsProperties awsProperties;
     private final JobDataService jobDataService;
-    //TODO: move to properties
-    private final long EXPIRATION_TIME = 5L;
+    private final UrlExpirationProperties expirationProperties;
+
+
 
     public URL generatePresignedUrl(UploadRequestDTO metadata) {
         PutObjectPresignRequest presignRequest = null;
@@ -39,7 +41,7 @@ public class S3PresignedUrlService implements PresignedUrlService {
             // Generate the Presigned URL
             presignRequest = PutObjectPresignRequest.builder()
                     .putObjectRequest(objectRequest)
-                    .signatureDuration(Duration.ofMinutes(EXPIRATION_TIME))
+                    .signatureDuration(Duration.ofMinutes(expirationProperties.getUpload()))
                     .build();
         } catch (Exception e) {
             log.error("Cannot create presigned url ", e);
@@ -58,7 +60,7 @@ public class S3PresignedUrlService implements PresignedUrlService {
                 .build();
 
         GetObjectPresignRequest presignRequest = GetObjectPresignRequest.builder()
-                .signatureDuration(Duration.ofMinutes(EXPIRATION_TIME))
+                .signatureDuration(Duration.ofMinutes(expirationProperties.getDownload()))
                 .getObjectRequest(getObjectRequest)
                 .build();
 

@@ -1,5 +1,5 @@
 services:
-  # PostgreSQL database
+  # PostgreSQL
   db:
     image: postgres:latest
     container_name: postgres_db
@@ -17,7 +17,8 @@ services:
       - dev
       - prod
 
-  # RabbitMQ message broker
+
+  # RabbitMQ
   rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbitmq
@@ -60,7 +61,7 @@ services:
       - dev
       - prod
 
-
+  #Api Gateway
   api-gateway:
     build:
       context: ./api-gateway
@@ -84,7 +85,7 @@ services:
     profiles:
       - prod
 
-
+  #Auth Server
   auth-server:
     build:
       context: ./auth-server
@@ -109,6 +110,7 @@ services:
     profiles:
       - prod
 
+  #Request Manager
   request-manager:
     build:
       context: ./request-manager
@@ -170,12 +172,12 @@ services:
 
 
 
-  # Redis cache
+  # Redis
   redis:
     image: redis:latest
     container_name: redis
     ports:
-      - "6379:6379"    # Default Redis port
+      - "6379:6379"
     restart: always
     networks:
       - backend_network

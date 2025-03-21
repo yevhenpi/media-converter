@@ -1,5 +1,6 @@
 package ua.pidopryhora.mediaconverter.core.service;
 
+import jakarta.annotation.PreDestroy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -13,15 +14,15 @@ import java.util.List;
 
 @Slf4j
 @Component
-public class JobDataCleaner {
+public class DataCleaner {
 
     private final DirectoryCleaner directoryCleaner;
     private final JobDataService jobDataService;
     private final S3Deleter s3Deleter;
 
-    public JobDataCleaner(DirectoryCleaner directoryCleaner,
-                          JobDataService jobDataService,
-                          S3Deleter s3Deleter) {
+    public DataCleaner(DirectoryCleaner directoryCleaner,
+                       JobDataService jobDataService,
+                       S3Deleter s3Deleter) {
         this.directoryCleaner = directoryCleaner;
         this.jobDataService = jobDataService;
         this.s3Deleter = s3Deleter;
@@ -32,6 +33,11 @@ public class JobDataCleaner {
     @Scheduled(cron = "0 0 0 * * ?")
     public void scheduleCleanup() {
         cleanExpiredJobs();
+        directoryCleanup();
+    }
+
+    @PreDestroy
+    public void shutdownCleanup(){
         directoryCleanup();
     }
 

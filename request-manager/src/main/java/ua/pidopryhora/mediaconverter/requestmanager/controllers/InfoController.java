@@ -16,7 +16,6 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
 public class InfoController {
-    //TODO: Cleanup
 
 
     private final JAVEDataSupplier javeDataSupplier;

@@ -34,10 +34,9 @@ build/
 
 ### User ###
 application.properties
-
-
 common/aws/src/main/resources/aws-properties.yaml
 output
 input
 aws.env
 security.env
+
