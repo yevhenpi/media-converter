@@ -2,7 +2,7 @@ package ua.pidopryhora.mediaconverter.requestmanager.service;
 
 import org.junit.jupiter.api.Test;
 import ua.pidopryhora.mediaconverter.common.model.AudioJobDTO;
-import ua.pidopryhora.mediaconverter.requestmanager.model.AudioConversionRequestDTO;
+import ua.pidopryhora.mediaconverter.requestmanager.model.AudioJobRequestDTO;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -20,8 +20,8 @@ public class AudioJobFactoryTest {
     private static final String EXPECTED_S3_KEY = "123/test.mp3";
 
 
-    private AudioConversionRequestDTO buildDefaultRequest() {
-        AudioConversionRequestDTO request = new AudioConversionRequestDTO();
+    private AudioJobRequestDTO buildDefaultRequest() {
+        AudioJobRequestDTO request = new AudioJobRequestDTO();
         request.setFileName(DEFAULT_FILENAME);
         request.setOutputFormat(DEFAULT_OUTPUT_FORMAT);
         request.setCodec(DEFAULT_CODEC);
@@ -32,7 +32,7 @@ public class AudioJobFactoryTest {
     @Test
     void shouldCreateJobWithAllFields() {
         // given
-        AudioConversionRequestDTO requestDTO = buildDefaultRequest();
+        AudioJobRequestDTO requestDTO = buildDefaultRequest();
         requestDTO.setBitRate("128");
         requestDTO.setChannels("2");
         requestDTO.setSamplingRate("44100");
@@ -56,7 +56,7 @@ public class AudioJobFactoryTest {
     @Test
     void shouldCreateJobWithMissingOptionalFields() {
         // given
-        AudioConversionRequestDTO requestDTO = buildDefaultRequest();
+        AudioJobRequestDTO requestDTO = buildDefaultRequest();
         requestDTO.setBitRate(null);
         requestDTO.setChannels(null);
         requestDTO.setSamplingRate(null);
@@ -71,7 +71,6 @@ public class AudioJobFactoryTest {
         assertThat(job.getCodec()).isEqualTo(DEFAULT_CODEC);
         assertThat(job.getUserId()).isEqualTo(DEFAULT_USER_ID);
         assertThat(job.getS3Key()).isEqualTo(EXPECTED_S3_KEY);
-
         assertThat(job.getBitRate()).isEqualTo(0);
         assertThat(job.getChannels()).isEqualTo(0);
         assertThat(job.getSamplingRate()).isEqualTo(0);

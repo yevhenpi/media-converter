@@ -18,5 +18,6 @@ public class UpdateProducer {
     public void produce(String queueName, AudioJobDTO audioJobDTO){
         rabbitTemplate.convertAndSend(queueName, audioJobDTO);
 
+
     }
 }

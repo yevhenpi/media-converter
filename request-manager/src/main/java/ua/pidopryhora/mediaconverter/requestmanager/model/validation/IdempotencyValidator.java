@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import ua.pidopryhora.mediaconverter.requestmanager.exception.ValidationException;
-import ua.pidopryhora.mediaconverter.requestmanager.model.AudioConversionRequestDTO;
+import ua.pidopryhora.mediaconverter.requestmanager.model.AudioJobRequestDTO;
 import ua.pidopryhora.mediaconverter.requestmanager.model.RequestDTO;
 import ua.pidopryhora.mediaconverter.requestmanager.model.UploadRequestDTO;
 import ua.pidopryhora.mediaconverter.requestmanager.service.IdempotencyService;
@@ -15,7 +15,7 @@ import java.util.Map;
 
 @Component
 @RequiredArgsConstructor
-public class IdempotencyValidator<T extends RequestDTO> implements RequestValidator<T>{
+public class IdempotencyValidator<T extends RequestDTO> implements Validator<T> {
 
     private final IdempotencyService idempotencyService;
 
@@ -24,7 +24,7 @@ public class IdempotencyValidator<T extends RequestDTO> implements RequestValida
 
     static {
         messageMap.put(UploadRequestDTO.class, "URL for this file is already created and not expired yet");
-        messageMap.put(AudioConversionRequestDTO.class, "Request is already being processed");
+        messageMap.put(AudioJobRequestDTO.class, "Request is already being processed");
         // Add more mappings as needed
     }
 

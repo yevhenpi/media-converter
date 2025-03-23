@@ -11,9 +11,9 @@ import java.nio.file.Path;
 
 @Slf4j
 @Component
-public class DirectoryManager {
+public class DirectoryCreator {
 
-    public DirectoryManager() {
+    public DirectoryCreator() {
         createDirectories();
     }
 

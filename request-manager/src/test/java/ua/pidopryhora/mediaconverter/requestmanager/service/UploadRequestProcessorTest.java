@@ -29,7 +29,7 @@ class UploadRequestProcessorTest {
     private UploadRequestCachingService uploadRequestCachingService;
 
     @Mock
-    private ValidationService<UploadRequestDTO> validationService;
+    private UploadValidationService<UploadRequestDTO> uploadValidationService;
 
     @InjectMocks
     private UploadRequestProcessor uploadRequestProcessor;
@@ -44,7 +44,7 @@ class UploadRequestProcessorTest {
         // Arrange
         UploadRequestDTO requestDTO = mock(UploadRequestDTO.class);
         URL presignedUrl = new URL("https://example.com/presigned-url");
-        doNothing().when(validationService).validate(requestDTO);  // No validation errors
+        doNothing().when(uploadValidationService).validate(requestDTO);  // No validation errors
         when(presignedUrlService.generatePresignedUrl(requestDTO)).thenReturn(presignedUrl);
         doNothing().when(uploadRequestCachingService).cacheData(requestDTO);
 
@@ -57,7 +57,7 @@ class UploadRequestProcessorTest {
         assertInstanceOf(Map.class, response.getBody());
         Map<String, String> responseBody = (Map<String, String>) response.getBody();
         assertEquals(presignedUrl.toString(), responseBody.get("url"));
-        verify(validationService).validate(requestDTO);
+        verify(uploadValidationService).validate(requestDTO);
         verify(presignedUrlService).generatePresignedUrl(requestDTO);
         verify(uploadRequestCachingService).cacheData(requestDTO);
     }
@@ -68,12 +68,12 @@ class UploadRequestProcessorTest {
         UploadRequestDTO requestDTO = mock(UploadRequestDTO.class);
         // Simulate validation failure by throwing a ValidationException
         doThrow(new ValidationException("Validation failed", HttpStatus.BAD_REQUEST))
-                .when(validationService).validate(requestDTO);
+                .when(uploadValidationService).validate(requestDTO);
 
         // Act & Assert
         ValidationException exception = assertThrows(ValidationException.class, () -> uploadRequestProcessor.processRequest(requestDTO));
         assertEquals("Validation failed", exception.getMessage());
-        verify(validationService).validate(requestDTO); // Ensure validation was called
+        verify(uploadValidationService).validate(requestDTO); // Ensure validation was called
         verifyNoInteractions(presignedUrlService, uploadRequestCachingService); // Ensure no further method calls
     }
 
@@ -81,13 +81,13 @@ class UploadRequestProcessorTest {
     void testProcessRequest_GeneratePresignedUrlFailure() throws Exception {
         // Arrange
         UploadRequestDTO requestDTO = mock(UploadRequestDTO.class);
-        doNothing().when(validationService).validate(requestDTO);  // Assuming validation passes
+        doNothing().when(uploadValidationService).validate(requestDTO);  // Assuming validation passes
         when(presignedUrlService.generatePresignedUrl(requestDTO)).thenThrow(new RuntimeException("Error generating presigned URL"));
 
         // Act & Assert
         RuntimeException exception = assertThrows(RuntimeException.class, () -> uploadRequestProcessor.processRequest(requestDTO));
         assertEquals("Error generating presigned URL", exception.getMessage());
-        verify(validationService).validate(requestDTO);  // Ensure validation was called
+        verify(uploadValidationService).validate(requestDTO);  // Ensure validation was called
         verify(presignedUrlService).generatePresignedUrl(requestDTO);  // Ensure URL generation was attempted
         verifyNoInteractions(uploadRequestCachingService);  // Ensure caching was not called
     }
@@ -97,14 +97,14 @@ class UploadRequestProcessorTest {
         // Arrange
         UploadRequestDTO requestDTO = mock(UploadRequestDTO.class);
         URL presignedUrl = new URL("https://example.com/presigned-url");
-        doNothing().when(validationService).validate(requestDTO);  // Assuming validation passes
+        doNothing().when(uploadValidationService).validate(requestDTO);  // Assuming validation passes
         when(presignedUrlService.generatePresignedUrl(requestDTO)).thenReturn(presignedUrl);
         doThrow(new RuntimeException("Error caching data")).when(uploadRequestCachingService).cacheData(requestDTO);
 
         // Act & Assert
         RuntimeException exception = assertThrows(RuntimeException.class, () -> uploadRequestProcessor.processRequest(requestDTO));
         assertEquals("Error caching data", exception.getMessage());
-        verify(validationService).validate(requestDTO);  // Ensure validation was called
+        verify(uploadValidationService).validate(requestDTO);  // Ensure validation was called
         verify(presignedUrlService).generatePresignedUrl(requestDTO);  // Ensure URL generation was attempted
         verify(uploadRequestCachingService).cacheData(requestDTO);  // Ensure caching was attempted
     }

@@ -10,14 +10,14 @@ import ua.pidopryhora.mediaconverter.requestmanager.service.RequestProcessor;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/upload")
+@RequestMapping("/api/v1")
 @CrossOrigin(origins = "*")
 public class UploadRequestController {
 
 
     private final RequestProcessor<UploadRequestDTO> uploadRequestProcessor;
 
-    @PostMapping("/audio")
+    @PostMapping("/files")
     public ResponseEntity<?> extractRequestData(@RequestHeader("UserId") String userId,
                                                 @RequestHeader("UserRole") String userRole,
                                                 @RequestBody UploadRequestDTO requestDTO) {

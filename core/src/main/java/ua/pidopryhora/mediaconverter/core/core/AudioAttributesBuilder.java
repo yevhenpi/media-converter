@@ -20,28 +20,28 @@ public class AudioAttributesBuilder {
 
 
         if (dto.getCodec() != null && !dto.getCodec().trim().isEmpty()) {
+
             audioAttributes.setCodec(dto.getCodec());
         }
         if (dto.getSamplingRate() != 0) {
+
             int samplingRate = dto.getSamplingRate();
             audioAttributes.setSamplingRate(samplingRate);
         }
         if (dto.getBitRate() != 0) {
+
             int bitRate = dto.getBitRate();
             audioAttributes.setBitRate(bitRate);
         }
         if (dto.getChannels() != 0) {
-
             int channels = dto.getChannels();
             audioAttributes.setChannels(channels);
-
         }
 
         if (dto.getVolume() != 0) {
 
             int volume = dto.getVolume();
             audioAttributes.setQuality(volume);
-
         }
 
         encodingAttributes.setAudioAttributes(audioAttributes);

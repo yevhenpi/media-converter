@@ -18,6 +18,7 @@ import java.util.Map;
 @CrossOrigin(origins = "*")
 @Validated
 public class DownloadRequestController {
+
     private final S3PresignedUrlService presignedUrlService;
 
     @GetMapping("/download")

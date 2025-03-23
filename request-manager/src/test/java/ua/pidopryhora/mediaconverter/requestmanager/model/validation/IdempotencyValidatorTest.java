@@ -1,15 +1,13 @@
 package ua.pidopryhora.mediaconverter.requestmanager.model.validation;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import ua.pidopryhora.mediaconverter.requestmanager.exception.ValidationException;
-import ua.pidopryhora.mediaconverter.requestmanager.model.AudioConversionRequestDTO;
+import ua.pidopryhora.mediaconverter.requestmanager.model.AudioJobRequestDTO;
 import ua.pidopryhora.mediaconverter.requestmanager.model.RequestDTO;
 import ua.pidopryhora.mediaconverter.requestmanager.model.UploadRequestDTO;
 import ua.pidopryhora.mediaconverter.requestmanager.service.IdempotencyService;
@@ -65,7 +63,7 @@ class IdempotencyValidatorTest {
     @Test
     void testValidate_Failure_AudioConversionRequestDTO() {
 
-        RequestDTO requestDTO = mock(AudioConversionRequestDTO.class);
+        RequestDTO requestDTO = mock(AudioJobRequestDTO.class);
         when(idempotencyService.addIdempotencyKey(requestDTO)).thenReturn(false);
 
 

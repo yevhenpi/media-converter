@@ -101,11 +101,13 @@ More detailed endpoint documentation is down below.
 
 Using --insecure flag because working with self-signed ssl certificate in dev environment.
 
-### Upload endpoint
+### Files endpoint
+
+POST for getting upload url.
 
 Example Request:
 
-    curl --insecure -X POST "https://localhost:8443/api/v1/upload/audio" \
+    curl --insecure -X POST "https://localhost:8443/api/v1/files" \
           -H "Content-Type: application/json" \
           -H "Authorization: Bearer YOUR_TOKEN" \
           -d '{"fileName": "sample.mp3", "fileSize": "1829938"}'
@@ -116,7 +118,7 @@ Example Response:
       "url": "PRESIGNED_URL"
     }
 
-### Files endpoint
+GET for getting list of uploaded files
 
 Example Request:
 
@@ -130,7 +132,7 @@ Example Response:
       sample2.wav
     }
 
-### Conversion endpoint
+### Jobs endpoint
 
 This endpoint includes both required fields and optional fields.
 For a better understanding of the value requirements for the optional fields,
@@ -140,14 +142,14 @@ https://www.sauronsoftware.it/projects/jave/manual.php
 
 Example request with required fields only:
 
-    curl --insecure -X POST "https://localhost:8443/api/v1/jobs/convert/audio" \
+    curl --insecure -X POST "https://localhost:8443/api/v1/jobs/audio" \
           -H "Content-Type: application/json" \
           -H "Authorization: Bearer YOUR_TOKEN" 
           -d '{"fileName": "sample.mp3", "outputFormat": "wav"}'
 
 Example request with required fields and ALL optional fields:
 
-    curl --insecure -X POST "https://localhost:8443/api/v1/jobs/convert/audio" \
+    curl --insecure -X POST "https://localhost:8443/api/v1/jobs/audio" \
           -H "Content-Type: application/json" \
           -H "Authorization: Bearer YOUR_TOKEN" 
           -d '{

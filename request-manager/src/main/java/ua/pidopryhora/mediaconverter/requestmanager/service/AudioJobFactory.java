@@ -2,14 +2,14 @@ package ua.pidopryhora.mediaconverter.requestmanager.service;
 
 import org.springframework.stereotype.Component;
 import ua.pidopryhora.mediaconverter.common.model.AudioJobDTO;
-import ua.pidopryhora.mediaconverter.requestmanager.model.AudioConversionRequestDTO;
+import ua.pidopryhora.mediaconverter.requestmanager.model.AudioJobRequestDTO;
 
 import java.util.UUID;
 
 @Component
-public class AudioJobFactory implements JobFactory<AudioConversionRequestDTO, AudioJobDTO> {
+public class AudioJobFactory implements JobFactory<AudioJobRequestDTO, AudioJobDTO> {
 
-    public AudioJobDTO createJob(AudioConversionRequestDTO requestDTO) {
+    public AudioJobDTO createJob(AudioJobRequestDTO requestDTO) {
         var builder = AudioJobDTO.builder()
                 .fileName(requestDTO.getFileName())
                 .outputFormat(requestDTO.getOutputFormat())

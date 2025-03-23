@@ -27,7 +27,11 @@ public class AudioConverter {
         }
 
         try {
-            encoder.encode(new MultimediaObject(inputPath.toFile()), outputPath.toFile(), attributes);
+            encoder.encode(
+                    new MultimediaObject(
+                    inputPath.toFile()),
+                    outputPath.toFile(),
+                    attributes);
             return true;
         } catch (IllegalArgumentException e) {
             log.error("Invalid encoding attributes: {}", attributes, e);

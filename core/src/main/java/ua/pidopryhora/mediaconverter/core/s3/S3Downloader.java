@@ -8,7 +8,7 @@ import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.services.s3.model.GetObjectResponse;
 import ua.pidopryhora.mediaconverter.common.aws.AwsProperties;
-import ua.pidopryhora.mediaconverter.core.service.DirectoryManager;
+import ua.pidopryhora.mediaconverter.core.service.DirectoryCreator;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -21,18 +21,18 @@ public class S3Downloader {
 
     private final S3Client s3Client;
     private final AwsProperties awsProperties;
-    private final DirectoryManager directoryManager;
+    private final DirectoryCreator directoryCreator;
 
-    public S3Downloader(S3Client s3Client, AwsProperties awsProperties, DirectoryManager directoryManager) {
+    public S3Downloader(S3Client s3Client, AwsProperties awsProperties, DirectoryCreator directoryCreator) {
         this.s3Client = s3Client;
         this.awsProperties = awsProperties;
-        this.directoryManager = directoryManager;
+        this.directoryCreator = directoryCreator;
     }
     //TODO: Needs investigation why two parameters needed in this method input. Looks unnecessary.
 
     public Path download(String key, Path filePath) {
         log.debug("Downloading file with key {} from S3 to {}", key, filePath);
-        directoryManager.createDirectory(filePath.getParent());
+        directoryCreator.createDirectory(filePath.getParent());
         try {
             String bucketName = awsProperties.getUploadBucketName();
             log.debug("Bucket name {}", bucketName);

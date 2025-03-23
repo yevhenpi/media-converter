@@ -12,8 +12,8 @@ import ua.pidopryhora.mediaconverter.requestmanager.model.validation.jakarta.*;
 @Getter
 @ToString
 @MustExist
-@GroupSequence({BasicCheck.class, AdvancedCheck.class, AudioConversionRequestDTO.class})
-public class AudioConversionRequestDTO extends RequestDTO {
+@GroupSequence({BasicCheck.class, AdvancedCheck.class, AudioJobRequestDTO.class})
+public class AudioJobRequestDTO extends RequestDTO {
     //TODO: Advanced validation would be great
 
 
