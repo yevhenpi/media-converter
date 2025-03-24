@@ -13,7 +13,7 @@ import ua.pidopryhora.mediaconverter.requestmanager.service.RequestProcessor;
 @RequestMapping("/api/v1/jobs")
 @Validated
 @RequiredArgsConstructor
-public class AudioConversionController {
+public class JobRequestController {
 
     private final RequestProcessor<AudioJobRequestDTO> requestProcessor;
 

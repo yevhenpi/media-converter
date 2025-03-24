@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ua.pidopryhora.mediaconverter.requestmanager.model.DownloadRequestDTO;
+import ua.pidopryhora.mediaconverter.requestmanager.model.UploadRequestDTO;
+import ua.pidopryhora.mediaconverter.requestmanager.service.RequestProcessor;
 import ua.pidopryhora.mediaconverter.requestmanager.service.s3.S3PresignedUrlService;
 
 import java.util.Map;
@@ -20,14 +22,16 @@ import java.util.Map;
 public class DownloadRequestController {
 
     private final S3PresignedUrlService presignedUrlService;
+    private final RequestProcessor<DownloadRequestDTO> requestProcessor;
 
     @GetMapping("/download")
-    public ResponseEntity<?> extractRequestData(@Valid DownloadRequestDTO request){
+    public ResponseEntity<?> extractRequestData(@RequestHeader("UserId") String userId,
+                                                @RequestHeader("UserRole") String userRole,
+                                                DownloadRequestDTO requestDTO){
 
-        String url = presignedUrlService.generateDownloadPresignedUrl(request.getJobId()).toString();
+        requestDTO.setRole(userRole);
+        requestDTO.setUserId(Long.parseLong(userId));
 
-
-        return ResponseEntity.ok(Map.of("url",url,
-                "jobId", request.getJobId()));
+        return requestProcessor.processRequest(requestDTO);
     }
 }

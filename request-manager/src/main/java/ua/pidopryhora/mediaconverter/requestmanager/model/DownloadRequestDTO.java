@@ -11,9 +11,14 @@ import ua.pidopryhora.mediaconverter.requestmanager.model.validation.jakarta.Job
 @Getter
 @Setter
 @GroupSequence({BasicCheck.class, AdvancedCheck.class, DownloadRequestDTO.class})
-public class DownloadRequestDTO {
+public class DownloadRequestDTO extends RequestDTO {
 
     @JobMustExist(groups = BasicCheck.class)
     @JobMustBeDone(groups = AdvancedCheck.class)
     String jobId;
+
+    String role;
+    long userId;
+
+
 }

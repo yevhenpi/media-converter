@@ -10,10 +10,10 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/api/v1/jobs")
-public class StatusController {
+public class StatusRequestController {
     private final JobDataService jobDataService;
 
-    public StatusController(JobDataService jobDataService) {
+    public StatusRequestController(JobDataService jobDataService) {
         this.jobDataService = jobDataService;
     }
 
