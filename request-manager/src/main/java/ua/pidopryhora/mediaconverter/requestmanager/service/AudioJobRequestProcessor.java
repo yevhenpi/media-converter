@@ -22,18 +22,18 @@ public class AudioJobRequestProcessor implements RequestProcessor<AudioJobReques
     private final UpdateProducer updateProducer;
     private final JobDataService jobDataService;
     private final JobFactory<AudioJobRequestDTO, AudioJobDTO> jobFactory;
-    private final UploadValidationService<AudioJobRequestDTO> uploadValidationService;
+    private final RequestValidationService<AudioJobRequestDTO> uploadRequestValidationService;
 
     public ResponseEntity<?> processRequest(@Valid AudioJobRequestDTO requestDTO){
 
-        uploadValidationService.validate(requestDTO);
+        uploadRequestValidationService.validate(requestDTO);
 
         var job = jobFactory.createJob(requestDTO);
 
         updateProducer.produce(AUDIO_CONVERSION_QUEUE, job);
         jobDataService.saveData(job);
 
-        return ResponseEntity.ok().body(Map.of("message", "conversion is started",
+        return ResponseEntity.ok().body(Map.of("message", "processing is started",
                 "jobId", job.getJobId()));
     }
 }

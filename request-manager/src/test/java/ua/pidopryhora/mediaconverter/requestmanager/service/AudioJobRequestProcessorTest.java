@@ -37,7 +37,7 @@ class AudioJobRequestProcessorTest {
     private JobFactory<AudioJobRequestDTO, AudioJobDTO> jobFactory;
 
     @Mock
-    private UploadValidationService<AudioJobRequestDTO> uploadValidationService;
+    private RequestValidationService<AudioJobRequestDTO> uploadRequestValidationService;
 
     @InjectMocks
     private AudioJobRequestProcessor audioJobRequestProcessor;
@@ -55,7 +55,7 @@ class AudioJobRequestProcessorTest {
     @Test
     void testProcessRequest_Success() {
         ArgumentCaptor<AudioJobDTO> jobCaptor = ArgumentCaptor.forClass(AudioJobDTO.class);
-        doNothing().when(uploadValidationService).validate(requestDTO);
+        doNothing().when(uploadRequestValidationService).validate(requestDTO);
 
         ResponseEntity<?> response = audioJobRequestProcessor.processRequest(requestDTO);
 
@@ -66,7 +66,7 @@ class AudioJobRequestProcessorTest {
         assertEquals("conversion is started", responseBody.get("message"));
         assertEquals("1", responseBody.get("jobId"));
 
-        verify(uploadValidationService).validate(requestDTO);
+        verify(uploadRequestValidationService).validate(requestDTO);
         verify(jobFactory).createJob(requestDTO);
         verify(updateProducer).produce(eq(AUDIO_CONVERSION_QUEUE), jobCaptor.capture());
         assertEquals(job, jobCaptor.getValue());
@@ -75,13 +75,13 @@ class AudioJobRequestProcessorTest {
 
     @Test
     void testProcessRequest_ValidationFailure() {
-        doThrow(new ValidationException("Validation failed", HttpStatus.BAD_REQUEST)).when(uploadValidationService).validate(requestDTO);
+        doThrow(new ValidationException("Validation failed", HttpStatus.BAD_REQUEST)).when(uploadRequestValidationService).validate(requestDTO);
 
         // Act & Assert
         ValidationException exception = assertThrows(ValidationException.class, () -> audioJobRequestProcessor.processRequest(requestDTO));
         assertEquals("Validation failed", exception.getMessage());
 
-        verify(uploadValidationService).validate(requestDTO);
+        verify(uploadRequestValidationService).validate(requestDTO);
         verifyNoInteractions(jobFactory, updateProducer, jobDataService);
     }
 

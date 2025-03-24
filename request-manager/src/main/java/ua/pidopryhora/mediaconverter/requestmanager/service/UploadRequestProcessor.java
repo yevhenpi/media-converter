@@ -20,12 +20,12 @@ public class UploadRequestProcessor implements RequestProcessor<UploadRequestDTO
 
     private final PresignedUrlService presignedUrlService;
     private final UploadRequestCachingService uploadRequestCachingService;
-    private final UploadValidationService<UploadRequestDTO> uploadValidationService;
+    private final RequestValidationService<UploadRequestDTO> uploadRequestValidationService;
 
     @Override
     public ResponseEntity<?> processRequest(@Valid UploadRequestDTO requestDTO){
 
-        uploadValidationService.validate(requestDTO);
+        uploadRequestValidationService.validate(requestDTO);
 
         URL presignedUrl = presignedUrlService.generatePresignedUrl(requestDTO);
         uploadRequestCachingService.cacheData(requestDTO);

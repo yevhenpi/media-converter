@@ -13,7 +13,7 @@ import ua.pidopryhora.mediaconverter.requestmanager.model.validation.jakarta.*;
 @Setter
 @Getter
 @ToString
-@FileSizeValidation
+//@FileSizeValidation
 @MustNotExist(groups = BasicCheck.class)
 @GroupSequence({BasicCheck.class, AdvancedCheck.class, UploadRequestDTO.class})
 public class UploadRequestDTO extends RequestDTO{

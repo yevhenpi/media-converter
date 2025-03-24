@@ -2,11 +2,8 @@ package ua.pidopryhora.mediaconverter.requestmanager.repository;
 
 
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +14,7 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import ua.pidopryhora.mediaconverter.requestmanager.entity.FileData;
 import ua.pidopryhora.mediaconverter.requestmanager.service.EventProcessor;
+import ua.pidopryhora.mediaconverter.requestmanager.service.RequestValidationService;
 import ua.pidopryhora.mediaconverter.requestmanager.service.sqs.SqsPoller;
 
 import java.util.ArrayList;
@@ -24,7 +22,6 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
@@ -111,6 +108,11 @@ class FileDataRepositoryTest {
         @Bean
         public SqsPoller sqsPoller() {
             return mock(SqsPoller.class);
+        }
+
+        @Bean
+        public RequestValidationService validationService() {
+            return mock(RequestValidationService.class);
         }
 
 
