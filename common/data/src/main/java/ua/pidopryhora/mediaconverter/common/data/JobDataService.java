@@ -65,10 +65,12 @@ public class JobDataService {
 
     }
     public List<JobStatusDto> getStatuses(List<String> jobId){
-        return   getJobs(jobId)
+
+            return   getJobs(jobId)
                 .stream()
                 .map(jobData -> new JobStatusDto(jobData.getJobId(), jobData.getJobStatus()))
                 .toList();
+
 
     }
 

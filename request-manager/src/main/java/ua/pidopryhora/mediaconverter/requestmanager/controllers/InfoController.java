@@ -24,7 +24,6 @@ public class InfoController {
     @GetMapping("/files")
     public ResponseEntity<?> getFile(@RequestHeader("UserId") String userId){
 
-
         return ResponseEntity.ok(fileDataService.getUserFiles(Long.valueOf(userId)));
     }
 

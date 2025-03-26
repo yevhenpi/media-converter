@@ -189,7 +189,7 @@ Example requests:
     curl --insecure -X POST "https://api.example.com/api/v1/jobs/status" \
           -H "Content-Type: application/json" \
           -H "Authorization: Bearer YOUR_TOKEN" \
-          -d '["JOB_ID_1","JOB_ID_2","JOB_ID_3]'
+          -d '{"jobIds": [JOB_ID_1, JOB_ID_2, JOB_ID_3]}'
 Example response:
 
     [
