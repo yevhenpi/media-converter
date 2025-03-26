@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Setter
 public abstract class RequestDTO implements Serializable {
 
-    protected String fileName;
+   // protected String fileName;
     protected long userId;
     protected String role;
 }

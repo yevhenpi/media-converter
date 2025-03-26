@@ -13,8 +13,7 @@ import ua.pidopryhora.mediaconverter.requestmanager.model.validation.jakarta.*;
 @Setter
 @Getter
 @ToString
-//@FileSizeValidation
-@MustNotExist(groups = BasicCheck.class)
+//@MustNotExist(groups = BasicCheck.class)
 @GroupSequence({BasicCheck.class, AdvancedCheck.class, UploadRequestDTO.class})
 public class UploadRequestDTO extends RequestDTO{
     //TODO: Create GenericFormatValidation annotation.Complex validation IS TEMPORARY here, complex logic should be moved to service layer.

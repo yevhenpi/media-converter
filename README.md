@@ -184,7 +184,7 @@ Empty Array:
 
 If the array is empty (e.g., []), the response will return a list of all jobs for this specific user.
 
-Example requets:
+Example requests:
 
     curl --insecure -X POST "https://api.example.com/api/v1/jobs/status" \
           -H "Content-Type: application/json" \
@@ -228,7 +228,7 @@ Example response:
 For now this endpoint is underdeveloped so no registration available, only test accounts.
 Test credentials are provided in example below. 
 
-    curl --insecure -X POST "https://localhost:8443/auth/login" \
+    curl --insecure -X POST "https://localhost:8085/auth/login" \
           -H "Content-Type: application/json" \
           -d '{"login": "admin@gmail.com", "password": "test"}'
 
