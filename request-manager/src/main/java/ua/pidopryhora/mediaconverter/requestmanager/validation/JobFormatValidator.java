@@ -25,12 +25,12 @@ public class JobFormatValidator<T extends JobRequestDTO> implements Validator<T>
     }
 
     private void validateAudioJob(T requestDTO){
-        if (!javeDataSupplier.getAudioFormats().contains(requestDTO.getOutputFormat()))
+        if (!javeDataSupplier.getSupportedAudioFormats().contains(requestDTO.getOutputFormat()))
             throw  new ValidationException("Format is not supported", HttpStatus.BAD_REQUEST);
 
     }
     private void validateVideoJob(T requestDTO){
-        if (!javeDataSupplier.getVideoFormats().contains(requestDTO.getOutputFormat()))
+        if (!javeDataSupplier.getSupportedVideoFormats().contains(requestDTO.getOutputFormat()))
             throw  new ValidationException("Format is not supported", HttpStatus.BAD_REQUEST);
 
     }

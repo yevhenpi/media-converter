@@ -31,7 +31,7 @@ public class InfoController {
     @GetMapping("/formats/audio")
     public ResponseEntity<?> getFormats(){
 
-        return ResponseEntity.ok(javeDataSupplier.getAudioFormats());
+        return ResponseEntity.ok(javeDataSupplier.getSupportedVideoFormats());
     }
 
     @GetMapping("/encoders/audio")

@@ -1,5 +1,6 @@
 package ua.pidopryhora.mediaconverter.common.jave2;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import ws.schild.jave.Encoder;
@@ -12,6 +13,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Slf4j
+@Getter
 @Component
 public class JAVEDataSupplier {
 
@@ -32,9 +34,7 @@ public class JAVEDataSupplier {
         loadSupportedFormats();
     }
 
-    /**
-     * Loads supported formats on application startup.
-     */
+
     private void loadSupportedFormats() {
         try {
             encodingFormats = Arrays.asList(encoder.getSupportedEncodingFormats());
@@ -47,39 +47,6 @@ public class JAVEDataSupplier {
             log.error("Failed to load encoding/decoding formats", e);
             encodingFormats = decodingFormats = audioEncoders = audioDecoders = videoEncoders = videoDecoders = Collections.emptyList();
         }
-    }
-
-    public String[] getEncodingFormats() {
-        return encodingFormats.toArray(new String[0]);
-    }
-
-    public String[] getDecodingFormats() {
-        return decodingFormats.toArray(new String[0]);
-    }
-
-    public String[] getAudioEncoders() {
-        return audioEncoders.toArray(new String[0]);
-    }
-
-    public String[] getAudioDecoders() {
-        return audioDecoders.toArray(new String[0]);
-    }
-
-    public String[] getVideoEncoders() {
-        return videoEncoders.toArray(new String[0]);
-    }
-
-    public String[] getVideoDecoders() {
-        return videoDecoders.toArray(new String[0]);
-    }
-
-    public List<String> getAudioFormats() {
-        return supportedAudioFormats;
-    }
-
-    public List<String > getVideoFormats() {
-
-        return supportedVideoFormats;
     }
 
     public List<String> getAllFormats(){

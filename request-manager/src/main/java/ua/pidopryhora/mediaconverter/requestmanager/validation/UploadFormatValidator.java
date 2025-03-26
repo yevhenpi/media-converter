@@ -15,7 +15,6 @@ import java.util.Arrays;
 public class UploadFormatValidator implements Validator<UploadRequestDTO>{
 
     private final JAVEDataSupplier javeDataSupplier;
-    //TODO: Convertation to list looks like class design problem.
 
 
     @Override

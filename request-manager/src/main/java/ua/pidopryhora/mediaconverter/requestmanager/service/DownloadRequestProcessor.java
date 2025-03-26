@@ -15,9 +15,12 @@ import java.util.Map;
 public class DownloadRequestProcessor implements RequestProcessor<DownloadRequestDTO> {
 
     private final S3PresignedUrlService presignedUrlService;
+    private final DownloadRequestValidationService validationService;
 
     @Override
     public ResponseEntity<?> processRequest(@Valid DownloadRequestDTO requestDTO) {
+
+        validationService.validateRequest(requestDTO);
 
         String url = presignedUrlService.generateDownloadPresignedUrl(requestDTO.getJobId()).toString();
 

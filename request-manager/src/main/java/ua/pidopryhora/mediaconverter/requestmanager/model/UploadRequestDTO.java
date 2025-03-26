@@ -12,9 +12,7 @@ import lombok.ToString;
 @Getter
 @ToString
 public class UploadRequestDTO extends RequestDTO{
-    //TODO: Create GenericFormatValidation annotation.Complex validation IS TEMPORARY here, complex logic should be moved to service layer.
 
-    //Switch to GenericFormatValidation to enable video upload
 
     @Pattern(regexp = "^[a-zA-Z0-9_.]+$", message = "Only alphanumeric characters are allowed")
     @NotBlank(message = "File name is required")
