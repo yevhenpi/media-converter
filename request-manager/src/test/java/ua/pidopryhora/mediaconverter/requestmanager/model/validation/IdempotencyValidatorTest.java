@@ -11,6 +11,7 @@ import ua.pidopryhora.mediaconverter.requestmanager.model.AudioJobRequestDTO;
 import ua.pidopryhora.mediaconverter.requestmanager.model.RequestDTO;
 import ua.pidopryhora.mediaconverter.requestmanager.model.UploadRequestDTO;
 import ua.pidopryhora.mediaconverter.requestmanager.service.IdempotencyService;
+import ua.pidopryhora.mediaconverter.requestmanager.validation.IdempotencyValidator;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;

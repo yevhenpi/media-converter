@@ -2,8 +2,8 @@ package ua.pidopryhora.mediaconverter.requestmanager.service;
 
 import org.springframework.stereotype.Service;
 import ua.pidopryhora.mediaconverter.requestmanager.model.AudioJobRequestDTO;
-import ua.pidopryhora.mediaconverter.requestmanager.model.validation.FileExistenceValidator;
-import ua.pidopryhora.mediaconverter.requestmanager.model.validation.IdempotencyValidator;
+import ua.pidopryhora.mediaconverter.requestmanager.validation.FileExistenceValidator;
+import ua.pidopryhora.mediaconverter.requestmanager.validation.IdempotencyValidator;
 @Service
 public class AudioJobRequestValidationService implements RequestValidationService<AudioJobRequestDTO> {
 

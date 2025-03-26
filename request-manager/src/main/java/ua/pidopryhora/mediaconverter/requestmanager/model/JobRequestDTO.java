@@ -8,6 +8,5 @@ import lombok.Setter;
 public abstract class JobRequestDTO extends RequestDTO{
 
     public String fileName;
-    public long userId;
-    public String role;
+
 }

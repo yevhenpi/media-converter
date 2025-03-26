@@ -63,7 +63,7 @@ class AudioJobRequestProcessorTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         Map<String, String> responseBody = (Map<String, String>) response.getBody();
         assert responseBody != null;
-        assertEquals("conversion is started", responseBody.get("message"));
+        assertEquals("processing is started", responseBody.get("message"));
         assertEquals("1", responseBody.get("jobId"));
 
         verify(uploadRequestValidationService).validate(requestDTO);

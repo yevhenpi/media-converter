@@ -1,4 +1,4 @@
-package ua.pidopryhora.mediaconverter.requestmanager.model.validation;
+package ua.pidopryhora.mediaconverter.requestmanager.validation;
 
 import ua.pidopryhora.mediaconverter.requestmanager.exception.ValidationException;
 import ua.pidopryhora.mediaconverter.requestmanager.model.RequestDTO;

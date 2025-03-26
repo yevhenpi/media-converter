@@ -8,6 +8,8 @@ import ws.schild.jave.EncoderException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Slf4j
 @Component
@@ -23,6 +25,7 @@ public class JAVEDataSupplier {
     private List<String> videoDecoders;
 
     private final List<String> supportedAudioFormats = Arrays.asList("mp3", "wav", "flac", "ogg", "opus", "ac3");
+    private final List<String> supportedVideoFormats = Arrays.asList("mp4", "avi", "mov", "mpeg", "mkv", "webm");
 
     public JAVEDataSupplier() {
         this.encoder = new Encoder();
@@ -72,5 +75,19 @@ public class JAVEDataSupplier {
 
     public String[] getAudioFormats() {
         return supportedAudioFormats.toArray(new String[0]);
+    }
+
+    public String[] getVideoFormats() {
+        return supportedVideoFormats.toArray(new String[0]);
+    }
+
+    public String[] getAllFormats(){
+        List<String> supportedFormats = Stream.concat(
+                supportedAudioFormats.stream(),
+                supportedVideoFormats.stream()
+        ).toList();
+
+        return supportedFormats.toArray(new String[0]);
+
     }
 }

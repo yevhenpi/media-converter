@@ -71,7 +71,7 @@ Ensure that all these AWS configurations are correctly set up to allow the appli
 
 5.Configure .env.example files and rename them to .env
 
-6.Install with maven and pray:
+6.Build with maven and pray:
 
 
     mvn install

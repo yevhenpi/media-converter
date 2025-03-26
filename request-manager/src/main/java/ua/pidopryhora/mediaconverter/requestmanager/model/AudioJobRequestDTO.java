@@ -1,26 +1,23 @@
 package ua.pidopryhora.mediaconverter.requestmanager.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.validation.GroupSequence;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import ua.pidopryhora.mediaconverter.requestmanager.model.validation.jakarta.*;
+import ua.pidopryhora.mediaconverter.requestmanager.validation.jakarta.AudioFormatValidation;
 
 @Setter
 @Getter
 @ToString
-//@MustExist
-@GroupSequence({BasicCheck.class, AdvancedCheck.class, AudioJobRequestDTO.class})
 public class AudioJobRequestDTO extends JobRequestDTO {
     //TODO: Advanced validation would be great
 
 
-    @NotBlank(message = "File name is required",groups = BasicCheck.class)
+    @NotBlank(message = "File name is required")
     private String fileName;
-    @NotBlank(message = "Output format is required", groups = BasicCheck.class)
-    @AudioFormatValidation(groups = BasicCheck.class)
+    @NotBlank(message = "Output format is required")
+    @AudioFormatValidation
     private String outputFormat;
 
     private String codec = null;
