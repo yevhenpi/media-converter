@@ -8,5 +8,6 @@ import lombok.Setter;
 public abstract class JobRequestDTO extends RequestDTO{
 
     public String fileName;
+    public String outputFormat;
 
 }

@@ -27,7 +27,7 @@ public class AudioJobRequestProcessor implements RequestProcessor<AudioJobReques
     @Override
     public ResponseEntity<?> processRequest(@Valid AudioJobRequestDTO requestDTO){
 
-        uploadRequestValidationService.validate(requestDTO);
+        uploadRequestValidationService.validateRequest(requestDTO);
 
         var job = jobFactory.createJob(requestDTO);
 

@@ -55,7 +55,7 @@ class AudioJobRequestProcessorTest {
     @Test
     void testProcessRequest_Success() {
         ArgumentCaptor<AudioJobDTO> jobCaptor = ArgumentCaptor.forClass(AudioJobDTO.class);
-        doNothing().when(uploadRequestValidationService).validate(requestDTO);
+        doNothing().when(uploadRequestValidationService).validateRequest(requestDTO);
 
         ResponseEntity<?> response = audioJobRequestProcessor.processRequest(requestDTO);
 
@@ -66,7 +66,7 @@ class AudioJobRequestProcessorTest {
         assertEquals("processing is started", responseBody.get("message"));
         assertEquals("1", responseBody.get("jobId"));
 
-        verify(uploadRequestValidationService).validate(requestDTO);
+        verify(uploadRequestValidationService).validateRequest(requestDTO);
         verify(jobFactory).createJob(requestDTO);
         verify(updateProducer).produce(eq(AUDIO_CONVERSION_QUEUE), jobCaptor.capture());
         assertEquals(job, jobCaptor.getValue());
@@ -75,13 +75,13 @@ class AudioJobRequestProcessorTest {
 
     @Test
     void testProcessRequest_ValidationFailure() {
-        doThrow(new ValidationException("Validation failed", HttpStatus.BAD_REQUEST)).when(uploadRequestValidationService).validate(requestDTO);
+        doThrow(new ValidationException("Validation failed", HttpStatus.BAD_REQUEST)).when(uploadRequestValidationService).validateRequest(requestDTO);
 
         // Act & Assert
         ValidationException exception = assertThrows(ValidationException.class, () -> audioJobRequestProcessor.processRequest(requestDTO));
         assertEquals("Validation failed", exception.getMessage());
 
-        verify(uploadRequestValidationService).validate(requestDTO);
+        verify(uploadRequestValidationService).validateRequest(requestDTO);
         verifyNoInteractions(jobFactory, updateProducer, jobDataService);
     }
 

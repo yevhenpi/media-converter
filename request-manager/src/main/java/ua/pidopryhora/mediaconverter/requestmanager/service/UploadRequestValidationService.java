@@ -19,7 +19,7 @@ public class UploadRequestValidationService implements RequestValidationService<
 
 
 
-    public void validate(UploadRequestDTO request){
+    public void validateRequest(UploadRequestDTO request){
         formatValidator.validate(request);
         fileAbsenceValidator.validate(request);
         fileSizeValidator.validate(request);

@@ -5,7 +5,6 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import ua.pidopryhora.mediaconverter.requestmanager.validation.jakarta.AudioFormatValidation;
 
 @Setter
 @Getter
@@ -17,7 +16,6 @@ public class AudioJobRequestDTO extends JobRequestDTO {
     @NotBlank(message = "File name is required")
     private String fileName;
     @NotBlank(message = "Output format is required")
-    @AudioFormatValidation
     private String outputFormat;
 
     private String codec = null;

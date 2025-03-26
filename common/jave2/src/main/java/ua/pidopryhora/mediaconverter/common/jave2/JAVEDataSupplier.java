@@ -73,21 +73,21 @@ public class JAVEDataSupplier {
         return videoDecoders.toArray(new String[0]);
     }
 
-    public String[] getAudioFormats() {
-        return supportedAudioFormats.toArray(new String[0]);
+    public List<String> getAudioFormats() {
+        return supportedAudioFormats;
     }
 
-    public String[] getVideoFormats() {
-        return supportedVideoFormats.toArray(new String[0]);
+    public List<String > getVideoFormats() {
+
+        return supportedVideoFormats;
     }
 
-    public String[] getAllFormats(){
-        List<String> supportedFormats = Stream.concat(
+    public List<String> getAllFormats(){
+
+        return Stream.concat(
                 supportedAudioFormats.stream(),
                 supportedVideoFormats.stream()
         ).toList();
-
-        return supportedFormats.toArray(new String[0]);
 
     }
 }

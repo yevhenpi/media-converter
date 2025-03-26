@@ -22,7 +22,8 @@ public class UploadFormatValidator implements Validator<UploadRequestDTO>{
     public void validate(UploadRequestDTO requestDTO) throws ValidationException {
         var fileFormat = extractFormatFromName(requestDTO.getFileName());
 
-        if (!Arrays.asList(javeDataSupplier.getAllFormats()).contains(fileFormat)) throw  new ValidationException("Format is not supported", HttpStatus.BAD_REQUEST);
+        if (!javeDataSupplier.getAllFormats().contains(fileFormat))
+            throw  new ValidationException("Format is not supported", HttpStatus.BAD_REQUEST);
 
     }
 
