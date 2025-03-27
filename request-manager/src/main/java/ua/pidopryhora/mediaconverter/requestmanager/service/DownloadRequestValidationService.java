@@ -17,7 +17,5 @@ public class DownloadRequestValidationService implements RequestValidationServic
     public void validateRequest(DownloadRequestDTO requestDTO) {
         jobExistenceValidator.validate(requestDTO);
         statusValidator.validate(requestDTO);
-
-
     }
 }

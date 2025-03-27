@@ -8,9 +8,9 @@ import java.util.Map;
 @Service
 public class UserLimitsProvider {
 
-    private static final long GUEST_MAX_FILE_SIZE = 1000000L;
-    private static final long BASIC_MAX_FILE_SIZE = 5000000L;
-    private static final long PREMIUM_MAX_FILE_SIZE = 10000000L;
+    private static final long GUEST_MAX_FILE_SIZE = 1_000_000L;
+    private static final long BASIC_MAX_FILE_SIZE = 5_000_000L;
+    private static final long PREMIUM_MAX_FILE_SIZE = 10_000_000L;
 
 
     private final Map<UserRole, UserLimits> limitsMap = Map.of(

@@ -3,7 +3,6 @@ package ua.pidopryhora.mediaconverter.requestmanager.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestHeader;
 import ua.pidopryhora.mediaconverter.common.data.JobDataService;
 import ua.pidopryhora.mediaconverter.requestmanager.model.StatusRequestDTO;
 @Service

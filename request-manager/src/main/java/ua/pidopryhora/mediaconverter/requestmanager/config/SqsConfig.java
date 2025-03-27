@@ -9,7 +9,6 @@ import software.amazon.awssdk.services.sqs.SqsAsyncClient;
 import software.amazon.awssdk.services.sqs.SqsClient;
 
 @Configuration
-
 public class SqsConfig {
 
     private final AwsCredentialsProvider credentialsProvider;

@@ -13,7 +13,6 @@ public class UploadRequestCachingService extends RedisCachingService<UploadReque
     private final long TTL_DURATION = 15L;
 
 
-
     public UploadRequestCachingService(RedisTemplate<String, UploadRequestDTO> objectRedisTemplate) {
         super(objectRedisTemplate);
     }

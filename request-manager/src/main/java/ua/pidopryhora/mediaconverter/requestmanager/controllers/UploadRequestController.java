@@ -14,7 +14,6 @@ import ua.pidopryhora.mediaconverter.requestmanager.service.RequestProcessor;
 @CrossOrigin(origins = "*")
 public class UploadRequestController {
 
-
     private final RequestProcessor<UploadRequestDTO> uploadRequestProcessor;
 
     @PostMapping("/files")

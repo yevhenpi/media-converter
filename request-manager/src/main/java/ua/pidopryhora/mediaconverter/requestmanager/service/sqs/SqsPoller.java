@@ -12,19 +12,24 @@ import software.amazon.awssdk.services.sqs.model.ReceiveMessageRequest;
 import ua.pidopryhora.mediaconverter.requestmanager.service.EventProcessor;
 
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
 @Slf4j
 @Service
 public class SqsPoller {
-    //TODO: Add exception handling and service reload. Add polling on request feature.
 
     private final SqsClient sqsClient;
     private final EventProcessor eventProcessor;
+
     @Value("${sqs.queue.url}")
     private String queueUrl;
-    private Thread pollerThread;
 
+    private final ExecutorService executorService = Executors.newSingleThreadExecutor();
+    private volatile boolean running = true;
 
-    public SqsPoller(SqsClient sqsClient, EventProcessor eventProcessor){
+    public SqsPoller(SqsClient sqsClient, EventProcessor eventProcessor) {
         this.sqsClient = sqsClient;
         this.eventProcessor = eventProcessor;
     }
@@ -32,12 +37,11 @@ public class SqsPoller {
     @PostConstruct
     public void init() {
         log.debug("Starting SQS Poller...");
-        pollerThread = new Thread(this::poll);
-        pollerThread.start();
+        executorService.submit(this::poll);
     }
 
     public void poll() {
-        while (true) {
+        while (running) {
             try {
                 ReceiveMessageRequest request = ReceiveMessageRequest.builder()
                         .queueUrl(queueUrl)
@@ -48,44 +52,62 @@ public class SqsPoller {
                 List<Message> messages = sqsClient.receiveMessage(request).messages();
 
                 for (Message message : messages) {
-                    try {
-                        eventProcessor.processMessage(message.body());
-                        deleteMessage(message.receiptHandle());
-                    } catch (Exception e) {
-                        log.error("Failed to process message: " , e);
-                        deleteMessage(message.receiptHandle());
-                    }
+                    processAndDeleteMessage(message);
                 }
 
-            }
-            catch (Exception e) {
-                if(Thread.currentThread().isInterrupted()) {
-                    log.debug("Shutting down SQS Poller...");
+            } catch (Exception e) {
+                // Log and wait before retrying to prevent rapid failure loops.
+                if (!running) {
                     break;
                 }
-
-                log.error("Error while polling SQS queue: " ,e);
-                break;
+                log.error("Error while polling SQS queue: ", e);
+                try {
+                    TimeUnit.SECONDS.sleep(5);
+                } catch (InterruptedException ie) {
+                    Thread.currentThread().interrupt();
+                }
             }
+        }
+    }
+
+    private void processAndDeleteMessage(Message message) {
+        try {
+            // Process the message using the injected event processor.
+            eventProcessor.processMessage(message.body());
+        } catch (Exception e) {
+            log.error("Failed to process message with receipt handle {}: ", message.receiptHandle(), e);
+        } finally {
+            // Always attempt to delete the message to prevent reprocessing.
+            deleteMessage(message.receiptHandle());
         }
     }
 
     private void deleteMessage(String receiptHandle) {
-        DeleteMessageRequest request = DeleteMessageRequest.builder()
+        DeleteMessageRequest deleteRequest = DeleteMessageRequest.builder()
                 .queueUrl(queueUrl)
                 .receiptHandle(receiptHandle)
                 .build();
-        sqsClient.deleteMessage(request);
-        log.debug("Deleted message with receipt handle: {}", receiptHandle);
+        try {
+            sqsClient.deleteMessage(deleteRequest);
+            log.debug("Deleted message with receipt handle: {}", receiptHandle);
+        } catch (Exception e) {
+            log.error("Failed to delete message with receipt handle {}: ", receiptHandle, e);
+        }
     }
 
     @PreDestroy
     public void shutdown() {
-        if (pollerThread != null && pollerThread.isAlive()) {
-            pollerThread.interrupt();
+        log.debug("Shutting down SQS Poller...");
+        running = false;
+        executorService.shutdown();
+        try {
+            if (!executorService.awaitTermination(30, TimeUnit.SECONDS)) {
+                executorService.shutdownNow();
+            }
+        } catch (InterruptedException e) {
+            executorService.shutdownNow();
+            Thread.currentThread().interrupt();
         }
         sqsClient.close();
     }
-
-
 }

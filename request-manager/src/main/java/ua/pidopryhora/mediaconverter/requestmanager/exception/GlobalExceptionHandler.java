@@ -32,12 +32,6 @@ public class GlobalExceptionHandler {
         });
         return ResponseEntity.badRequest().body(errors);
     }
-    @ExceptionHandler(FileAlreadyUploadedException.class)
-    public ResponseEntity<Map<String, String>> handleFileAlreadyUploadedException(FileAlreadyUploadedException e) {
-        Map<String, String> error = new HashMap<>();
-        error.put("error", e.getMessage());
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
-    }
 
     @ExceptionHandler(ValidationException.class)
     public ResponseEntity<?> handleValidationException(ValidationException e) {

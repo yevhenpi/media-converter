@@ -9,6 +9,8 @@ import java.io.Serializable;
 @Setter
 public abstract class RequestDTO implements Serializable {
 
+    //TODO:Figure out field inheritance compatibility with builder pattern
+
    // protected String fileName;
     protected long userId;
     protected String role;

@@ -28,7 +28,6 @@ public class S3Downloader {
         this.awsProperties = awsProperties;
         this.directoryCreator = directoryCreator;
     }
-    //TODO: Needs investigation why two parameters needed in this method input. Looks unnecessary.
 
     public Path download(String key, Path filePath) {
         log.debug("Downloading file with key {} from S3 to {}", key, filePath);

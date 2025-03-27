@@ -51,8 +51,7 @@ public class S3PresignedUrlService implements PresignedUrlService {
         return presigner.presignPutObject(presignRequest).url();
     }
 
-    public URL generateDownloadPresignedUrl(String jobId){
-        String key = jobDataService.getJob(jobId).getS3Key();
+    public URL generateDownloadPresignedUrl(String key){
         GetObjectRequest getObjectRequest = GetObjectRequest.builder()
                 .bucket(awsProperties.getCoreBucketName())
                 .key(key)

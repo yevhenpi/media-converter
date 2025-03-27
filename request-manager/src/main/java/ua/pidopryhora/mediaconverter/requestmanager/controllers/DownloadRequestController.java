@@ -21,7 +21,6 @@ import java.util.Map;
 @Validated
 public class DownloadRequestController {
 
-    private final S3PresignedUrlService presignedUrlService;
     private final RequestProcessor<DownloadRequestDTO> requestProcessor;
 
     @GetMapping("/download")

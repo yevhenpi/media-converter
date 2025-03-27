@@ -28,6 +28,7 @@ public class UploadRequestProcessor implements RequestProcessor<UploadRequestDTO
         uploadRequestValidationService.validateRequest(requestDTO);
 
         URL presignedUrl = presignedUrlService.generatePresignedUrl(requestDTO);
+
         uploadRequestCachingService.cacheData(requestDTO);
 
         return ResponseEntity.ok().body(Map.of(

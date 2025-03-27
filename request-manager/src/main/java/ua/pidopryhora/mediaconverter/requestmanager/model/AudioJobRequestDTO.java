@@ -2,6 +2,7 @@ package ua.pidopryhora.mediaconverter.requestmanager.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -18,10 +19,15 @@ public class AudioJobRequestDTO extends JobRequestDTO {
     @NotBlank(message = "Output format is required")
     private String outputFormat;
 
+    @Pattern(regexp = "^[a-zA-Z0-9_.]+$", message = "Only alphanumeric characters are allowed")
     private String codec = null;
+    @Pattern(regexp = "^\\d+$", message = "Must contain only numbers")
     private String samplingRate = null;
+    @Pattern(regexp = "^\\d+$", message = "Must contain only numbers")
     private String bitRate = null;
+    @Pattern(regexp = "^\\d+$", message = "Must contain only numbers")
     private String channels = null;
+    @Pattern(regexp = "^\\d+$", message = "Must contain only numbers")
     private String volume = null;
 
 

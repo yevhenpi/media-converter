@@ -20,7 +20,8 @@ public class FileSizeValidator implements Validator<UploadRequestDTO> {
 
         long maxFileSize = limitsProvider.getLimitsByRole(UserRole.valueOf(requestDTO.getRole())).maxFileSize();
 
-        if(requestDTO.getFileSize() > maxFileSize ) throw new ValidationException("You exceeded max file size for your plan", HttpStatus.FORBIDDEN);
+        if(requestDTO.getFileSize() > maxFileSize )
+            throw new ValidationException("You exceeded max file size for your plan", HttpStatus.FORBIDDEN);
 
     }
 }

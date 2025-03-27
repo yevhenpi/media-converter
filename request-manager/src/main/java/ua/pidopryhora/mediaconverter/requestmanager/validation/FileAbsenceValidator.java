@@ -14,7 +14,8 @@ public class FileAbsenceValidator implements Validator<UploadRequestDTO> {
 
     @Override
     public void validate(UploadRequestDTO request) throws ValidationException {
-        if(fileDataService.isPresent(request.getFileName(), request.getUserId())) throw new ValidationException("File is already uploaded", HttpStatus.CONFLICT);
+        if(fileDataService.isPresent(request.getFileName(), request.getUserId()))
+            throw new ValidationException("File is already uploaded", HttpStatus.CONFLICT);
 
     }
 }

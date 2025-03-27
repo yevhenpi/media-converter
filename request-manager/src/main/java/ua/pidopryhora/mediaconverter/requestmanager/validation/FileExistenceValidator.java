@@ -15,6 +15,7 @@ public class FileExistenceValidator<T extends JobRequestDTO> implements Validato
 
     @Override
     public void validate(T request) throws ValidationException {
-        if(!fileDataService.isPresent(request.getFileName(), request.getUserId())) throw new ValidationException("File is not found", HttpStatus.NOT_FOUND);
+        if(!fileDataService.isPresent(request.getFileName(), request.getUserId()))
+            throw new ValidationException("File is not found", HttpStatus.NOT_FOUND);
     }
 }
