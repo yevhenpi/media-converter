@@ -1,8 +1,12 @@
 
 server:
   port: 8095
+  ssl:
+    enabled: false
 
 spring:
+  application:
+    name: auth-server
   redis:
     host: ${REDIS_HOST:localhost}
     port: ${REDIS_PORT:6379}
@@ -20,3 +24,7 @@ spring:
         format_sql: true
 
 
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

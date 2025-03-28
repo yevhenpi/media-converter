@@ -39,6 +39,7 @@ public class WebFluxSecurityConfig {
                 .logout(LogoutSpec::disable)
                 // Authorize all requests
                 .authorizeExchange(exchanges -> exchanges
+                        .pathMatchers("/auth/login").permitAll()
                         .anyExchange().authenticated()
                 )
                 .addFilterAt(jwtAuthenticationFilter, SecurityWebFiltersOrder.AUTHENTICATION)

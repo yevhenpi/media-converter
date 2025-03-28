@@ -25,6 +25,18 @@ spring:
               redis-rate-limiter.requestedTokens: 1
               key-resolver: "#{@ipKeyResolver}"
 
+        - id: auth-server
+          uri: lb://auth-server
+          predicates:
+            - Path=/auth/**
+          filters:
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 3
+                redis-rate-limiter.requestedTokens: 3
+                key-resolver: "#{@ipKeyResolver}"
+
 eureka:
   client:
     service-url:
