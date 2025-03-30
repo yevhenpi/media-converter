@@ -11,7 +11,7 @@
     </appender>
 
     <logger name="ua.pidopryhora" level="debug" />
-<!--    <logger name="io.lettuce.core" level="debug" />-->
+<!--    <logger name="org.springframework.cloud.gateway" level="debug" />-->
 
     <!-- Root logger -->
     <root level="info">

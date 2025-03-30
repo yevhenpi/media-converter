@@ -48,6 +48,11 @@
             <artifactId>config</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>ua.pidopryhora.mediaconverter.common</groupId>
+            <artifactId>model</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 <!--        <dependency>-->
 <!--            <groupId>ua.pidopryhora.mediaconverter.common</groupId>-->
 <!--            <artifactId>cache</artifactId>-->

@@ -30,7 +30,7 @@ public class AuthService {
 
         var roles = principal.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList();
 
-        var token = jwtIssuer.issue(principal.getUserId(), principal.getEmail(), roles);
+        var token = jwtIssuer.issueAccessToken(principal.getUserId(), principal.getEmail(), roles);
 
         return LoginResponse
                 .builder()

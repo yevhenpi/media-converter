@@ -100,12 +100,14 @@ services:
       SPRING_REDIS_HOST: redis
       SPRING_REDIS_PORT: 6379
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres_db:5432/postgres
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://eureka-server:8761/eureka/
       DB_USER: postgres
     networks:
       - backend_network
     depends_on:
       - db
       - redis
+      - api-gateway
 
     profiles:
       - prod

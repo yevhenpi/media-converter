@@ -144,14 +144,14 @@ Example request with required fields only:
 
     curl --insecure -X POST "https://localhost:8443/api/v1/jobs/audio" \
           -H "Content-Type: application/json" \
-          -H "Authorization: Bearer YOUR_TOKEN" 
+          -H "Authorization: Bearer YOUR_TOKEN" \
           -d '{"fileName": "sample.mp3", "outputFormat": "wav"}'
 
 Example request with required fields and ALL optional fields:
 
     curl --insecure -X POST "https://localhost:8443/api/v1/jobs/audio" \
           -H "Content-Type: application/json" \
-          -H "Authorization: Bearer YOUR_TOKEN" 
+          -H "Authorization: Bearer YOUR_TOKEN" \
           -d '{
                "fileName": "sample.mp3", 
                "outputFormat": "wav",
@@ -186,7 +186,7 @@ If the array is empty (e.g., []), the response will return a list of all jobs fo
 
 Example requests:
 
-    curl --insecure -X POST "https://api.example.com/api/v1/jobs/status" \
+    curl --insecure -X POST "https://localhost:8443/api/v1/jobs/status" \
           -H "Content-Type: application/json" \
           -H "Authorization: Bearer YOUR_TOKEN" \
           -d '{"jobIds": [JOB_ID_1, JOB_ID_2, JOB_ID_3]}'
@@ -228,17 +228,17 @@ Example response:
 For now this endpoint is underdeveloped so no registration available, only test accounts.
 Test credentials are provided in example below. 
 
-    curl --insecure -X POST "https://localhost:8085/auth/login" \
+    curl --insecure -X POST "https://localhost:8443/auth/login" \
           -H "Content-Type: application/json" \
-          -d '{"login": "admin@gmail.com", "password": "test"}'
+          -d '{"email": "admin@gmail.com", "password": "test"}'
 
 ### Info endpoints
 
-Get list of codecs:
+GET list of codecs:
 
     /api/v1/encoders/audio
   
-Get list of supported audio format extensions:
+GET list of supported audio format extensions:
      
     /api/v1/formats/audio
 

@@ -1,8 +1,8 @@
 package ua.pidopryhora.mediaconverter.requestmanager.model;
 
 import org.springframework.stereotype.Service;
+import ua.pidopryhora.mediaconverter.common.model.UserRole;
 
-import javax.swing.*;
 import java.util.Map;
 
 @Service

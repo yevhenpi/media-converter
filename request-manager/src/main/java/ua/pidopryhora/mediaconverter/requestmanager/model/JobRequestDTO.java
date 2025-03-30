@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public abstract class JobRequestDTO extends RequestDTO{
+public abstract class JobRequestDTO extends RequestDTO {
 
     public String fileName;
     public String outputFormat;

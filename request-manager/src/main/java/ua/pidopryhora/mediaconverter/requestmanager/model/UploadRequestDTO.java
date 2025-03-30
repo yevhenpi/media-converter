@@ -11,7 +11,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class UploadRequestDTO extends RequestDTO{
+public class UploadRequestDTO extends RequestDTO {
 
 
     @Pattern(regexp = "^[a-zA-Z0-9_.]+$", message = "Only alphanumeric characters are allowed")

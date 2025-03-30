@@ -9,6 +9,9 @@ import ua.pidopryhora.mediaconverter.auth.entity.UserData;
 
 import java.util.Optional;
 
+import static ua.pidopryhora.mediaconverter.common.model.UserRole.ADMIN;
+import static ua.pidopryhora.mediaconverter.common.model.UserRole.GUEST;
+
 @Slf4j
 @Service
 public class UserDataService {
@@ -28,7 +31,7 @@ public class UserDataService {
         UserData user = new UserData();
         user.setEmail(email);
         user.setPassword(passwordEncoder.encode(rawPassword));
-        user.setRole("USER");
+        user.setRole(String.valueOf(GUEST));
 
         return userDataRepository.save(user);
     }
@@ -57,7 +60,7 @@ public class UserDataService {
     public void addTestUsers(){
         if(userDataRepository.findAll().isEmpty()){
             createUser("user@gmail.com","test");
-            createUser("admin@gmail.com","test", "ADMIN");
+            createUser("admin@gmail.com","test", String.valueOf(ADMIN));
         }
     }
 

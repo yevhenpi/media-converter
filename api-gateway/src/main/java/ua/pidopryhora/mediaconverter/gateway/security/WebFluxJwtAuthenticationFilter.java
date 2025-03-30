@@ -16,6 +16,9 @@ import ua.pidopryhora.mediaconverter.common.security.JwtDecoder;
 import ua.pidopryhora.mediaconverter.common.security.JwtToPrincipalConverter;
 import ua.pidopryhora.mediaconverter.common.security.UserPrincipal;
 import ua.pidopryhora.mediaconverter.common.security.UserPrincipalAuthenticationToken;
+
+import static ua.pidopryhora.mediaconverter.common.model.UserRole.GUEST;
+
 @Slf4j
 @Component
 @RequiredArgsConstructor
@@ -64,7 +67,7 @@ public class WebFluxJwtAuthenticationFilter implements WebFilter {
                             .stream()
                             .findFirst()  // get the first element as Optional<GrantedAuthority>
                             .map(GrantedAuthority::getAuthority)
-                            .orElse("USER");
+                            .orElse(String.valueOf(GUEST));
                     // Add new headers with data extracted from the token.
                     httpHeaders.add("UserId", String.valueOf(principal.getUserId()));
                     httpHeaders.add("UserRole", authority);

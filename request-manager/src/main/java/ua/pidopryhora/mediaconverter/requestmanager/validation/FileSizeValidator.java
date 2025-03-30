@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import ua.pidopryhora.mediaconverter.requestmanager.model.UploadRequestDTO;
 import ua.pidopryhora.mediaconverter.requestmanager.model.UserLimitsProvider;
-import ua.pidopryhora.mediaconverter.requestmanager.model.UserRole;
+import ua.pidopryhora.mediaconverter.common.model.UserRole;
 import ua.pidopryhora.mediaconverter.requestmanager.exception.ValidationException;
 
 @Component
