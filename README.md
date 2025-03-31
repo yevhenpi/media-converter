@@ -87,9 +87,9 @@ Ensure that all these AWS configurations are correctly set up to allow the appli
  
 Workflow looks like this: 
 1. Get JWT token from /auth/login endpoint.
-2. Send POST request with file metadata to /upload endpoint and receive presigned URL.
+2. Send POST request with file metadata to /files endpoint and receive presigned URL.
 3. Upload actual file with PUT request using acquired URL. 
-4. Send POST request with conversion metadata to /jobs/convert endpoint and receive JobID.
+4. Send POST request with conversion metadata to /jobs/audio endpoint and receive JobID.
 5. If job status on /jobs/status endpoint is DONE, get download URL from /jobs/download endpoint.
 
 More detailed endpoint documentation is down below.
