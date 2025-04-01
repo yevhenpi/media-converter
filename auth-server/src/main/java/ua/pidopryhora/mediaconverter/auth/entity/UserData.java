@@ -2,13 +2,16 @@ package ua.pidopryhora.mediaconverter.auth.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.context.annotation.Bean;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
+@Builder
+@AllArgsConstructor
 @Entity
 @Table(name = "UserData")
 public class UserData {
@@ -29,5 +32,15 @@ public class UserData {
 
     @Column(name = "status", nullable = false)
     private String status = "OK";
+
+    @JsonIgnore
+    @Column(name = "refresh_token")
+    private String refreshToken;
+
+//    @CreationTimestamp
+//    @Column(name = "created_at", nullable = false, updatable = false)
+//    private LocalDateTime createdAt;
+
+    public UserData(){}
 
 }

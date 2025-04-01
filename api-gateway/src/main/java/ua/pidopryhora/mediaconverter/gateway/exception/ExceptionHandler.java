@@ -1,9 +1,10 @@
-package ua.pidopryhora.mediaconverter.gateway.security;
+package ua.pidopryhora.mediaconverter.gateway.exception;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
+
 @Slf4j
 @Component
 public class ExceptionHandler {
@@ -13,6 +14,8 @@ public class ExceptionHandler {
             return sendErrorResponse(exchange, "Token expired", 401);
         } else if (e instanceof com.auth0.jwt.exceptions.JWTVerificationException) {
             return sendErrorResponse(exchange, "Invalid token", 401);
+        } else if (e instanceof RefreshTokenNotAllowedException) {
+            return sendErrorResponse(exchange, "Refresh token is not allowed", 401);
         } else {
             log.debug(e.getMessage());
             return sendErrorResponse(exchange, "Internal server error", 500);

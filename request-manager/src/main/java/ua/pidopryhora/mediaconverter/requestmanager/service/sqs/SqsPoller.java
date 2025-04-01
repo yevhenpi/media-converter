@@ -56,7 +56,6 @@ public class SqsPoller {
                 }
 
             } catch (Exception e) {
-                // Log and wait before retrying to prevent rapid failure loops.
                 if (!running) {
                     break;
                 }
@@ -72,12 +71,10 @@ public class SqsPoller {
 
     private void processAndDeleteMessage(Message message) {
         try {
-            // Process the message using the injected event processor.
             eventProcessor.processMessage(message.body());
         } catch (Exception e) {
             log.error("Failed to process message with receipt handle {}: ", message.receiptHandle(), e);
         } finally {
-            // Always attempt to delete the message to prevent reprocessing.
             deleteMessage(message.receiptHandle());
         }
     }

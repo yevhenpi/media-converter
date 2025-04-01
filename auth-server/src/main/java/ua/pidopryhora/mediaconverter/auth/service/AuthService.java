@@ -16,6 +16,8 @@ public class AuthService {
 
     private final JwtIssuer jwtIssuer;
 
+    private final UserDataService userDataService;
+
     private final AuthenticationManager authenticationManager;
 
     public LoginResponse attemptLogin(String email, String password){
@@ -30,11 +32,14 @@ public class AuthService {
 
         var roles = principal.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList();
 
-        var token = jwtIssuer.issueAccessToken(principal.getUserId(), principal.getEmail(), roles);
+        var accessToken = jwtIssuer.issueAccessToken(principal.getUserId(), principal.getEmail(), roles);
+
+        var refreshToken = jwtIssuer.issueRefreshToken(principal.getUserId());
 
         return LoginResponse
                 .builder()
-                .accessToken(token)
+                .accessToken(accessToken)
+                .refreshToken(refreshToken)
                 .build();
 
     }

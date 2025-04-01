@@ -19,9 +19,18 @@ public class JwtIssuer {
     public String issueAccessToken(long userId, String email, List<String> roles){
         return JWT.create()
                 .withSubject(String.valueOf(userId))
-                .withExpiresAt(Instant.now().plus(Duration.of(30, ChronoUnit.DAYS)))
+                .withExpiresAt(Instant.now().plus(Duration.of(1, ChronoUnit.DAYS)))
                 .withClaim("e", email)
                 .withClaim("a",roles)
+                .withClaim("type", "ACCESS")
+                .sign(Algorithm.HMAC256(jwtProperties.getSecret()));
+    }
+
+    public String issueRefreshToken(long userId){
+        return JWT.create()
+                .withSubject(String.valueOf(userId))
+                .withExpiresAt(Instant.now().plus(Duration.of(60, ChronoUnit.DAYS)))
+                .withClaim("type","REFRESH")
                 .sign(Algorithm.HMAC256(jwtProperties.getSecret()));
     }
 

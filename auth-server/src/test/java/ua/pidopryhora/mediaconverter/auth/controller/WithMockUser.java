@@ -9,5 +9,5 @@ import java.lang.annotation.RetentionPolicy;
 @WithSecurityContext(factory = WithMockUserSecurityContextFactory.class)
 public @interface WithMockUser {
     long userId() default 1L;
-    String[] authorities() default "USER";
+    String[] authorities() default "BASIC";
 }

@@ -16,6 +16,8 @@ import ua.pidopryhora.mediaconverter.common.security.JwtDecoder;
 import ua.pidopryhora.mediaconverter.common.security.JwtToPrincipalConverter;
 import ua.pidopryhora.mediaconverter.common.security.UserPrincipal;
 import ua.pidopryhora.mediaconverter.common.security.UserPrincipalAuthenticationToken;
+import ua.pidopryhora.mediaconverter.gateway.exception.ExceptionHandler;
+import ua.pidopryhora.mediaconverter.gateway.exception.RefreshTokenNotAllowedException;
 
 import static ua.pidopryhora.mediaconverter.common.model.UserRole.GUEST;
 
@@ -35,11 +37,18 @@ public class WebFluxJwtAuthenticationFilter implements WebFilter {
         if (token != null) {
             return Mono.just(token)
                     .map(jwtDecoder::decode)
+                    .flatMap(jwt -> {
+                        String tokenType = jwt.getClaim("type").asString();
+                        if ("REFRESH".equalsIgnoreCase(tokenType)) {
+                            return Mono.error(new RefreshTokenNotAllowedException("Refresh token is not allowed for access."));
+                        }
+                        return Mono.just(jwt);
+                    })
                     .map(jwtToPrincipalConverter::convert)
                     .flatMap(principal -> {
                         // Mutate the request: remove the original token and add new headers with user info.
                         ServerWebExchange mutatedExchange = getMutatedExchange(exchange, principal);
-                        // Optionally, create an authentication token for the reactive security context.
+                        // Create an authentication token for the reactive security context.
                         UserPrincipalAuthenticationToken authentication = new UserPrincipalAuthenticationToken(principal);
                         return chain.filter(mutatedExchange)
                                 .contextWrite(ReactiveSecurityContextHolder.withAuthentication(authentication));

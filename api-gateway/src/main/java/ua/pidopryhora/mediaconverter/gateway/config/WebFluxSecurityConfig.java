@@ -1,4 +1,4 @@
-package ua.pidopryhora.mediaconverter.gateway.security;
+package ua.pidopryhora.mediaconverter.gateway.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -13,6 +13,7 @@ import org.springframework.security.config.web.server.ServerHttpSecurity.HttpBas
 import org.springframework.security.config.web.server.ServerHttpSecurity.LogoutSpec;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.security.web.server.context.NoOpServerSecurityContextRepository;
+import ua.pidopryhora.mediaconverter.gateway.security.WebFluxJwtAuthenticationFilter;
 
 @Configuration
 @EnableWebFluxSecurity
@@ -27,17 +28,17 @@ public class WebFluxSecurityConfig {
         return http
                 // Disable CSRF
                 .csrf(CsrfSpec::disable)
-                // Disable CORS (enable if you need it)
+                // Disable CORS
                 .cors(CorsSpec::disable)
-                // Disable form login (if you want fully stateless)
+                // Disable form login
                 .formLogin(FormLoginSpec::disable)
-                // Disable basic auth (optional—remove if you want to allow Basic auth)
+                // Disable basic auth
                 .httpBasic(HttpBasicSpec::disable)
-                // This ensures no session is created (stateless)
+                // This ensures no session is created
                 .securityContextRepository(NoOpServerSecurityContextRepository.getInstance())
                 // You can also disable logout if you don't need session-based logout
                 .logout(LogoutSpec::disable)
-                // Authorize all requests
+
                 .authorizeExchange(exchanges -> exchanges
                         .pathMatchers("/auth/login").permitAll()
                         .anyExchange().authenticated()

@@ -28,18 +28,20 @@ public class UserDataService {
     }
 
     public UserData createUser(String email, String rawPassword) {
-        UserData user = new UserData();
-        user.setEmail(email);
-        user.setPassword(passwordEncoder.encode(rawPassword));
-        user.setRole(String.valueOf(GUEST));
+        UserData user = UserData.builder()
+                .email(email)
+                .password(passwordEncoder.encode(rawPassword))
+                .role(String.valueOf(GUEST))
+                .build();
 
         return userDataRepository.save(user);
     }
     public UserData createUser(String email, String rawPassword, String role) {
-        UserData user = new UserData();
-        user.setEmail(email);
-        user.setPassword(passwordEncoder.encode(rawPassword));
-        user.setRole(role);
+        UserData user = UserData.builder()
+                .email(email)
+                .password(passwordEncoder.encode(rawPassword))
+                .role(role)
+                .build();
 
         return userDataRepository.save(user);
     }
