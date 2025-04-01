@@ -4,6 +4,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @SpringBootApplication
-@EntityScan("ua.pidopryhora.mediaconverter.auth.entity")
+//@EntityScan("ua.pidopryhora.mediaconverter.auth.entity")
 public class TestApplication {
 }
