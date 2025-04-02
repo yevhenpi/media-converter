@@ -4,3 +4,11 @@ server:
     key-store: # leave empty or remove this property
     key-store-password: # leave empty or remove this property
 
+#spring:
+#  main:
+#    allow-bean-definition-overriding: true
+#
+#eureka:
+#  client:
+#    register-with-eureka: false
+#    fetch-registry: false
