@@ -26,10 +26,12 @@ public class JwtIssuer {
                 .sign(Algorithm.HMAC256(jwtProperties.getSecret()));
     }
 
-    public String issueRefreshToken(long userId){
+    public String issueRefreshToken(long userId, String email, List<String> roles){
         return JWT.create()
                 .withSubject(String.valueOf(userId))
                 .withExpiresAt(Instant.now().plus(Duration.of(60, ChronoUnit.DAYS)))
+                .withClaim("e", email)
+                .withClaim("a",roles)
                 .withClaim("type","REFRESH")
                 .sign(Algorithm.HMAC256(jwtProperties.getSecret()));
     }

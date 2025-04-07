@@ -1,4 +1,4 @@
-package ua.pidopryhora.mediaconverter.requestmanager.model;
+package ua.pidopryhora.mediaconverter.common.model;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-public abstract class RequestDTO implements Serializable {
+public abstract class AuthenticatedRequestDTO implements Serializable {
 
     //TODO:Figure out field inheritance compatibility with builder pattern
 

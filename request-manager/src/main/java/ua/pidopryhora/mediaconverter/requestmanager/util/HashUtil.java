@@ -2,7 +2,7 @@ package ua.pidopryhora.mediaconverter.requestmanager.util;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import ua.pidopryhora.mediaconverter.requestmanager.model.RequestDTO;
+import ua.pidopryhora.mediaconverter.common.model.AuthenticatedRequestDTO;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -12,7 +12,7 @@ import java.util.Base64;
 @Component
 public class HashUtil {
 
-    public String getHash(RequestDTO requestDTO){
+    public String getHash(AuthenticatedRequestDTO requestDTO){
 
         byte[] hashBytes = null;
         try {

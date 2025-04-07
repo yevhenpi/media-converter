@@ -1,11 +1,11 @@
 package ua.pidopryhora.mediaconverter.auth.service;
 
 import org.springframework.stereotype.Service;
-import ua.pidopryhora.mediaconverter.auth.model.RefreshResponse;
+import ua.pidopryhora.mediaconverter.auth.model.RefreshResponseDTO;
 @Service
 public class RefreshService {
 
-    public RefreshResponse processRefreshToken(String refreshToken){
+    public RefreshResponseDTO processRefreshToken(String refreshToken){
 
         return null;
 

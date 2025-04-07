@@ -6,7 +6,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import ua.pidopryhora.mediaconverter.auth.model.LoginResponse;
+import ua.pidopryhora.mediaconverter.auth.model.LoginResponseDTO;
 import ua.pidopryhora.mediaconverter.auth.security.JwtIssuer;
 import ua.pidopryhora.mediaconverter.common.security.UserPrincipal;
 
@@ -20,7 +20,7 @@ public class AuthService {
 
     private final AuthenticationManager authenticationManager;
 
-    public LoginResponse attemptLogin(String email, String password){
+    public LoginResponseDTO attemptLogin(String email, String password){
 
         var authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(email, password)
@@ -34,9 +34,11 @@ public class AuthService {
 
         var accessToken = jwtIssuer.issueAccessToken(principal.getUserId(), principal.getEmail(), roles);
 
-        var refreshToken = jwtIssuer.issueRefreshToken(principal.getUserId());
+        var refreshToken = jwtIssuer.issueRefreshToken(principal.getUserId(), principal.getEmail(),roles);
 
-        return LoginResponse
+        userDataService.updateRefreshToken(refreshToken, principal.getUserId());
+
+        return LoginResponseDTO
                 .builder()
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)

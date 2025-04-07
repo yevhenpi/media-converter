@@ -2,16 +2,12 @@ package ua.pidopryhora.mediaconverter.auth.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.parameters.P;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import ua.pidopryhora.mediaconverter.auth.model.LoginRequest;
-import ua.pidopryhora.mediaconverter.auth.model.LoginResponse;
-import ua.pidopryhora.mediaconverter.auth.model.RefreshRequest;
-import ua.pidopryhora.mediaconverter.auth.model.RefreshResponse;
+import org.springframework.web.bind.annotation.*;
+import ua.pidopryhora.mediaconverter.auth.model.LoginRequestDTO;
+import ua.pidopryhora.mediaconverter.auth.model.LoginResponseDTO;
+import ua.pidopryhora.mediaconverter.auth.model.RefreshRequestDTO;
+import ua.pidopryhora.mediaconverter.auth.model.RefreshResponseDTO;
 import ua.pidopryhora.mediaconverter.auth.service.AuthService;
 import ua.pidopryhora.mediaconverter.auth.service.RefreshService;
 
@@ -26,14 +22,16 @@ public class LoginController {
 
 
     @PostMapping("/login")
-    public LoginResponse login(@RequestBody @Valid LoginRequest request) {
+    public LoginResponseDTO login(@RequestBody @Valid LoginRequestDTO request) {
 
         return authService.attemptLogin(request.getEmail(), request.getPassword());
 
     }
 
     @PostMapping("/refresh")
-    private RefreshResponse refresh(@RequestBody @Valid RefreshRequest request){
+    private RefreshResponseDTO refresh(@RequestHeader("UserId") String userId,
+                                       @RequestHeader("UserRole") String userRole,
+                                       @RequestBody @Valid RefreshRequestDTO request){
 
         return null;
 

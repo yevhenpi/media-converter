@@ -46,6 +46,10 @@ public class UserDataService {
         return userDataRepository.save(user);
     }
 
+    public void updateRefreshToken(String token, Long userId){
+        userDataRepository.updateRefreshToken(token, userId);
+    }
+
 
     public Optional<UserData> findByEmail(String email){
 

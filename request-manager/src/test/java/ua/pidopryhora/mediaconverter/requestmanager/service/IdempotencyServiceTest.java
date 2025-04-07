@@ -7,7 +7,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
-import ua.pidopryhora.mediaconverter.requestmanager.model.RequestDTO;
+import ua.pidopryhora.mediaconverter.common.model.AuthenticatedRequestDTO;
 import ua.pidopryhora.mediaconverter.requestmanager.model.UploadRequestDTO;
 import ua.pidopryhora.mediaconverter.requestmanager.util.HashUtil;
 
@@ -40,7 +40,7 @@ class IdempotencyServiceTest {
     @Test
     void testAddIdempotencyKey_Success() {
         // Arrange
-        RequestDTO requestDTO = new UploadRequestDTO();
+        AuthenticatedRequestDTO requestDTO = new UploadRequestDTO();
         String key = "sampleKey";
         when(hashUtil.getHash(requestDTO)).thenReturn(key);
         when(redisTemplate.opsForValue().setIfAbsent(eq(key), anyString(), eq(IdempotencyService.IDEMPOTENCY_TTL_SECONDS), eq(TimeUnit.SECONDS)))
@@ -57,7 +57,7 @@ class IdempotencyServiceTest {
     @Test
     void testAddIdempotencyKey_Failure() {
         // Arrange
-        RequestDTO requestDTO = new UploadRequestDTO();
+        AuthenticatedRequestDTO requestDTO = new UploadRequestDTO();
         String key = "sampleKey";
         when(hashUtil.getHash(requestDTO)).thenReturn(key);
         when(redisTemplate.opsForValue().setIfAbsent(eq(key), anyString(), eq(IdempotencyService.IDEMPOTENCY_TTL_SECONDS), eq(TimeUnit.SECONDS)))
@@ -74,7 +74,7 @@ class IdempotencyServiceTest {
     @Test
     void testAddIdempotencyKey_NullReturn() {
         // Arrange
-        RequestDTO requestDTO = new UploadRequestDTO();
+        AuthenticatedRequestDTO requestDTO = new UploadRequestDTO();
         String key = "sampleKey";
         when(hashUtil.getHash(requestDTO)).thenReturn(key);
         when(redisTemplate.opsForValue().setIfAbsent(eq(key), anyString(), eq(IdempotencyService.IDEMPOTENCY_TTL_SECONDS), eq(TimeUnit.SECONDS)))

@@ -7,11 +7,12 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import ua.pidopryhora.mediaconverter.common.model.AuthenticatedRequestDTO;
 
 @Setter
 @Getter
 @ToString
-public class UploadRequestDTO extends RequestDTO {
+public class UploadRequestDTO extends AuthenticatedRequestDTO {
 
 
     @Pattern(regexp = "^[a-zA-Z0-9_.]+$", message = "Only alphanumeric characters are allowed")

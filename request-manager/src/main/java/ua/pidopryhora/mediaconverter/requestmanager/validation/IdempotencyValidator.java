@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import ua.pidopryhora.mediaconverter.requestmanager.exception.ValidationException;
 import ua.pidopryhora.mediaconverter.requestmanager.model.AudioJobRequestDTO;
-import ua.pidopryhora.mediaconverter.requestmanager.model.RequestDTO;
+import ua.pidopryhora.mediaconverter.common.model.AuthenticatedRequestDTO;
 import ua.pidopryhora.mediaconverter.requestmanager.model.UploadRequestDTO;
 import ua.pidopryhora.mediaconverter.requestmanager.service.IdempotencyService;
 
@@ -15,11 +15,11 @@ import java.util.Map;
 
 @Component
 @RequiredArgsConstructor
-public class IdempotencyValidator<T extends RequestDTO> implements Validator<T> {
+public class IdempotencyValidator<T extends AuthenticatedRequestDTO> implements Validator<T> {
 
     private final IdempotencyService idempotencyService;
 
-    private static final Map<Class<? extends RequestDTO>, String> messageMap = new HashMap<>();
+    private static final Map<Class<? extends AuthenticatedRequestDTO>, String> messageMap = new HashMap<>();
 
 
     static {

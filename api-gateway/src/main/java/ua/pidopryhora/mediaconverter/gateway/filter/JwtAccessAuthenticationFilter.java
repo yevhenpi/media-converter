@@ -1,4 +1,4 @@
-package ua.pidopryhora.mediaconverter.gateway.security;
+package ua.pidopryhora.mediaconverter.gateway.filter;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +24,7 @@ import static ua.pidopryhora.mediaconverter.common.model.UserRole.GUEST;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class WebFluxJwtAuthenticationFilter implements WebFilter {
+public class JwtAccessAuthenticationFilter implements WebFilter {
 
     private final JwtDecoder jwtDecoder;
     private final JwtToPrincipalConverter jwtToPrincipalConverter;

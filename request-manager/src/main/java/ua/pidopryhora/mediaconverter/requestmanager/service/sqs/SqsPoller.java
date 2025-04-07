@@ -26,7 +26,7 @@ public class SqsPoller {
     @Value("${sqs.queue.url}")
     private String queueUrl;
 
-    private final ExecutorService executorService = Executors.newSingleThreadExecutor();
+    private final ExecutorService executorService = Executors.newFixedThreadPool(1);
     private volatile boolean running = true;
 
     public SqsPoller(SqsClient sqsClient, EventProcessor eventProcessor) {

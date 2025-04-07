@@ -8,7 +8,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import ua.pidopryhora.mediaconverter.requestmanager.exception.ValidationException;
 import ua.pidopryhora.mediaconverter.requestmanager.model.AudioJobRequestDTO;
-import ua.pidopryhora.mediaconverter.requestmanager.model.RequestDTO;
+import ua.pidopryhora.mediaconverter.common.model.AuthenticatedRequestDTO;
 import ua.pidopryhora.mediaconverter.requestmanager.model.UploadRequestDTO;
 import ua.pidopryhora.mediaconverter.requestmanager.service.IdempotencyService;
 import ua.pidopryhora.mediaconverter.requestmanager.validation.IdempotencyValidator;
@@ -23,13 +23,13 @@ class IdempotencyValidatorTest {
     private IdempotencyService idempotencyService;
 
     @InjectMocks
-    private IdempotencyValidator<RequestDTO> idempotencyValidator;
+    private IdempotencyValidator<AuthenticatedRequestDTO> idempotencyValidator;
 
 
     @Test
     void testValidate_Success() {
 
-        RequestDTO requestDTO = mock(UploadRequestDTO.class);
+        AuthenticatedRequestDTO requestDTO = mock(UploadRequestDTO.class);
         when(idempotencyService.addIdempotencyKey(requestDTO)).thenReturn(true);
 
 
@@ -40,7 +40,7 @@ class IdempotencyValidatorTest {
     @Test
     void testValidate_Failure() {
 
-        RequestDTO requestDTO = mock(UploadRequestDTO.class);
+        AuthenticatedRequestDTO requestDTO = mock(UploadRequestDTO.class);
         when(idempotencyService.addIdempotencyKey(requestDTO)).thenReturn(false);
 
 
@@ -52,7 +52,7 @@ class IdempotencyValidatorTest {
     @Test
     void testValidate_Failure_WithGenericMessage() {
 
-        RequestDTO requestDTO = mock(RequestDTO.class); // Using a generic RequestDTO not in the map
+        AuthenticatedRequestDTO requestDTO = mock(AuthenticatedRequestDTO.class); // Using a generic RequestDTO not in the map
         when(idempotencyService.addIdempotencyKey(requestDTO)).thenReturn(false);
 
 
@@ -64,7 +64,7 @@ class IdempotencyValidatorTest {
     @Test
     void testValidate_Failure_AudioConversionRequestDTO() {
 
-        RequestDTO requestDTO = mock(AudioJobRequestDTO.class);
+        AuthenticatedRequestDTO requestDTO = mock(AudioJobRequestDTO.class);
         when(idempotencyService.addIdempotencyKey(requestDTO)).thenReturn(false);
 
 

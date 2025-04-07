@@ -15,7 +15,9 @@ public class ExceptionHandler {
         } else if (e instanceof com.auth0.jwt.exceptions.JWTVerificationException) {
             return sendErrorResponse(exchange, "Invalid token", 401);
         } else if (e instanceof RefreshTokenNotAllowedException) {
-            return sendErrorResponse(exchange, "Refresh token is not allowed", 401);
+            return sendErrorResponse(exchange, e.getMessage(), 401);
+        } else if (e instanceof AccessTokenNotAllowedException) {
+            return sendErrorResponse(exchange, e.getMessage(), 401);
         } else {
             log.debug(e.getMessage());
             return sendErrorResponse(exchange, "Internal server error", 500);

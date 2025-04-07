@@ -5,5 +5,5 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class RefreshResponse {
+public class RefreshResponseDTO {
 }
