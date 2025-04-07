@@ -2,6 +2,7 @@ package ua.pidopryhora.mediaconverter.auth.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ua.pidopryhora.mediaconverter.auth.model.LoginRequestDTO;
@@ -10,7 +11,7 @@ import ua.pidopryhora.mediaconverter.auth.model.RefreshRequestDTO;
 import ua.pidopryhora.mediaconverter.auth.model.RefreshResponseDTO;
 import ua.pidopryhora.mediaconverter.auth.service.AuthService;
 import ua.pidopryhora.mediaconverter.auth.service.RefreshService;
-
+@Slf4j
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
@@ -28,12 +29,15 @@ public class LoginController {
 
     }
 
-    @PostMapping("/refresh")
-    private RefreshResponseDTO refresh(@RequestHeader("UserId") String userId,
-                                       @RequestHeader("UserRole") String userRole,
-                                       @RequestBody @Valid RefreshRequestDTO request){
+    @GetMapping("/refresh")
+    public RefreshResponseDTO refresh(@RequestHeader("UserId") String userId,
+                                      @RequestHeader("UserRole") String userRole,
+                                      @RequestHeader("RefreshToken") String refreshToken){
 
-        return null;
+
+
+
+        return refreshService.processRefreshToken(refreshToken);
 
 
     }

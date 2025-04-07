@@ -47,7 +47,7 @@ public class JwtRefreshAuthenticationFilter implements WebFilter {
                     .map(jwtToPrincipalConverter::convert)
                     .flatMap(principal -> {
                         // Mutate the request: remove the original token and add new headers with user info.
-                        ServerWebExchange mutatedExchange = getMutatedExchange(exchange, principal);
+                        ServerWebExchange mutatedExchange = getMutatedExchange(exchange, principal, token);
                         // Create an authentication token for the reactive security context.
                         UserPrincipalAuthenticationToken authentication = new UserPrincipalAuthenticationToken(principal);
                         return chain.filter(mutatedExchange)
@@ -67,7 +67,7 @@ public class JwtRefreshAuthenticationFilter implements WebFilter {
         return null;
     }
 
-    private static ServerWebExchange getMutatedExchange(ServerWebExchange exchange, UserPrincipal principal) {
+    private static ServerWebExchange getMutatedExchange(ServerWebExchange exchange, UserPrincipal principal, String token) {
         return exchange.mutate()
                 .request(req -> req.headers(httpHeaders -> {
                     // Remove the Authorization header.
@@ -78,6 +78,7 @@ public class JwtRefreshAuthenticationFilter implements WebFilter {
                             .map(GrantedAuthority::getAuthority)
                             .orElse(String.valueOf(GUEST));
                     // Add new headers with data extracted from the token.
+                    httpHeaders.add("RefreshToken", token);
                     httpHeaders.add("UserId", String.valueOf(principal.getUserId()));
                     httpHeaders.add("UserRole", authority);
                 }))
