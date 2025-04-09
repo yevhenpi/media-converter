@@ -22,10 +22,6 @@ public class UploadRequestDTO extends AuthenticatedRequestDTO {
     @Min(value = 1, message = "File size must be greater than zero")
     private long fileSize;
 
-    private String role;
-
-    private long userId;
-
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     public String getS3Key(){ return  userId+"/"+fileName;}
 

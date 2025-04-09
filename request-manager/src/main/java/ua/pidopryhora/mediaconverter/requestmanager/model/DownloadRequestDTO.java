@@ -9,12 +9,9 @@ import ua.pidopryhora.mediaconverter.common.model.AuthenticatedRequestDTO;
 @Setter
 public class DownloadRequestDTO extends AuthenticatedRequestDTO {
 
-
     @NotBlank(message = "Job id is required")
     String jobId;
 
-    String role;
-    long userId;
 
 
 }

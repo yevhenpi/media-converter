@@ -14,10 +14,6 @@ public class AudioJobRequestDTO extends JobRequestDTO {
     //TODO: Advanced validation would be great
 
 
-    @NotBlank(message = "File name is required")
-    private String fileName;
-    @NotBlank(message = "Output format is required")
-    private String outputFormat;
 
     @Pattern(regexp = "^[a-zA-Z0-9_.]+$", message = "Only alphanumeric characters are allowed")
     private String codec = null;
@@ -33,7 +29,7 @@ public class AudioJobRequestDTO extends JobRequestDTO {
 
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    public String getS3Key(){ return  userId+"/"+fileName;}
+    public String getS3Key(){ return  userId+"/"+getFileName();}
 
 
 
