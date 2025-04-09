@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
         "ua.pidopryhora.mediaconverter.common"
 })
 public class AuthenticationServerApplication {
-    //TODO: Implement request rate limitation. Add refresh token functional.
+
 
     public static void main(String[] args){
         SpringApplication.run(AuthenticationServerApplication.class, args);

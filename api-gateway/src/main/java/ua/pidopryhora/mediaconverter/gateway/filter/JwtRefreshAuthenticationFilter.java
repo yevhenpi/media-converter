@@ -74,7 +74,7 @@ public class JwtRefreshAuthenticationFilter implements WebFilter {
                     httpHeaders.remove(HttpHeaders.AUTHORIZATION);
                     String authority = principal.getAuthorities()
                             .stream()
-                            .findFirst()  // get the first element as Optional<GrantedAuthority>
+                            .findFirst()
                             .map(GrantedAuthority::getAuthority)
                             .orElse(String.valueOf(GUEST));
                     // Add new headers with data extracted from the token.
