@@ -32,12 +32,21 @@ public class LoginController {
     @GetMapping("/refresh")
     public RefreshResponseDTO refresh(@RequestHeader("UserId") String userId,
                                       @RequestHeader("UserRole") String userRole,
+                                      @RequestHeader("Email") String email,
                                       @RequestHeader("RefreshToken") String refreshToken){
 
 
 
+        return refreshService.processRefreshToken(
+                RefreshRequestDTO
+                        .builder()
+                        .refreshToken(refreshToken)
+                        .role(userRole)
+                        .userId(Long.parseLong(userId))
+                        .email(email)
+                        .build()
+        );
 
-        return refreshService.processRefreshToken(refreshToken);
 
 
     }

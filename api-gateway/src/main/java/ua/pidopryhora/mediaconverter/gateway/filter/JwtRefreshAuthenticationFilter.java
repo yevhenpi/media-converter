@@ -79,6 +79,7 @@ public class JwtRefreshAuthenticationFilter implements WebFilter {
                             .orElse(String.valueOf(GUEST));
                     // Add new headers with data extracted from the token.
                     httpHeaders.add("RefreshToken", token);
+                    httpHeaders.add("Email", principal.getEmail());
                     httpHeaders.add("UserId", String.valueOf(principal.getUserId()));
                     httpHeaders.add("UserRole", authority);
                 }))
