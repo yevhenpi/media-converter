@@ -15,9 +15,7 @@ import ua.pidopryhora.mediaconverter.common.security.UserPrincipal;
 public class AuthService {
 
     private final JwtIssuer jwtIssuer;
-
     private final UserDataService userDataService;
-
     private final AuthenticationManager authenticationManager;
 
     public LoginResponseDTO attemptLogin(String email, String password){

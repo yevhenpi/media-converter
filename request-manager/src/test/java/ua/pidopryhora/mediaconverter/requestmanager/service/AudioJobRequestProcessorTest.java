@@ -15,7 +15,7 @@ import ua.pidopryhora.mediaconverter.common.data.JobDataService;
 import ua.pidopryhora.mediaconverter.common.model.AudioJobDTO;
 import ua.pidopryhora.mediaconverter.requestmanager.exception.ValidationException;
 import ua.pidopryhora.mediaconverter.requestmanager.model.AudioJobRequestDTO;
-import ua.pidopryhora.mediaconverter.requestmanager.service.rabbitmq.UpdateProducer;
+import ua.pidopryhora.mediaconverter.requestmanager.service.rabbitmq.RabbitUpdateProducer;
 
 import java.util.Map;
 
@@ -28,7 +28,7 @@ import static ua.pidopryhora.mediaconverter.common.rabbitmq.RabbitQueues.AUDIO_C
 class AudioJobRequestProcessorTest {
 
     @Mock
-    private UpdateProducer updateProducer;
+    private RabbitUpdateProducer updateProducer;
 
     @Mock
     private JobDataService jobDataService;

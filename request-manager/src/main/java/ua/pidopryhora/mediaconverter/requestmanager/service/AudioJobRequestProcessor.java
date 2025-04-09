@@ -8,7 +8,7 @@ import org.springframework.validation.annotation.Validated;
 import ua.pidopryhora.mediaconverter.common.data.JobDataService;
 import ua.pidopryhora.mediaconverter.requestmanager.model.AudioJobRequestDTO;
 import ua.pidopryhora.mediaconverter.common.model.AudioJobDTO;
-import ua.pidopryhora.mediaconverter.requestmanager.service.rabbitmq.UpdateProducer;
+import ua.pidopryhora.mediaconverter.requestmanager.service.rabbitmq.RabbitUpdateProducer;
 
 import java.util.Map;
 
@@ -19,7 +19,7 @@ import static ua.pidopryhora.mediaconverter.common.rabbitmq.RabbitQueues.AUDIO_C
 @Validated
 public class AudioJobRequestProcessor implements RequestProcessor<AudioJobRequestDTO> {
 
-    private final UpdateProducer updateProducer;
+    private final RabbitUpdateProducer updateProducer;
     private final JobDataService jobDataService;
     private final JobFactory<AudioJobRequestDTO, AudioJobDTO> jobFactory;
     private final RequestValidationService<AudioJobRequestDTO> uploadRequestValidationService;

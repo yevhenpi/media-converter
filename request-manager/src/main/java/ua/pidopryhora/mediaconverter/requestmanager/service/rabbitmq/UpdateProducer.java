@@ -1,23 +1,9 @@
 package ua.pidopryhora.mediaconverter.requestmanager.service.rabbitmq;
 
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.stereotype.Service;
-import ua.pidopryhora.mediaconverter.common.model.AudioJobDTO;
+import ua.pidopryhora.mediaconverter.common.model.JobDTO;
+import ua.pidopryhora.mediaconverter.requestmanager.model.JobRequestDTO;
 
-@Slf4j
-@Service
-public class UpdateProducer {
+public interface UpdateProducer {
 
-    private final RabbitTemplate rabbitTemplate;
-
-    public UpdateProducer(RabbitTemplate rabbitTemplate) {
-        this.rabbitTemplate = rabbitTemplate;
-    }
-
-    public void produce(String queueName, AudioJobDTO audioJobDTO){
-        rabbitTemplate.convertAndSend(queueName, audioJobDTO);
-
-
-    }
+    void produce(String queueName, JobDTO jobDTO);
 }

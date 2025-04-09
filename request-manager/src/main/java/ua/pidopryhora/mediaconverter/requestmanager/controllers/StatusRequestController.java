@@ -4,13 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ua.pidopryhora.mediaconverter.common.data.JobDataService;
-import ua.pidopryhora.mediaconverter.requestmanager.model.AudioJobRequestDTO;
 import ua.pidopryhora.mediaconverter.requestmanager.model.StatusRequestDTO;
 import ua.pidopryhora.mediaconverter.requestmanager.service.RequestProcessor;
-import ua.pidopryhora.mediaconverter.requestmanager.service.StatusRequestProcessor;
-
-import java.util.List;
 
 @Slf4j
 @RestController

@@ -35,17 +35,15 @@ public class LoginController {
                                       @RequestHeader("Email") String email,
                                       @RequestHeader("RefreshToken") String refreshToken){
 
+        RefreshRequestDTO requestDTO = new RefreshRequestDTO();
+        requestDTO.setUserId(Long.parseLong(userId));
+        requestDTO.setRole(userRole);
+        requestDTO.setRefreshToken(refreshToken);
+        requestDTO.setEmail(email);
 
 
-        return refreshService.processRefreshToken(
-                RefreshRequestDTO
-                        .builder()
-                        .refreshToken(refreshToken)
-                        .role(userRole)
-                        .userId(Long.parseLong(userId))
-                        .email(email)
-                        .build()
-        );
+
+        return refreshService.processRefreshToken(requestDTO);
 
 
 
